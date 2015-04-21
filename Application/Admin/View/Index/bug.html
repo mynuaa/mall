@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>{$app_title}</title>
+	<link rel="stylesheet" type="text/css" href="./Application/Admin/Css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./Application/Admin/Css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="./Application/Common/Js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="./Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+	<script type="text/javascript" src="./Application/Admin/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div style="width:1000px;margin:30px auto;border:2px solid #CCC;border-radius:10px;min-height:200px;padding:15px 20px;">
+		<table class="table table-hover">
+			<tr>
+				<td>ID</td>
+				<td>bug内容</td>
+				<td>时间</td>
+				<td>邮箱</td>
+			</tr>
+			<FOREACH name="bug" item="vo">
+				<tr>
+					<td><a href="http://my.nuaa.edu.cn/?{$vo.uid}">{$vo.username}</a></td>
+					<td>{$vo.bug_content}</td>
+					<td>{$vo.time}</td>
+					<td>{$vo.email}</td>
+				</tr>
+			</FOREACH>
+		</table>
+	</div>
+</body>
+</html>

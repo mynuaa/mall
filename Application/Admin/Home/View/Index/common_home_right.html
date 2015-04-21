@@ -1,0 +1,21 @@
+<div class="record_font clearfix" style="background-color:#BBB;color:black;"><div style="float:left;">&nbsp;&nbsp;我的关注&nbsp;</div><div style="font-size:12px;padding-top:2px;"><a href="./?m=home&c=config">[设置]</a></div></div>
+<div class="record_area clearfix" style="background-color:#F3F3F3;line-height:22px;padding-bottom:10px;">
+	<IF condition="$attention_num eq 0">
+		<span style="font-size:13px;">&nbsp;暂无关注的分类</span>
+	<ELSE/>
+		<span style="font-size:13px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>今日更新:</b><br/>
+		<FOREACH name="attention_panel" item="vo">
+			<if condition="$attention_array[$vo] neq '' " >
+				<div style="float:left;width:100px;display:inline;">&nbsp;&nbsp;&nbsp;&nbsp;<a href="./?m=mall&a=scan&&lb={$vo}">{$attention_array[$vo]} <span style="color:#F56C7E;">( {$attention_daynum[$vo]} )</span></a></div>
+			</if>
+		</FOREACH>
+		</span>
+	</IF>
+</div>
+<div class="record_font" style="color:black;background-color:#BBB;">&nbsp;&nbsp;猜你喜欢</div>
+<div class="record_area" style="background-color:#F3F3F3;padding-top:5px;">
+	<FOREACH name="guess" item="vo">
+			<div class="guess_style clearfix"><div style="float:left;"><IF condition="$vo.need_type eq 1"><span style="color:#F56C7E;"><b>出</b></span><ELSE/><span style="color:#35B787;"><b>求</b></span></IF></div><div style="margin-left:5px;float:left;width:175px;"><a href="./?m=mall&c=goods&id={$vo.goods_id}">{$vo.goods_name}</a></div></div>
+	</FOREACH>
+</div>

@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>{$app_title}</title>
+	<link rel="stylesheet" type="text/css" href="./Application/Common/Css/common.css">
+	<script type="text/javascript" src="./Application/Common/Js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="./Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+	<script type="text/javascript">
+		var page="mall";
+	</script>
+	<style>
+	.person{width: 100%;padding-bottom:10px;border-bottom: 1px solid grey;margin-top:8px;}
+	.person_left{width:80px;float:left;margin-left: 5px;}
+	.person_right{width:600px;float:right;}
+	.person_top{font-size: 18px;}
+	.person_bot{font-size: 13px;color:grey;margin-top: 6px;line-height: 22px;}
+	</style>
+</head>
+<body>
+	<include file="./Application/Common/View/common_header_mall.html" />
+	<div class="set_width panel-all clearfix">
+		<div class="panel-left"></div>
+		<div class="panel-center">
+			<div style="padding-top:20px;width:700px;margin-left:15px;padding-bottom:30px;">
+				<div>
+					<div class="clearfix">
+						<div id="bug" style="float:left;color:#A5A5A5;font-size:18px;">意见反馈</div>
+						<div style="float:right;width:610px;border-top:5px solid #34B787;margin-top:12px;"></div>	
+					</div>
+					<div style="min-height:100px;border:0px solid black;width:100%;padding-top:12px;">
+						<div class="clearfix">
+							<div style="float:left;font-size:14px;">&nbsp;用户名:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+							<div style="float:left;"><input type="text" readonly style="line-height:20px;height:20px;margin-left: -2px;" value="{$username}"/>&nbsp;&nbsp;<IF condition="$uid eq ''"><span style="color:red;font-size:12px;">*登录后才可以反馈意见</span></IF></div>
+						</div>
+						<div class="clearfix" style="margin-top: 10px;">
+							<div style="float:left;font-size:14px;">&nbsp;邮箱:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+							<div style="float:left;margin-left: 2px;"><input type="text" id="email" style="line-height:20px;height:20px;margin-left: -2px;"></div>&nbsp;&nbsp;<span style="color:#34B787;font-size:12px;">建议留下您的常用邮箱</span>
+						</div>
+						<div class="clearfix" style="margin-top:10px;">
+							<div style="float:left;font-size:14px;">&nbsp;意见描述:&nbsp;&nbsp;</div>
+							<div style="float:left;"><textarea style="width:400px;height:100px;line-height:18px;" id="bug_content"></textarea></div>
+						</div>
+						<div class="clearfix" style="margin-top:10px;">
+							<div class="button_green" style="width:60px;margin-left:71px;">提交</div>
+						</div>
+					</div>
+
+					<div class="clearfix" style="margin-top:50px;">
+						<div id="updata_record" style="float:left;color:#A5A5A5;font-size:18px;">更新日志</div>
+						<div style="float:right;width:610px;border-top:5px solid #34B787;margin-top:12px;"></div>	
+					</div>
+					<div style="min-height:100px;width:100%;padding-top:12px;">
+						<table style="width:680px;margin-left:5px;font-size:14px;" cellpadding="0" cellspacing="0" border="1" frame="hsides" rules="all">
+							<tr height="35px">
+								<td width="120px" style="text-align:center;">2014年1月16日</td>
+								<td>&nbsp;项目正式开始</td>
+							</tr>
+							<tr height="35px">
+								<td width="120px" style="text-align:center;">2014年2月6日</td>
+								<td>&nbsp;集市模块完成</td>
+							</tr>
+							<tr height="35px">
+								<td width="120px" style="text-align:center;">2014年2月14日</td>
+								<td>&nbsp;个人中心模块完成</td>
+							</tr>
+							<tr height="35px">
+								<td width="120px" style="text-align:center;">2014年3月25日</td>
+								<td>&nbsp;商铺模块完成</td>
+							</tr>
+							<tr height="35px">
+								<td width="120px" style="text-align:center;">2014年3月25日</td>
+								<td>&nbsp;系统正式更名为“南航Mall”</td>
+							</tr>
+							<tr height="35px">
+								<td width="120px" style="text-align:center;">2014年4月26日</td>
+								<td>&nbsp;南航Mall正式上线</td>
+							</tr>
+							<tr height="35px">
+								<td width="120px" style="text-align:center;">2014年4月26日</td>
+								<td>&nbsp;换客模块正在进行，敬请期待~</td>
+							</tr>
+						</table>
+					</div>
+
+					<div class="clearfix" style="margin-top:50px;">
+						<div id="contact_us" style="float:left;color:#A5A5A5;font-size:18px;">联系我们</div>
+						<div style="float:right;width:610px;border-top:5px solid #34B787;margin-top:12px;"></div>	
+					</div>
+					<div style="min-height:100px;width:100%;padding-top:12px;">
+						<table style="width:680px;margin-left:5px;font-size:14px;" cellpadding="0" cellspacing="0" border="1" frame="hsides" rules="all">
+							<tr height="30px">
+								<td  width="100px"></td>
+								<td>&nbsp;姓名</td>
+								<td>&nbsp;联系方式</td>
+							</tr>
+							<tr height="30px">
+								<td  style="text-align:center;">网站管理</td>
+								<td>&nbsp;祁艺</td>
+								<td>&nbsp;13057581372</td>
+							</tr>
+							<tr height="30px">
+								<td style="text-align:center;">技术支持</td>
+								<td>&nbsp;钟亘明</td>
+								<td>&nbsp;15895912020</td>
+							</tr>
+							<tr height="30px">
+								<td style="text-align:center;">商业合作</td>
+								<td>&nbsp;郑建豪</td>
+								<td>&nbsp;15651956807</td>
+							</tr>
+						</table>
+					</div>	
+
+					<div class="clearfix" style="margin-top:50px;">
+						<div id="team" style="float:left;color:#A5A5A5;font-size:18px;">开发团队</div>
+						<div style="float:right;width:610px;border-top:5px solid #34B787;margin-top:12px;"></div>	
+					</div>
+					<div style="min-height:100px;width:100%;padding-top:12px;" >
+						<div class="person clearfix">
+							<div class="person_left">
+								<img src="./Uploads/beike.jpg">
+							</div>
+							<div class="person_right">
+								<span class="person_top">贝壳~</span>
+								<div class="person_bot">赵贝贝，纸飞机ID=贝壳~，12级软件培优班，南航Mall联合创始人，技术总监，负责南航Mall的技术功能开发实现，独立完成了集市、换客、个人中心、后台管理等大多数核心模块的搭建。邮箱: 649321688@qq.com</div>
+							</div>
+						</div>
+						<div class="person clearfix">
+							<div class="person_left">
+								<img src="./Uploads/misu.jpg">
+							</div>
+							<div class="person_right">
+								<span class="person_top">chevoleng</span>
+								<div class="person_bot">连晶晶，纸飞机ID=chevoleng，昵称: 米苏，10级自动化专业，南航Mall联合创始人，首席UI设计师，参加南航Mall的UI设计，确定了网站的视觉风格，完成了网站效果的整体美化和细节设计。邮箱: 421287523@qq.com</div>
+							</div>
+						</div>
+						<div class="person clearfix">
+							<div class="person_left">
+								<img src="./Uploads/ghdcat.jpg">
+							</div>
+							<div class="person_right">
+								<span class="person_top">ghdcat</span>
+								<div class="person_bot">桂涵东，纸飞机ID=ghdcat，昵称：挂叔，13级电力电子与电力传动专业硕士研究生。南航Mall联合创始人，产品总监，UI设计师，首先提出了创建南航Mall的想法，确定了网站各类功能要求，负责开发团队内部协调沟通，保证项目有效进行，并辅助米苏参与网站UI设计。邮箱：ghdcat@nuaa.edu.cn</div>
+							</div>
+						</div>
+						<div class="person clearfix">
+							<div class="person_left">
+								<img src="./Uploads/yangchong.jpg">
+							</div>
+							<div class="person_right">
+								<span class="person_top">旅行的洋葱</span>
+								<div class="person_bot">陈永超，纸飞机ID=旅行的洋葱，12级飞行器设计专业。南航Mall联合创始人，产品副总监，运营总监，牵头建立纸飞机南航Mall工作组，统筹负责网站从内测开始的运营及推广工作，并辅助挂叔确定了网站各模块功能要求。邮箱:nuaacyc@qq.com
+								</div>
+							</div>
+						</div>
+						<div class="person clearfix">
+							<div class="person_left">
+								<img src="./Uploads/bunny.jpg">
+							</div>
+							<div class="person_right">
+								<span class="person_top">_bunny</span>
+								<div class="person_bot">夏驰浩，纸飞机ID=_bunny，12级物联网工程专业，UI设计师，辅助米苏进行了网站页面细节优化。邮箱:349417851@qq.com
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="panel-right" id="right_th" style="width:150px;position:fixed;margin-left:835px;margin-bottom:40px;background-color:#B2E4D2;">
+			<table style="width:100%;text-align:center;" cellpadding="0" cellspacing="0" border="1" rules="rows" frame="vsides">
+				<tr height="40px"><td><a href="#bug">意见反馈</a></td></tr>
+				<tr height="40px"><td><a href="#updata_record">更新日志</td></tr>
+				<tr height="40px"><td><a href="#contact_us">联系我们</td></tr>	
+				<tr height="40px"><td><a href="#team">开发团队</td></tr>	
+			</table>
+		</div>
+	</div>
+	<include file="./Application/Common/View/common_bottom.html" />
+</body>
+<script>
+jQuery(function($){
+	$(window).scroll(function() 
+	{
+		var th=$('#right_th');
+		//var offset=th.offset();				//offset()获取的是相对于页面最上方的高度，而不是当前页面最上方的高度。。。。
+		var scroll=$(window).scrollTop();		//获取滚动条上方隐藏的高度
+		if(scroll < 355)
+		{
+			th.css({top:355-scroll});
+		}		
+		else
+		 	th.css({top:'0px'});
+	});
+
+	$('.button_green').click(function(){		//提交bug信息
+		var bug=$('#bug_content').val();
+		var email=$('#email').val()
+		var url='./?m=mall&a=save_bug';
+		var data={"content":bug,"email":email};
+		$.post(url,data,function(r){
+			if(r.code==1)
+				noty({text: '操作成功！',layout: 'center', type: 'success',timeout:'1000',});
+			else if(r.code==-1)
+			{
+				noty({text: '请先登录！',layout: 'center', type: 'error',timeout:'1000',});
+				$('#load_box').css({"top":"200px","left":(screen.width-450)/2});
+				$("#load_area").fadeIn("slow");			
+				$('#username').focus();
+			}
+			else
+			{
+				noty({text: '操作失败！'+r.code,layout: 'center', type: 'error',timeout:'1000',});
+			}		
+		},'json');
+	});
+	$(window).load(function(){
+		$('.panel-left').css("height",$(document).height()-(355));
+	});
+});
+</script>
+</html>

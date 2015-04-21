@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>{$app_title}</title>
+	<link rel="stylesheet" type="text/css" href="./Application/Common/Css/common.css">
+	<script type="text/javascript" src="./Application/Common/Js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="./Application/Common/Js/page.js"></script>
+	<script type="text/javascript" src="./Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+	<script type="text/javascript" src="./Application/Common/Js/collect.js"></script>
+	<script type="text/javascript">
+		var page="mall";
+		var page_this={$page_this};
+	</script>
+</head>
+<body>
+	<include file="./Application/Common/View/common_header_mall.html" />
+	<div class="set_width panel-all clearfix">
+		<div class="panel-left"></div>
+		<div class="panel-center">
+			<div class="content">
+				<foreach name="data" item="vo" key="k" >
+					<div class="box clearfix" id="{$vo.goods_id}">
+						<div class="box_left">
+							<a href="Http://my.nuaa.edu.cn/?{$vo.uid}"><IF condition="$vo.Concern_shopid eq 0"><img src="http://my.nuaa.edu.cn/ucenter/avatar.php?uid={$vo.uid}&size=middle" width="80px" /><ELSE/><img src="Uploads{$vo.shop_avator}" width="80px" /></IF></a>
+							<div style="text-align:center;font-size:12px;">{$vo.username}<input type="hidden" value="{$vo.uid}" id="uid" /></br><span style="color:#8D8B8C;">{$vo.data}</span></div>
+						</div>
+						<IF condition="$vo.need_type eq 1"><div class="box_right"><ELSE /><div class="box_right_want"></IF>
+							<div class="box_right_top">
+								<IF condition="$vo.need_type eq 1"><div style="float:left;font-size:16px;line-height:32px;font-weight:bold;color:#FE5252;">出售<ELSE/><div style="float:left;font-size:16px;line-height:32px;font-weight:bold;color:#66C8A3;">求购</IF>
+							</div>
+							<div style="margin-left:8px;float:left;font-size:15px;min-width:200px;font-weight:bold;line-height:34px;"><a href="./?c=goods&id={$vo.goods_id}" target="_blank">{$vo.goods_name}</a></div>
+							<div style="float:left;font-size:18px;color:#FE5252;line-height:32px;"><IF condition="$vo.price eq 0">面议<ELSE />&nbsp;&nbsp;&nbsp;{$vo.price}</IF><span style="color:black;font-size:15px;"> RMB</span></div>
+							<div style="float:right;font-size:16px;line-height:36px;"><IF condition="$vo.is_co eq 1"><img src="Application/Mall/Image/heart.png"  class="heart" title="已收藏"><ELSE /><img src="Application/Mall/Image/heart_grey.png"  class="heart" title="收藏"></IF> <span style="color:#FE5252;" class="col_num">{$vo.col_num}</span>&nbsp;&nbsp;<img src="Application/Mall/Image/talk_green.png" onclick="document.location.href='./?m=mall&c=goods&id={$vo.goods_id}#talk_both'" style="cursor:pointer;" title="查看回复"> <span style="color:#66C8A3;">{$vo.mess_goods}</span></div>
+						</div>
+						<div class="box_right_center"></div>
+						<div class="box_right_bottom" onclick="window.open('./?m=mall&c=goods&id={$vo.goods_id}','_blank')" style="cursor:pointer;">
+							<table width="480px" height="28px" style="font-size:12px;float:left;" class="info_table">
+								<tr>
+									<td width="32px">地点 :</td><td width="33px"><IF condition="$vo.location eq 1">江宁<ELSEIF condition="$vo.location eq 0"/>本部<ELSE />不限</IF></td><td width="32px">分类 :</td><td width="35px"><IF condition="$vo.classify eq 0">手机<ELSEIF condition="$vo.classify eq 1"/>电子<ELSEIF condition="$vo.classify eq 2"/>书籍<ELSEIF condition="$vo.classify eq 3"/>车辆<ELSEIF condition="$vo.classify eq 4"/>服饰<ELSEIF condition="$vo.classify eq 5"/>化妆<ELSEIF condition="$vo.classify eq 6"/>日用<ELSEIF condition="$vo.classify eq 7"/>乐器<ELSEIF condition="$vo.classify eq 8"/>房屋<ELSEIF condition="$vo.classify eq 10"/>虚拟<ELSEIF condition="$vo.classify eq 11"/>食品<ELSE />其他</IF></td>
+									<td  width="55px">联系方式 :</td><td>{$vo.contact}</td>
+								</tr>
+							</table>
+							<div class="clearfix">
+								<IF condition="$vo.photo neq ''"><div style="float:left;width:110px;"><img src="./Uploads{$vo.photo}" width="110px"/></div><div class="description description_class"><IF condition="$vo.description neq ''">{$vo.description}<ELSE /><span style="color:grey;" class="description">这个人很懒，没有留下任何商品描述</span></IF></div><ELSE/><div class="description description_class" style="width:468px;"><IF condition="$vo.description neq ''">{$vo.description}<ELSE /><span style="color:grey;" class="description">这个人很懒，没有留下任何商品描述</span></IF></div></IF>
+							</div>
+						</div>
+						</div>
+						<div class="arrow"></div>
+					</div>
+				</foreach>
+				<a href='javascript:void' id="to_top"></a>
+				<IF condition="$page_num gt 0">
+				<div class="page">
+					<div class="page_left_left" onclick="window.location.href='./?m=mall'"></div>
+					<IF condition="$page_this neq 1"><div class="page_left" onclick="window.location.href='./?m=mall&page={$page_this-1}'"></div></IF>
+					<FOR start="$page_start" end="$page_end">
+						<div class="page_center" id="page_{$i}" onclick="window.location.href='./?m=mall&page={$i}'"><div class="page_font">{$i}</div></div>
+					</FOR>
+					<IF condition="$page_this neq $page_num"><div class="page_right" onclick="window.location.href='./?m=mall&page={$page_this+1}'"></div></IF>
+					<div class="page_right_right" onclick="window.location.href='./?m=mall&page={$page_num}'"></div>
+				</div>
+				</IF>
+			</div>
+		</div>
+		<include file="./Application/Common/View/common_right_green.html" />
+	</div>
+	<include file="./Application/Common/View/common_bottom.html" />
+</body>
+<script>
+jQuery(function($)
+{
+	$('#page_'+page_this).css("background-image","url(Application/Mall/Image/circle_hover.png)");
+
+	$('.description').each(function(){
+		var str= String($(this).html());
+		var reg=new RegExp("\n","g"); 
+		str= str.replace(reg,"<br/>"); 
+		var regx=new RegExp(" ","g"); 
+		str= str.replace(regx,"&nbsp;"); 
+		$(this).html(str);
+	});
+
+
+	$(window).load(function(){
+		$('.panel-left').css("height",$(document).height()-(355));
+	});
+
+    $(window).scroll(function(){
+        if ($(window).scrollTop()>1000){
+            $("#to_top").fadeIn(500);
+        }
+        else
+        {
+            $("#to_top").fadeOut(500);
+        }
+    });
+
+    $("#to_top").click(function(){
+        $('body,html').animate({scrollTop:0},1000);
+        return false;
+    });
+
+    $("#to_top").hover(
+    function(){
+        $(this).css("background","transparent url(Application/Common/Image/sideToolbar.gif) -74px -62px no-repeat")
+    },
+    function(){
+    	$(this).css("background","transparent url(Application/Common/Image/sideToolbar.gif) -1px -62px no-repeat")
+    });
+	
+});
+</script>
+</html>

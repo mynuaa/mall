@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>{$app_title}</title>
+	<link rel="stylesheet" type="text/css" href="./Application/Admin/Css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./Application/Admin/Css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="./Application/Common/Js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="./Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+	<script type="text/javascript" src="./Application/Admin/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div style="width:1000px;margin:30px auto;border:2px solid #CCC;border-radius:10px;min-height:200px;padding:15px 20px;">
+		<a href="./?m=admin">返回管理员中心</a>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<td>#</td>
+					<td>ID</td>
+					<td>禁言时间</td>
+					<td>持续时间</td>
+					<td>禁言操作人</td>
+					<td>xx</td>
+				</tr>
+			</thead>
+			<tbody>
+				<FOREACH name="data" item="vo">
+					<IF condition="$vo.is_over eq 1"><tr class="active"><ELSE/><tr class="warning"></IF>
+						<td>{$vo.banned_id}</td>
+						<td>{$vo.username}</td>
+						<td>{$vo.start_time}</td>
+						<td><IF condition="$vo.last_time eq 0">永久<ELSE/>{$vo.last_time}</IF></td>
+						<td>{$vo.admin_username}</td>
+						<td><IF condition="$vo.is_over eq 1"><a href='./?m=admin&a=no_banned&banned_id={$vo.banned_id}'>取消禁言</a><ElSE />不在禁言时间</IF></td>
+					</tr>
+				</FOREACH>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

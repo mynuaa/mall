@@ -1,0 +1,491 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>{$app_title}</title>
+	<link rel="stylesheet" type="text/css" href="./Application/Admin/Css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./Application/Admin/Css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="./Application/Common/Js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="./Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+	<script type="text/javascript" src="./Application/Admin/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div style="width:1000px;margin:30px auto;border:2px solid #CCC;border-radius:10px;min-height:200px;padding:15px 20px;">
+		<ul class="nav nav-tabs" id="myTab">
+		  <li><a href="#tab0" data-toggle="tab">商品操作</a></li>
+		  <li><a href="#tab1" data-toggle="tab">用户操作</a></li>
+		  <li><a href="#tab2" data-toggle="tab">公告管理</a></li>
+		  <li><a href="#tab3" data-toggle="tab">广告/推荐管理</a></li>
+		  <li><a href="#tab4" data-toggle="tab">商铺管理<span class="badge">{$shop_num}</span></a></li>
+		  <li class="active"><a href="#tab5" data-toggle="tab">数据统计</a></li>
+		</ul>
+		<div id="myTabContent" class="tab-content">
+	        <div class="tab-pane fade" id="tab0">
+	        	<div class="clearfix">
+		        	<form class="navbar-form navbar-left" role="search" style="margin:20px 0px 20px -15px">
+					    <div class="btn-group open">
+				        	<button type="button" class="btn btn-primary dropdown-toggle" id="goods_menu_result" data-toggle="dropdown">商品名 <span class="caret"></span></button>
+					        <ul class="dropdown-menu" id="goods_menu" role="menu">
+					            <li><a href="1">商品名 </a></li>
+					            <li class="divider"></li>
+					            <li><a href="2">uid </a></li>
+					            <li class="divider"></li>
+					            <li><a href="3">id </a></li>
+					        </ul>
+					        <input type="hidden" value="1" name="goods_searchtype" id="goods_searchtype"/>
+				        </div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="goods_search">
+						</div>
+						<button type="submit" id="goods_submit" class="btn btn-default">Go!</button>
+					</form>
+				</div>
+				<div id="goods_content"></div>
+				<ul class="pagination" id="goods_page"> 
+				</ul>
+	        </div>
+	        <div class="tab-pane fade" id="tab1">
+	        	<div class="clearfix">
+		        	<form class="navbar-form navbar-left" role="search" style="margin:20px 0px 20px -15px">
+					    <div class="btn-group open">
+				        	<button type="button" class="btn btn-primary dropdown-toggle" id="people_result" data-toggle="dropdown">uid <span class="caret"></span></button>
+					        <ul class="dropdown-menu" id="people_menu" role="menu">
+					            <li><a href="1">uid </a></li>
+					            <li class="divider"></li>
+					            <li><a href="2">id </a></li>
+					        </ul>
+					        <input type="hidden" value="1" name="goods_searchtype" id="people_searchtype"/>
+				        </div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="people_search"/>
+						</div>
+						<button type="submit" id="people_submit" class="btn btn-default">Go!</button>
+					</form>
+				</div>
+				<div id="people_content"></div>
+				<div style="width:100%;text-align:right;"><a href='./?m=admin&c=other&a=get_bug'>查看bug反馈&nbsp;&nbsp;&nbsp;&nbsp;</a><a href='./?m=admin&c=other'>查看所有管理员</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href='./?m=admin&a=banned_log'>查看所有禁言记录</a></div>
+	        </div>
+	        <div class="tab-pane fade" id="tab2">
+	        	<div style="margin-top:10px;">
+	        		<FOREACH name="notice" item="vo">
+	        			<div class="alert alert-danger" id="{$vo.notice_id}"><a href="./?m=admin&c=notice&id={$vo.notice_id}">{$vo.notice_title}</a>&nbsp;&nbsp;排序优先级: {$vo.notice_grade}<div style="display:inline;float:right;"><a href="javascript:void;" class="notice_delete">删除</a></div></div>
+	        		</FOREACH>
+	        	</div>
+	        	<div class="form-group" style="margin-top:10px;">
+	        		<label for="exampleInputEmail1">公告标题</label>
+	        		<input type="text" class="form-control title" placeholder="Text input" />
+	        	</div>
+	        	<div class="form-group">
+	        		<label for="exampleInputEmail1">公告内容</label>
+	        		<textarea class="form-control content" rows="3" ></textarea>
+	        	</div>
+	        	<div class="form-group">
+	        		<label for="exampleInputEmail1">排序优先级</label>
+	        		<input type="text" class="form-control grade" placeholder="请输入1~9，数字大的排在前面"/>
+	        	</div>
+	        	<button type="submit" id="notice_submit" class="btn btn-default">Submit</button>
+	        </div>
+	        <div class="tab-pane fade" id="tab3">
+	        	<div style="margin-top:10px;">
+	        		<FOREACH name="ad" item="vo">
+	        			<div class="alert alert-danger" id="{$vo.ad_id}"><img src="./Uploads{$vo.content}" width="80px"/>&nbsp;&nbsp;排序优先级: {$vo.grade}&nbsp;&nbsp;图片链接: {$vo.href}<div style="display:inline;float:right;"><a href="javascript:void;" class="ad_delete">删除</a></div></div>
+	        		</FOREACH>
+	        	</div>
+	        	<form method="post" action="./?m=admin&c=other&a=add_ad" enctype="multipart/form-data">
+		        	<div class="form-group" style="margin-top:10px;">
+		        		<input type='file'  name='photo' />
+		        	</div>
+		        	<div class="form-group">
+		        		<label for="exampleInputEmail1" >排序优先级</label>
+		        		<input type="text" class="form-control grade" placeholder="请输入1~9，数字大的排在前面" name="grade"/>
+		        	</div>
+		        	<div class="form-group">
+		        		<label for="exampleInputEmail1" >图片链接</label>
+		        		<input type="text" class="form-control href" placeholder="请以http://开头，限制长度在60位,无链接可留空" name="href"/>
+		        	</div>
+		        	<button type="submit" id="ad_submit" class="btn btn-default">Submit</button>
+		        </form>
+	        </div>
+	        <div class="tab-pane fade" id="tab4">
+	        	<table class="table table-striped" style="margin-top:10px;" id="shop_table">
+	        		<tr>
+	        			<td>#</td>
+	        			<td>店铺名称</td>
+	        			<td>申请人ID</td>
+	        			<td>申请时间</td>
+	        			<td>店铺类型</td>
+	        			<td>店铺描述</td>
+	        			<td>联系方式</td>
+	        			<td>XXX</td>
+	        		</tr>
+	        		<FOREACH name="shop" item="vo">
+	        			<tr id="{$vo.shop_id}">
+		        			<td>{$vo.shop_id}</td>
+		        			<td>{$vo.shop_name}</td>
+		        			<td>{$vo.admin_name}</td>
+		        			<td>{$vo.create_time}</td>
+		        			<td>{$vo.shop_type}</td>
+		        			<td>{$vo.description}</td>
+		        			<td>{$vo.contact}</td>
+		        			<td><a href="javascript:void;" class="permit_it">审核通过</a>&nbsp;&nbsp;<a href="javascript:void;" class="delete_shop">删除</a></td>
+		        		</tr>
+	        		</FOREACH>
+	        	</table>
+	        	<div style="width:100%;text-align:right;margin-top:10px;"><a href="#" class="search_shop">查看所有商铺</a></div>
+	        </div>
+	        <div class="tab-pane active" id="tab5">
+	        	<div style="margin-top:10px;">
+	        		<span style="font-size:18px;font-weight:bold;">实时数据统计</span>&nbsp;&nbsp;<a id="get_tj" href="javascript:void">获取数据</a>
+	        		<div style="margin-top:10px;" id="tj_area"></div>
+	        	</div>
+	        </div>
+        </div>
+	</div>
+</body>
+<script>
+jQuery(function($){
+	$('#myTab a').click(function (e) {
+		//alert("fdas");
+		  e.preventDefault();
+		  $(this).tab('show');
+	});
+	var goods_page=1;
+
+	$(document).delegate('#goods_page a','click',function (e){	//绑定事件~实现翻页功能
+		e.preventDefault();
+		var pge=$(this).html();
+		var goods_page=pge;
+		var url="./?m=admin&a=search_goods";
+		var data={"goods_name":$('#goods_search').val(),"page":pge,"type":$('#goods_searchtype').val()};
+		$.post(url,data,function(r){
+				if(r.code==-1)
+				{
+					noty({text: '查询失败，请检查登录状态',layout: 'center', type: 'error',timeout:'2000',});
+				}
+				else
+				{
+					$('#goods_content').html('');
+					var page_area=$('#goods_page');
+					page_area.html('').append('<li class="disabled"><a href="#">&laquo;</a></li>');
+					console.log(r.data);
+
+					for(var j=1;j<(r.num)/10+1;j++)
+						if(j==goods_page)
+							page_area.append('<li class="active"><a href="#">'+j+' </a></li>');
+						else
+							page_area.append('<li><a href="#">'+j+' </a></li>');
+					page_area.append('<li class="disabled"><a href="#">&raquo;</a></li>');
+
+					for(var i=0;i<r.data.length;i++)
+						if(r.data[i]['need_type']==1)
+							$('#goods_content').append('<div class="panel panel-info" id="'+r.data[i]['goods_id']+'"><div class="panel-heading"><span style="color:#F56C7E;">出售</span>&nbsp;&nbsp;<b><a href="./?m=mall&c=goods&id='+r.data[i]['goods_id']+'">'+r.data[i]['goods_name']+'</b></a>&nbsp;&nbsp;&nbsp;'+r.data[i]['data']+'&nbsp;&nbsp;&nbsp;'+r.data[i]['username']+'<div style="display:inline;float:right;"><a href="./?m=mall&c=edit&ed='+r.data[i]['goods_id']+'">编辑</a> &nbsp;<a href="#" class="goods_delete">删除</a> &nbsp;<a href="#" class="trade_over">关闭</a></div></div><div class="panel-body">'+r.data[i]['description']+'</div></div>');
+						else
+							$('#goods_content').append('<div class="panel panel-info" id="'+r.data[i]['goods_id']+'"><div class="panel-heading"><span style="color:#34B787;">求购</span>&nbsp;&nbsp;<b><a href="./?m=mall&c=goods&id='+r.data[i]['goods_id']+'">'+r.data[i]['goods_name']+'</b></a>&nbsp;&nbsp;&nbsp;'+r.data[i]['data']+'&nbsp;&nbsp;&nbsp;'+r.data[i]['username']+'<div style="display:inline;float:right;"><a href="./?m=mall&c=edit&ed='+r.data[i]['goods_id']+'">编辑</a> &nbsp;<a href="#" class="goods_delete">删除</a> &nbsp;<a href="#" class="trade_over">关闭</a></div></div><div class="panel-body">'+r.data[i]['description']+'</div></div>');
+					noty({text: '查询成功！',layout: 'center', type: 'success',timeout:'2000',});
+				}
+			},'json');
+		
+	});
+
+	$('#goods_submit').click(function (e){	//ajax提交搜索信息到后台,type=1 按商品名称搜索 type=0按uid搜索
+		e.preventDefault();
+		var url="./?m=admin&a=search_goods";
+		var data={"goods_name":$('#goods_search').val(),"page":1,"type":$('#goods_searchtype').val()};
+		$.post(url,data,function(r){
+				if(r.code==-1)
+				{
+					noty({text: '查询失败，请检查登录状态',layout: 'center', type: 'error',timeout:'2000',});
+				}
+				else
+				{
+					var page_area=$('#goods_page');
+					page_area.html('').append('<li class="disabled"><a href="#">&laquo;</a></li>');
+					for(var j=1;j<(r.num)/10+1;j++)
+						if(j==goods_page)
+							page_area.append('<li class="active"><a href="#">'+j+' </a></li>');
+						else
+							page_area.append('<li><a href="#">'+j+' </a></li>');
+					page_area.append('<li class="disabled"><a href="#">&raquo;</a></li>');
+					$('#goods_content').html('');
+//console.log(r);
+					if (r.data)
+					{
+						for(var i=0;i<r.data.length;i++)
+							if(r.data[i]['need_type']==1)
+								$('#goods_content').append('<div class="panel panel-info" id="'+r.data[i]['goods_id']+'"><div class="panel-heading"><span style="color:#F56C7E;">出售</span>&nbsp;&nbsp;<b><a href="./?m=mall&c=goods&id='+r.data[i]['goods_id']+'">'+r.data[i]['goods_name']+'</b></a>&nbsp;&nbsp;&nbsp;'+r.data[i]['data']+'&nbsp;&nbsp;&nbsp;'+r.data[i]['username']+'<div style="display:inline;float:right;"><a href="./?m=mall&c=edit&ed='+r.data[i]['goods_id']+'">编辑</a> &nbsp;<a href="#" class="goods_delete">删除</a> &nbsp;<a href="#" class="trade_over">关闭</a></div></div><div class="panel-body">'+r.data[i]['description']+'</div></div>');
+							else
+								$('#goods_content').append('<div class="panel panel-info" id="'+r.data[i]['goods_id']+'"><div class="panel-heading"><span style="color:#34B787;">求购</span>&nbsp;&nbsp;<b><a href="./?m=mall&c=goods&id='+r.data[i]['goods_id']+'">'+r.data[i]['goods_name']+'</b></a>&nbsp;&nbsp;&nbsp;'+r.data[i]['data']+'&nbsp;&nbsp;&nbsp;'+r.data[i]['username']+'<div style="display:inline;float:right;"><a href="./?m=mall&c=edit&ed='+r.data[i]['goods_id']+'">编辑</a> &nbsp;<a href="#" class="goods_delete">删除</a> &nbsp;<a href="#" class="trade_over">关闭</a></div></div><div class="panel-body">'+r.data[i]['description']+'</div></div>');
+						noty({text: '查询成功！',layout: 'center', type: 'success',timeout:'2000',});	
+					}	
+				}
+			},'json');
+	});
+
+	$(document).delegate(".goods_delete","click",
+		function (e)
+		{
+			e.preventDefault();
+			var th=$(this);
+			var goods_id=th.parents('.panel').attr('id');
+			var url="./?m=admin&a=delete";
+			var data={"goods_id":goods_id};
+			var r=confirm("确认删除该条目？");
+			if(r==true)
+			{;
+				$.post(url,data,function(r)
+				{
+				//console.log(r)
+					if(r.code==-1)	
+					{
+						noty({text: '无此数据,请刷新页面'+r.code,layout: 'center', type: 'error',timeout:'1000',});
+					}
+					else if(r.code == 1)
+					{
+						noty({text: '删除成功',layout: 'center', type: 'success',timeout:'1000',});
+						th.parents('.panel').remove();
+					}
+				});
+			}
+		});
+
+	$(document).delegate('.trade_over',"click",	//点击之后ajax将对应商品的信息移到另一张表里
+		function (e)
+		{
+			e.preventDefault();
+			var th=$(this);
+			var goods_id=th.parents('.panel').attr('id');
+			var url="./?m=mall&c=goods&a=trade_over";
+			var data={"goods_id":goods_id};
+			$.post(url,data,function(r){
+					if(r.code==1)
+						noty({text: '交易成功，感谢您支持纸飞机',layout: 'center', type: 'success',timeout:'1000',});
+					else
+						noty({text: '操作失败,刷新页面后若仍未完成交易请联系管理员'+r.code,layout: 'center', type: 'error',timeout:'1000',});
+				},'json');
+		});
+
+	$('#goods_menu a').click(function (e){
+		e.preventDefault();
+		var num=$(this).attr('href');
+		if(num==1)
+		{
+			$('#goods_menu_result').html('商品名  <span class="caret"></span>');
+			$('#goods_searchtype').val('1');
+		}
+		else if(num==2)
+		{
+			$('#goods_menu_result').html('uid  <span class="caret"></span>');
+			$('#goods_searchtype').val('2');
+		}	
+		else if(num==3)
+		{
+			$('#goods_menu_result').html('id  <span class="caret"></span>');
+			$('#goods_searchtype').val('3');
+		}
+	});
+
+	$('#people_menu a').click(function (e){
+		e.preventDefault();
+		var num=$(this).attr('href');
+		if(num==1)
+		{
+			$('#people_result').html('uid  <span class="caret"></span>');
+			$('#people_searchtype').val('1');
+		}
+		else if(num==2)
+		{
+			$('#people_result').html('id  <span class="caret"></span>');
+			$('#people_searchtype').val('2');
+		}
+	});
+
+	$('#people_submit').click(function (e){
+		e.preventDefault();
+		var type=$('#people_searchtype').val();
+		var cont=$('#people_search').val();
+		var url='./?m=admin&a=search_user';
+		var data={"search_content":cont,"type":type};
+		$.post(url,data,function(r){
+			if(r.code==1)
+			{
+				noty({text: '查询成功',layout: 'center', type: 'success',timeout:'1000',});
+				$('#people_content').html('').append('<div class="alert alert-info">uid: '+r.data[0]+'&nbsp;&nbsp;&nbsp;用户名: '+r.data[1]+'&nbsp;&nbsp;&nbsp;邮箱: '+r.data[2]+'<div style="display:inline;float:right;"><a href="#" id="give_admin">给予管理员权限</a>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" style="width:25px;" id="banned_time"/>&nbsp;天<a href="#" id="give_banned">禁言</a></div></div>');
+			}
+			else
+			{
+				noty({text: '查询失败',layout: 'center', type: 'success',timeout:'1000',});
+			}
+		},'json');
+	});
+
+	$(document).delegate('#give_admin','click',function	(e){
+		e.preventDefault();
+		var cont=$('#people_search').val();
+		var type=$('#people_searchtype').val();
+		var url='./?m=admin&a=give_admin';
+		var	data={"data":cont,"type":type};
+		$.post(url,data,function(r){
+			if(r.code==1)
+				noty({text: '操作成功',layout: 'center', type: 'success',timeout:'1000',});
+			else if(r.code==-1)
+				noty({text: '操作失败',layout: 'center', type: 'error',timeout:'3000',});
+			else if(r.code==-2)
+				noty({text: '您的权限不允许设置新的管理员',layout: 'center', type: 'error',timeout:'3000',});
+			else if(r.code==-3)
+				noty({text: '该用户已经是管理员',layout: 'center', type: 'error',timeout:'3000',});
+			else
+				noty({text: '操作失败'+r.code,layout: 'center', type: 'error',timeout:'1000',});
+		},'json');
+	});
+
+	$(document).delegate('#give_banned','click',function (e){
+		e.preventDefault();
+		var banned_time=$('#banned_time').val();
+		if(banned_time!='')
+		{
+			var url='./?m=admin&a=give_banned';
+			var cont=$('#people_search').val();
+			var type=$('#people_searchtype').val();
+			var data={"data":cont,"type":type,"bannned_time":banned_time};
+			$.post(url,data,function (r){
+				if(r.code==1)
+					noty({text: '操作成功',layout: 'center', type: 'success',timeout:'1000',});
+				else if(r.code==-1)
+					noty({text: '操作失败',layout: 'center', type: 'error',timeout:'3000',});
+				else if(r.code==-2)
+					noty({text: '您没有禁言的权限',layout: 'center', type: 'error',timeout:'3000',});
+				else if(r.code==-3)
+					noty({text: '该用户已在禁言时间，请勿重复禁言',layout: 'center', type: 'error',timeout:'3000',});
+			},'json');
+		}
+		else
+		{
+			noty({text: '操作失败,禁言时间不能为空',layout: 'center', type: 'error',timeout:'3000',});
+		}
+	});
+
+	$('#notice_submit').click(function(){
+		var title=$('#tab2 .title').val();
+		var content=$('#tab2 .content').val();
+		var grade=$('#tab2 .grade').val();
+		var url='./?m=admin&c=notice&a=add_notice';
+		var data={"title":title,"content":content,"grade":grade};
+
+		$.post(url,data,function(r){
+			if(r.code==1)
+				noty({text: '添加新公告成功',layout: 'center', type: 'success',timeout:'1000',});
+			else
+				noty({text: '操作失败'+r.code,layout: 'center', type: 'error',timeout:'3000',});
+		},'json');
+	});
+
+	$('.notice_delete').click(function(){	//删公告
+		var id=$(this).parents('.alert').attr('id');
+		var url='./?m=admin&c=notice&a=delete';
+		var data={"id":id};
+		$.post(url,data,function(r){
+			if(r.code==1)
+			{
+				noty({text: '删除公告成功',layout: 'center', type: 'success',timeout:'1000',});
+			}	
+			else
+				noty({text: '操作失败'+r.code,layout: 'center', type: 'error',timeout:'3000',});
+		},'json');
+		//alert(id);
+	});
+
+	$('.ad_delete').click(function(){	//删除广告
+		var id=$(this).parents('.alert').attr('id');
+		var url='./?m=admin&c=other&a=delete_ad';
+		var data={"ad_id":id};
+		$.post(url,data,function(r){
+			if(r.code==1)
+			{
+				noty({text: '删除广告成功',layout: 'center', type: 'success',timeout:'1000',});
+			}	
+			else
+				noty({text: '操作失败'+r.code,layout: 'center', type: 'error',timeout:'3000',});
+		},'json');
+	});
+
+	$('.permit_it').click(function(){
+		var shop_id=$(this).parents('tr').attr('id');
+		var url='./?m=mall&c=shop&a=permit';
+		var data={"shop_id":shop_id};
+		var m=confirm("确认完成该店铺的审核?");
+		if(m==true)
+		{
+			$.post(url,data,function(r){
+				if(r.code==1)
+					noty({text: '审核操作成功',layout: 'center', type: 'success',timeout:'1000',});
+				else
+					noty({text: '操作失败'+r.code,layout: 'center', type: 'error',timeout:'3000',});
+			},'json');
+		}
+	});
+
+	$('.search_shop').click(function (e){
+		e.preventDefault();
+		var url='./?m=mall&c=shop&a=all_shops';
+		$.post(url,'',function(r){
+			if(r.code==1)
+			{
+				if(r.data)
+				{
+					for(var i=0;i<r.data.length;i++)
+					{
+						$('#shop_table').append('<tr id="'+r.data[i]['shop_id']+'"><td>'+r.data[i]['shop_id']+'</td><td>'+r.data[i]['shop_name']+'</td><td>'+r.data[i]['admin_name']+'</td><td>'+r.data[i]['create_time']+'</td><td>'+r.data[i]['shop_type']+'</td><td>'+r.data[i]['description']+'</td><td>'+r.data[i]['contact']+'</td><td><a href="javascript:void" class="edit_shop">编辑</a>&nbsp;&nbsp;<a href="#" class="delete_shop">删除店铺</a></td></tr>');
+					}
+					noty({text: '显示成功',layout: 'center', type: 'success',timeout:'1000',});
+				}
+				else
+				{
+					noty({text: '暂无商铺数据',layout: 'center', type: 'error',timeout:'1000',});
+				}
+				
+			}
+			else
+				noty({text: '操作失败'+r.code,layout: 'center', type: 'error',timeout:'3000',});
+		},'json');
+	});
+
+	$(document).delegate('.delete_shop',"click",function (e){
+		e.preventDefault();
+		var shop_id=$(this).parents('tr').attr('id');
+		var url='./?m=mall&c=shop&a=delete_shop';
+		var data={"shop_id":shop_id};
+		var m=confirm("确认删除该店铺?");
+		if(m==true)
+		{
+			$.post(url,data,function(r){
+				if(r.code==1)
+					noty({text: '删除操作成功',layout: 'center', type: 'success',timeout:'1000',});
+				else if(r.code== -2)
+					noty({text: '权限不够啊亲~'+r.code,layout: 'center', type: 'error',timeout:'3000',});
+				else
+					noty({text: '操作失败'+r.code,layout: 'center', type: 'error',timeout:'3000',});
+			},'json');
+		}
+	});
+
+	$(document).delegate('.edit_shop',"click",function(){
+		document.location.href="./?m=admin&c=other&a=shop_edit_page&id="+$(this).parents('tr').attr('id');
+	});
+
+	$('#get_tj').click(function(){
+		url='./?m=admin&c=other&a=get_tj';
+		$.post(url,'',function(r){
+			if(r.code)
+			{
+				console.log(r);
+				noty({text: '获取数据成功',layout: 'center', type: 'success',timeout:'1000',});
+				$('#tj_area').append("今日发布用户数："+r.today_usernum+"<br/>"+"总发布用户数："+r.all_usernum+"<br/><br/>"+"今日未成交数_出售："+r.today_newgoodsnum_chu+"<br/>"+"今日未成交数_求购："+r.today_newgoodsnum_qiu+"<br/>"+"总未成交数_出售："+r.all_newgoodsnum_chu+"<br/>"+"总未成交数_求购："+r.all_newgoodsnum_qiu+"<br/><br/>"+"今日已成交数_出售："+r.today_soldgoodsnum_chu+"<br/>"+"今日已成交数_求购："+r.today_soldgoodsnum_qiu+"<br/>"+"总成交数_出售："+r.all_soldgoodsnum_chu+"<br/>"+"总成交数_求购："+r.all_soldgoodsnum_qiu+"<br/>");
+			}
+			else
+				noty({text: '操作失败'+r.code,layout: 'center', type: 'error',timeout:'3000',});
+		});
+	});
+});
+</script>
+</html>
+	

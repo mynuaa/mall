@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>{$app_title}</title>
+	<link rel="stylesheet" type="text/css" href="./Application/Common/Css/common.css">
+	<script type="text/javascript" src="./Application/Common/Js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="./Application/Common/Js/page.js"></script>
+	<script type="text/javascript" src="./Application/Common/Js/collect.js"></script>
+	<script type="text/javascript" src="./Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+	<script type="text/javascript">
+		var page="mall";
+		var page_this='{$page_this}';
+	</script>
+</head>
+<body>
+	<include file="./Application/Common/View/common_header_mall.html" />
+	<div class="set_width panel-all clearfix">
+		<div class="panel-left"></div>
+		<div class="panel-center">
+			<div class="content_home">
+				<div class="self_info clearfix">
+					<div style="width:80px;min-height:30px;float:left;border-left:1px solid #CCC;border-right:1px solid #CCC;border-top:1px solid #CCC;"><img src="./Uploads{$shop.cover}" width="80px" /></div>
+					<div style="width:100px;height:80px;float:right;"><div style="font-size:12px;text-align:right;line-height:20px;margin-top:2px;">正在出售 <span style="color:#2DB482;">{$num}</span></div></div>
+					<div style="width:400px;float:right;">
+						<h3>{$shop.shop_name}</h3>
+						<span style="font-size:13px;color:grey;line-height:30px;">店铺描述: {$shop.description}<br/>联系方式: {$shop.contact}</span>
+					</div>
+				</div>
+				<div class="taps_bottom" style="margin-top:15px;border-top-color:#34B787;border-bottom-color:#34B787;">
+					<div class="boxs_2 clearfix boxs">
+						<IF condition="$num eq 0">
+							<div style="font-size:14px;margin-top:10px;">本商铺尚未发布过商品~~ &nbsp;&nbsp;</div><br/>
+						<ELSE/>
+							<FOREACH name="data" item="vo" key="k" >
+								<div class="home_box clearfix box" id="{$vo.goods_id}">
+									<div class="home_box_right"  style="width:560px;">
+										<div class="box_right_top" style="width:560px;">
+											<div style="float:left;font-size:16px;line-height:32px;font-weight:bold;color:#34B787;">出售</div>
+											<div style="margin-left:8px;float:left;font-size:15px;min-width:160px;font-weight:bold;line-height:34px;"><a href="./?c=goods&id={$vo.goods_id}">{$vo.goods_name}</a></div>
+											<div style="float:left;font-size:18px;color:#FE5252;line-height:32px;"><IF condition="$vo.price eq 0">面议<ELSE />&nbsp;&nbsp;&nbsp;{$vo.price}</IF><span style="color:black;font-size:15px;"> RMB</span></div>
+											<div style="float:right;font-size:16px;line-height:36px;"><IF condition="$vo.is_co eq 1"><img src="Application/Mall/Image/heart.png"  class="heart"><ELSE /><img src="Application/Mall/Image/heart_grey.png"  class="heart"></IF> <span style="color:#FE5252;" class="col_num">{$vo.col_num}</span>&nbsp;&nbsp;<img src="Application/Mall/Image/talk_green.png" onclick="document.location.href='./?m=mall&c=goods&id={$vo.goods_id}#talk_both'" style="cursor:pointer;"> <span style="color:#66C8A3;">{$vo.mess_goods}</span></div>
+										</div>
+										<div class="box_right_center"  style="width:560px;"></div>
+										<div class="box_right_bottom" style="width:560px;min-height:50px;cursor:pointer;" onclick="document.location.href='./?m=mall&c=goods&id={$vo.goods_id}'">
+											<table width="480px" height="28px" style="font-size:12px;float:left;"  class="info_table">
+												<tr>
+													<td width="32px">地点 :</td><td width="33px"><IF condition="$vo.location eq 1">江宁<ELSEIF condition="$vo.location eq 0"/>本部<ELSE />不限</IF></td><td width="32px">分类 :</td><td width="35px"><IF condition="$vo.classify eq 0">手机<ELSEIF condition="$vo.classify eq 1"/>电子<ELSEIF condition="$vo.classify eq 2"/>书籍<ELSEIF condition="$vo.classify eq 3"/>车辆<ELSEIF condition="$vo.classify eq 4"/>服饰<ELSEIF condition="$vo.classify eq 5"/>化妆<ELSEIF condition="$vo.classify eq 6"/>日用<ELSEIF condition="$vo.classify eq 7"/>乐器<ELSEIF condition="$vo.classify eq 8"/>房屋<ELSE />其他</IF></td>
+													<td  width="55px">联系方式 :</td><td>{$vo.contact}</td>
+												</tr>
+											</table>
+											<div class="clearfix">
+												<IF condition="$vo.photo neq ''"><div style="float:left;width:110px;"><img src="./Uploads{$vo.photo}" width="110px"/></div>
+												<div style="float:right;width:440px;" class="description">{$vo.description}</div>
+												<ELSE/><div style="float:right;width:560px" class="description"><IF condition="$vo.description neq ''">&nbsp;{$vo.description}<ELSE /><span style="color:grey;" class="description">这个人很懒，没有留下任何商品描述</span></IF></div></IF>
+											</div>
+										</div>
+									</div>
+								</div>
+							</FOREACH>				
+						</IF>
+						<div class="page">
+							<div class="page_left_left" onclick="link_to(1)"></div>
+							<IF condition="$page_this neq 1"><div class="page_left" onclick="link_to({$page_this-1})"></div></IF>
+							<IF condition="$page_num gt 9">		<!--//页数大于9-->
+								<IF condition="$page_this gt 5">
+									<FOR start="$page_this-4" end="$page_this+5">
+										<div class="page_center" id="page_{$i}" onclick="link_to({$i})"><div class="page_font">{$i}</div></div>
+									</FOR>
+								<ELSE/>
+									<FOR start="1" end="10">
+										<div class="page_center" id="page_{$i}" onclick="link_to({$i})"><div class="page_font">{$i}</div></div>
+									</FOR>
+								</IF>
+							</IF>
+							<IF condition="$page_num lt 10">	<!--//页数小于10-->
+								<FOR start="1" end="$page_num+1">
+									<div class="page_center" id="page_{$i}" onclick="link_to({$i})"><div class="page_font">{$i}</div></div>
+								</FOR>
+							</IF>
+							<IF condition="$page_this neq $page_num"><div class="page_right" onclick="link_to({$page_this+1})"></div></IF>
+							<div class="page_right_right" onclick="link_to({$page_num})"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<include file="./Application/Common/View/common_right_green.html"/>
+	</div>
+	<include file="./Application/Common/View/common_bottom.html" />
+</body>
+<script>
+jQuery(function($){
+	$('#page_'+page_this).css("background-image","url(Application/Mall/Image/circle_hover.png)");
+	$(window).load(function(){
+		$('.panel-left').css("height",$(document).height()-(355));
+	});
+	$('.page_center').hover(
+		function()
+		{
+			var th=$(this);
+			th.css("background-image","url(Application/Mall/Image/circle_hover.png)");
+		},
+		function()
+		{
+			var th=$(this);
+			if(th.children().html() != page_this)
+			{
+				th.css("background-image","url(Application/Mall/Image/circle.png)");
+			}
+		});
+
+	var tap_s=1;
+	$('.description').each(function(){
+		var str= String($(this).html());
+		var reg=new RegExp("\n","g"); 
+		str= str.replace(reg,"<br/>"); 
+		$(this).html(str);
+	});
+
+	$('.panel-left').height($(document).height()-360);
+
+	window.link_to=function(page)
+	{
+		var url=window.location.href;
+		var id=url.match(/&id=\d/g)[0].match(/\d/);
+		window.location.href='./?m=mall&c=shop&id='+id+'&page='+page;
+	}
+
+});
+</script>
+</body>

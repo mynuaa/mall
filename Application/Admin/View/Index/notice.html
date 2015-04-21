@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>{$app_title}</title>
+	<link rel="stylesheet" type="text/css" href="./Application/Common/Css/common.css">
+	<link rel="stylesheet" type="text/css" href="./Application/Mall/Css/mall.css">
+	<script type="text/javascript" src="./Application/Common/Js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript">
+		var page="mall";
+	</script>
+</head>
+<body>
+	<include file="./Application/Common/View/common_header_mall.html" />
+	<div class="set_width panel-all clearfix">
+		<div class="panel-left" style="min-height:800px;"></div>
+		<div class="panel-center">
+			<div class="set_center" style="width:600px;margin:20px auto;">
+				<span style="font-size:22px;">{$content.notice_title}</span><br/>
+				<span style="font-size:13px;" id="link_to_zfj"><a href='http://my.nuaa.edu.cn'>纸飞机南航青年网络社区</a></span><span style="font-size:13px;color:#CCC;"> | {$content.notice_time}</span>
+				<div style="border-bottom:2px dotted #CCC;margin-top:8px;margin-bottom:10px;"></div>
+				<div style="font-size:14px;line-height:25px;" class="description">{$content.notice_content}</div>
+			</div>
+		</div>
+		<include file="./Application/Common/View/common_right_green.html" />
+	</div>
+	<include file="./Application/Common/View/common_bottom.html" />
+</body>
+<script>
+jQuery(function($){
+	$('.description').each(function(){
+			var str= String($(this).html());
+			var reg=new RegExp("\n","g"); 
+			str= str.replace(reg,"<br/>"); 
+			var regx=new RegExp(" ","g"); 
+			str= str.replace(regx,"&nbsp;"); 
+			$(this).html(str);
+			$('.panel-left').css("height",$(document).height()-(355));
+		});
+});
+</script>
+</html>

@@ -1,0 +1,505 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>{$app_title}</title>
+	<link rel="stylesheet" type="text/css" href="./Application/Common/Css/common.css">
+	<script type="text/javascript" src="./Application/Common/Js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="./Application/Common/Js/page.js"></script>
+	<script type="text/javascript" src="./Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+	<script type="text/javascript">
+		var page="home";
+		var tap_s={$tap_s};
+		var p2_this={$p2_this};
+		var p3_this=1;//{$p3_this};
+		var p4_this={$p4_this};
+	</script>
+	<style>
+		.description{ overflow: hidden;max-height: 300px}
+	</style>
+</head>
+<body>
+	<include file="./Application/Common/View/common_header_mall.html" />
+	<div class="set_width panel-all clearfix">
+		<div class="panel-left" style="background-color:#D1D1D1"></div>
+		<div class="panel-center">
+			<div class="content_home">
+				<div class="self_info clearfix">
+					<div style="width:80px;min-height:80px;float:left;"><img src="http://my.nuaa.edu.cn/ucenter/avatar.php?uid={$uid}&size=middle" width="80px" /></div>
+					<div style="width:100px;float:right;"><img src="Application/Mall/Image/config.png" style="float:right;cursor:pointer;" onclick="window.location.href='./?m=home&c=config'"/><br/><div style="font-size:12px;text-align:right;line-height:20px;margin-top:2px;">正在出售 <span style="color:#2DB482;">{$num}</span><br/>已售出 <span style="color:#2DB482;">{$num_sold}</span></div></div>
+					<div style="width:400px;height:80px;float:right;">
+						<h3>{$username}</h3>
+						<span style="font-size:13px;color:grey;line-height:30px;"><IF condition="$shop_id gt 0"><a href="./?m=mall&c=shop&id={$shop_id}">查看我的店铺</a><br/><a href="./?m=mall&c=shop&a=edit&id={$shop_id}">修改店铺信息</a><ELSE/></IF></span>
+					</div>
+				</div>
+				<div class="taps_top">
+					<div class="taps_style taps_sel" id="goods_tap_1">最新消息</div>
+					<div class="taps_style taps_unsel" id="goods_tap_2">我的出售/求购</div>
+					<div class="taps_style taps_unsel" id="goods_tap_3">已出售</div>
+					<div class="taps_style taps_unsel" id="goods_tap_4">我的收藏</div>
+				</div>
+				<div class="taps_bottom">
+					<div class="boxs_1 clearfix boxs">
+						<IF condition="$mess_num eq 0">
+							<div style="font-size:14px;margin-top:10px;">没有未读的消息哦~</div>
+						<ELSE/>
+							<FOREACH name="mess" item="vo">
+								<div class="clearfix mes_line" id="{$vo.message_id}">
+									<div style="float:left;"><span style="color:red;"><IF condition="$vo.status eq 1">新！<ELSE/>&nbsp;</IF>&nbsp;&nbsp;</span>
+										<IF condition="$vo.message_type eq 0">
+										 <a class="link_goods" href="./?m=mall&c=goods&id={$vo.goods_id}" target="_blank">
+											<IF condition="$vo.status eq 1"><b>您在主题 ‘{$vo.goods_name}’ 有新回复</b><ELSE/>您在主题 ‘{$vo.goods_name}’ 有新回复</IF>
+										</a>
+										<ELSEIF condition="$vo.message_type eq 1"/>
+										<div class="underline_void">
+												<a href="javascript:void;" class="link_goods"><IF condition="$vo.status eq 1"><b>您收藏的商品 '{$vo.goods_name}' 已被卖出</b><ELSE/>您收藏的商品 '{$vo.goods_name}' 已被卖出</IF></a>
+										</div>
+										<ELSEIF condition="$vo.message_type eq 4"/>
+										<div class="underline_void">
+												<a href="javascript:void;" class="link_goods"><IF condition="$vo.status eq 1"><b>您收藏的商品 '{$vo.goods_name}' 已被删除</b><ELSE/>您收藏的商品 '{$vo.goods_name}' 已被删除</IF></a>
+										</div>
+										<ELSEIF condition="$vo.message_type eq 3"/>
+										<div class="underline_void">
+											<a href="javascript:void;" class="link_goods"><IF condition="$vo.status eq 1"><b>您的 '{$vo.goods_name}' 被管理员 {$vo.from_username} 删除</b><ELSE/>您的 '{$vo.goods_name}' 被管理员 {$vo.from_username} 删除</IF></a>
+										</div>
+										<ELSEIF condition="$vo.message_type eq 2"/>
+											<a class="link_goods" href="./?m=mall&c=goods&id={$vo.goods_id}" target="_blank">
+												<IF condition="$vo.status eq 1"><b>您的 '{$vo.goods_name}' 被管理员 {$vo.from_username} 关闭</b><ELSE/>您的 '{$vo.goods_name}' 被管理员 {$vo.from_username} 关闭
+												</IF>
+											</a>
+										</IF>
+
+									</div>
+										<div style="float:right;font-size:12px;">{$vo.data}</div>
+								</div>
+							</FOREACH>
+						</IF>
+						<div id="caozuo_area" style="text-align:right;font-size:14px;margin-top:15px;margin-bottom:15px;cursor:pointer;"><div id="all_read" style="height: 25px;width: 110px;background: #F56C7E;color: white;text-align: center;line-height: 25px;float: left;">全部标记为已读</div><a href="javascript:;" id="read_more">查看已读消息</a></div>
+					</div>
+					<div class="boxs_2 boxs clearfix" style="display:none;">
+						<br/>
+						<IF condition="$num eq 0">
+							<div style="font-size:14px;margin-top:10px;">尚未发布过出售或者求购信息哦~ &nbsp;&nbsp;</div>
+						<ELSE/>
+							<FOREACH name="data" item="vo" key="k" >
+								<div class="home_box clearfix" id="{$vo.goods_id}">
+									<IF condition="$vo.need_type eq 1"><div class="home_box_left_chu"></div><ELSE/><div class="home_box_left_qiu"></div></IF>
+									<div class="home_box_right">
+										<div class="box_right_top" style="width:500px;">
+											<IF condition="$vo.need_type eq 1"><div style="float:left;font-size:16px;line-height:32px;font-weight:bold;color:#FE5252;">出售<ELSE/><div style="float:left;font-size:16px;line-height:32px;font-weight:bold;color:#66C8A3;">求购</IF></div>
+											<div style="margin-left:8px;float:left;font-size:15px;width:150px;over-flow:hidden;font-weight:bold;line-height:34px;"><a href="./?c=goods&id={$vo.goods_id}">{$vo.goods_name}</a></div>
+											<div style="float:left;font-size:18px;color:#FE5252;line-height:32px;"><IF condition="$vo.price eq 0">面议<ELSE />&nbsp;&nbsp;&nbsp;{$vo.price}</IF><span style="color:black;font-size:15px;"> RMB</span></div>
+											<div style="float:right;font-size:16px;line-height:36px;">&nbsp;<img src="Application/Mall/Image/edit.png" class="edit">&nbsp;<img src="Application/Mall/Image/delete.png" class="newgoods_delete"/>&nbsp;<img src="Application/Common/Image/soldout.png" class="newgoods_soldout">&nbsp;<img src="Application/Common/Image/up.png" class="goods_up"></div>
+										</div>
+										<div class="box_right_center"  style="width:500px;"></div>
+										<div class="box_right_bottom" style="width:500px;min-height:50px;cursor:pointer;" onclick="document.location.href='./?m=mall&c=goods&id={$vo.goods_id}'">
+											<table width="480px" height="28px" style="font-size:12px;float:left;"  class="info_table">
+												<tr>
+													<td width="32px">地点 :</td><td width="33px"><IF condition="$vo.location eq 1">江宁<ELSEIF condition="$vo.location eq 0"/>本部<ELSE />不限</IF></td><td width="32px">分类 :</td><td width="35px"><IF condition="$vo.classify eq 0">手机<ELSEIF condition="$vo.classify eq 1"/>电子<ELSEIF condition="$vo.classify eq 2"/>书籍<ELSEIF condition="$vo.classify eq 3"/>车辆<ELSEIF condition="$vo.classify eq 4"/>服饰<ELSEIF condition="$vo.classify eq 5"/>化妆<ELSEIF condition="$vo.classify eq 6"/>日用<ELSEIF condition="$vo.classify eq 7"/>乐器<ELSEIF condition="$vo.classify eq 8"/>房屋<ELSEIF condition="$vo.classify eq 10"/>虚拟<ELSEIF condition="$vo.classify eq 11"/>食物<ELSE />其他</IF></td>
+													<td  width="55px">联系方式 :</td><td>{$vo.contact}</td>
+												</tr>
+											</table>
+											<div class="clearfix">
+												<IF condition="$vo.photo neq ''"><div style="float:left;width:110px;"><img src="./Uploads{$vo.photo}" width="110px"/></div>
+												<div style="float:right;width:380px;" class="description">{$vo.description}</div>
+												<ELSE/><div style="float:right;width:498px" class="description"><IF condition="$vo.description neq ''">{$vo.description}<ELSE /><span style="color:grey;" class="description">这个人很懒，没有留下任何商品描述</span></IF></div></IF>
+											</div>
+										</div>
+									</div>
+								</div>
+							</FOREACH>
+						</IF>
+							<div class="page">
+								<div class="page_left_left" onclick="window.location.href='./?m=home&lb=2&p2=1'"></div>
+								<IF condition="$p2_this neq 1"><div class="page_left" onclick="window.location.href='./?m=home&lb=2&p2={$p2_this-1}'"></div></IF>
+								<IF condition="$p2_num gt 9">		<!--//页数大于9-->
+									<IF condition="$p2_this gt 5">
+										<FOR start="$p2_this-4" end="$p2_this+5">
+											<div class="page_center" id="page_{$i}" onclick="window.location.href='./?m=home&lb=2&p2={$i}'"><div class="page_font">{$i}</div></div>
+										</FOR>
+									</IF>
+									<IF condition="$p2_num lt 10">
+										<FOR start="1" end="10">
+											<div class="page_center" id="page_{$i}" onclick="window.location.href='./?m=home&lb=2&p2={$i}'"><div class="page_font">{$i}</div></div>
+										</FOR>
+									</IF>
+								</IF>
+								<IF condition="$p2_num lt 10">	<!--//页数小于10-->
+									<FOR start="1" end="$p2_num+1">
+										<div class="page_center" id="page_{$i}" onclick="window.location.href='./?m=home&lb=2&p2={$i}'"><div class="page_font">{$i}</div></div>
+									</FOR>
+								</IF>
+								<IF condition="$p2_this neq $p2_num"><div class="page_right" onclick="window.location.href='./?m=home&lb=2&p2={$p2_this+1}'"></div></IF>
+								<div class="page_right_right" onclick="window.location.href='./?m=home&lb=2&p2={$p2_num}'"></div>
+							</div>
+					</div>
+					<div class="boxs_3 boxs" style="display:none;">
+						<br/>
+						<IF condition="$num_sold eq 0">
+							<div style="font-size:14px;margin-top:10px;">尚未有完成的交易</div>
+						<ELSE/>
+							<FOREACH name="soldout" item="vo" key="k" >
+								<div class="home_box clearfix" id="{$vo.goods_id}">
+									<IF condition="$vo.need_type eq 1"><div class="home_box_left_chu"></div><ELSE/><div class="home_box_left_qiu"></div></IF>
+									<div class="home_box_right">
+										<div class="box_right_top" style="width:500px;">
+											<IF condition="$vo.need_type eq 1"><div style="float:left;font-size:16px;line-height:32px;font-weight:bold;color:#FE5252;">出售<ELSE/><div style="float:left;font-size:16px;line-height:32px;font-weight:bold;color:#66C8A3;">求购</IF></div>
+											<div style="margin-left:8px;float:left;font-size:15px;min-width:200px;font-weight:bold;line-height:34px;"><a href="./?c=goods&id={$vo.goods_id}">{$vo.goods_name}</a></div>
+											<div style="float:left;font-size:18px;color:#FE5252;line-height:32px;"><IF condition="$vo.price eq 0">面议<ELSE />&nbsp;&nbsp;&nbsp;{$vo.price}</IF><span style="color:black;font-size:15px;"> RMB</span></div>
+											<div style="float:right;font-size:16px;line-height:36px;"><img src="Application/Mall/Image/talk_green.png"  onclick="document.location.href='./?m=mall&c=goods&id={$vo.goods_id}#talk_both'" style="cursor:pointer;"> <span style="color:#66C8A3;">{$vo.mess_goods}</span></div>
+										</div>
+										<div class="box_right_center"  style="width:500px;"></div>
+										<div class="box_right_bottom" style="width:500px;min-height:50px;cursor:pointer;" onclick="document.location.href='./?m=mall&c=goods&id={$vo.goods_id}'">
+											<table width="480px" height="28px" style="font-size:12px;float:left;" class="info_table">
+												<tr>
+													<td width="32px">地点 :</td><td width="33px"><IF condition="$vo.location eq 1">江宁<ELSEIF condition="$vo.location eq 0"/>本部<ELSE />不限</IF></td><td width="32px">分类 :</td><td width="35px"><IF condition="$vo.classify eq 0">手机<ELSEIF condition="$vo.classify eq 1"/>电子<ELSEIF condition="$vo.classify eq 2"/>书籍<ELSEIF condition="$vo.classify eq 3"/>车辆<ELSEIF condition="$vo.classify eq 4"/>服饰<ELSEIF condition="$vo.classify eq 5"/>化妆<ELSEIF condition="$vo.classify eq 6"/>日用<ELSEIF condition="$vo.classify eq 7"/>乐器<ELSEIF condition="$vo.classify eq 8"/>房屋<ELSEIF condition="$vo.classify eq 10"/>虚拟<ELSEIF condition="$vo.classify eq 11"/>食物<ELSE />其他</IF></td>
+													<td width="55px">出售时间 :</td><td width="75px">{$vo.close_time}</td><td  width="55px">联系方式 :</td><td>{$vo.contact}</td>
+												</tr>
+											</table>
+											<div class="clearfix">
+												<IF condition="$vo.photo neq ''"><div style="float:left;width:110px;"><img src="./Uploads{$vo.photo}" width="110px"/></div>
+												<div style="float:right;width:380px;" class="description">{$vo.description}</div>
+												<ELSE/><div style="float:right;width:498px" class="description"><IF condition="$vo.description neq ''"  class="description">{$vo.description}<ELSE /><span style="color:grey;" class="description">这个人很懒，没有留下任何商品描述</span></IF></div></IF>
+											</div>
+										</div>
+									</div>
+								</div>
+							</FOREACH>
+						</IF>
+						<div class="page">
+							<div class="page_left_left" onclick="window.location.href='./?m=home&lb=3&p3=1'"></div>
+							<IF condition="$p3_this neq 1"><div class="page_left" onclick="window.location.href='./?m=home&lb=3&p3={$p3_this-1}'"></div></IF>
+							<IF condition="$p3_num gt 9">		<!--//页数大于9-->
+								<IF condition="$p3_this gt 5">
+									<FOR start="$p3_this-4" end="$p3_this+5">
+										<div class="page_center" id="page_{$i}" onclick="window.location.href='./?m=home&lb=3&p3={$i}'"><div class="page_font">{$i}</div></div>
+									</FOR>
+								</IF>
+								<IF condition="$p3_num lt 10">
+									<FOR start="1" end="10">
+										<div class="page_center" id="page_{$i}" onclick="window.location.href='./?m=home&lb=3&p3={$i}'"><div class="page_font">{$i}</div></div>
+									</FOR>
+								</IF>
+							</IF>
+							<IF condition="$p3_num lt 10">	<!--//页数小于10-->
+								<FOR start="1" end="$p3_num+1">
+									<div class="page_center" id="page_{$i}" onclick="window.location.href='./?m=home&lb=3&p3={$i}'"><div class="page_font">{$i}</div></div>
+								</FOR>
+							</IF>
+							<IF condition="$p3_this neq $p3_num"><div class="page_right" onclick="window.location.href='./?m=home&lb=3&p3={$p3_this+1}'"></div></IF>
+							<div class="page_right_right" onclick="window.location.href='./?m=home&lb=3&p3={$p3_num}'"></div>
+						</div>
+					</div>
+					<div class="boxs_4 boxs" style="display:none;"><br/>
+						<IF condition="$num_colle eq 0">
+							<div style="font-size:14px;margin-top:10px;">尚未收藏过商品哦~</div>
+						<ELSE/>
+							<foreach name="colle" item="vo" key="k" >
+								<div class="box clearfix" id="{$vo.collect_id}"><!--收藏编号-->
+									<div class="box_left">
+										<IF condition="$vo.Concern_shopid eq 0"><img src="http://my.nuaa.edu.cn/uc_server/avatar.php?uid={$vo.uid}&size=middle" width="80px" /><ELSE/><img src="Uploads{$vo.shop_avator}" width="80px" /></IF>
+										<div style="text-align:center;font-size:12px;">{$vo.username}<input type="hidden" value="{$vo.uid}" id="uid" /></br><span style="color:#8D8B8C;">{$vo.data}</span></div>
+									</div>
+									<IF condition="$vo.need_type eq 1"><div class="box_right" style="width:460px;"><ELSE /><div class="box_right_want" style="width:460px;"></IF>
+										<div class="box_right_top" style="width:430px;">
+												<IF condition="$vo.is_sold eq 1"><div style="float:left;font-size:16px;line-height:32px;font-weight:bold;color:#A1A1D1;">已完成<ELSE/><IF condition="$vo.need_type eq 1"><div style="float:left;font-size:16px;line-height:32px;font-weight:bold;color:#FE5252;">出售<ELSE/><div style="float:left;font-size:16px;line-height:32px;font-weight:bold;color:#66C8A3;">求购</IF></IF>
+											</div>
+										<div style="margin-left:8px;float:left;font-size:15px;min-width:200px;font-weight:bold;line-height:34px;"><a href="./?c=goods&id={$vo.goods_id}">{$vo.goods_name}</a></div>
+										<div style="float:left;font-size:18px;color:#FE5252;line-height:32px;"><IF condition="$vo.price eq 0">面议<ELSE />&nbsp;&nbsp;&nbsp;{$vo.price}</IF><span style="color:black;font-size:15px;"> RMB</span></div>
+										<div style="float:right;font-size:16px;line-height:36px;"><img src="Application/Mall/Image/delete.png" class="delete" style="margin-left:5px;cursor:pointer;"></div>
+									</div>
+									<div class="box_right_center" style="width:430px;"></div>
+									<div class="box_right_bottom" onclick="document.location.href='./?m=mall&c=goods&id={$vo.goods_id}'" style="cursor:pointer;width:430px;">
+										<table width="480px" height="28px" style="font-size:12px;float:left;"  class="info_table">
+											<tr>
+												<td width="32px">地点 :</td><td width="33px"><IF condition="$vo.location eq 1">江宁<ELSEIF condition="$vo.location eq 0"/>本部<ELSE />不限</IF></td><td width="32px">分类 :</td><td width="35px"><IF condition="$vo.classify eq 0">手机<ELSEIF condition="$vo.classify eq 1"/>电子<ELSEIF condition="$vo.classify eq 2"/>书籍<ELSEIF condition="$vo.classify eq 3"/>车辆<ELSEIF condition="$vo.classify eq 4"/>服饰<ELSEIF condition="$vo.classify eq 5"/>化妆<ELSEIF condition="$vo.classify eq 6"/>日用<ELSEIF condition="$vo.classify eq 7"/>乐器<ELSEIF condition="$vo.classify eq 10"/>虚拟<ELSEIF condition="$vo.classify eq 11"/>食物<ELSEIF condition="$vo.classify eq 8"/>房屋<ELSE />其他</IF></td><td width="55px">收藏时间 :</td><td width="75px">{$vo.collect_time}<td><td  width="55px">联系方式 :</td><td>{$vo.contact}</td>
+											</tr>
+										</table>
+										<div class="clearfix">
+											<IF condition="$vo.photo neq ''"><div style="float:left;width:110px;"><img src="./Uploads{$vo.photo}" width="110px"/></div>
+											<div style="float:right;width:320px" class="description">{$vo.description}</div>
+											<ELSE/><div style="float:right;width:428px" class="description"><IF condition="$vo.description neq ''">{$vo.description}<ELSE /><span style="color:grey;" class="description">这个人很懒，没有留下任何商品描述</span></IF></div></IF>
+										</div>
+									</div>
+									</div>
+									<div class="arrow"></div>
+								</div>
+							</foreach>
+						</IF>
+						<div class="page">
+							<div class="page_left_left" onclick="window.location.href='./?m=home&lb=4&p4=1'"></div>
+							<IF condition="$p4_this neq 1"><div class="page_left" onclick="window.location.href='./?m=home&lb=4&p4={$p4_this-1}'"></div></IF>
+							<IF condition="$p4_num gt 9">		<!--//页数大于9-->
+								<IF condition="$p4_this gt 5">
+									<FOR start="$p4_this-4" end="$p4_this+5">
+										<div class="page_center" id="page_{$i}" onclick="window.location.href='./?m=home&lb=4&p4={$i}'"><div class="page_font">{$i}</div></div>
+									</FOR>
+								</IF>
+								<IF condition="$p4_num lt 10">
+									<FOR start="1" end="10">
+										<div class="page_center" id="page_{$i}" onclick="window.location.href='./?m=home&lb=4&p4={$i}'"><div class="page_font">{$i}</div></div>
+									</FOR>
+								</IF>
+							</IF>
+							<IF condition="$p4_num lt 10">	<!--//页数小于10-->
+								<FOR start="1" end="$p4_num+1">
+									<div class="page_center" id="page_{$i}" onclick="window.location.href='./?m=home&lb=4&p4={$i}'"><div class="page_font">{$i}</div></div>
+								</FOR>
+							</IF>
+							<IF condition="$p4_this neq $p4_num"><div class="page_right" onclick="window.location.href='./?m=home&lb=4&p4={$p3_this+1}'"></div></IF>
+							<div class="page_right_right" onclick="window.location.href='./?m=home&lb=4&p4{$p4_num}'"></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="panel-right">
+			<include file="./Application/Home/View/Index/common_home_right.html"/>
+		</div>
+	</div>
+	<include file="./Application/Common/View/common_bottom.html" />
+</body>
+<script>
+jQuery(function($){
+	$('.description').each(function(){
+		var str= String($(this).html());
+		var reg=new RegExp("\n","g"); 
+		str= str.replace(reg,"<br/>"); 
+		$(this).html(str);
+	});
+
+	var mess_page=2;
+	$('.boxs_2 #page_'+p2_this).css("background-image","url(Application/Mall/Image/circle_hover.png)");	//给当前页面的页码按钮增加阴影效果
+	$('.boxs_3 #page_'+p3_this).css("background-image","url(Application/Mall/Image/circle_hover.png)");
+	$('.boxs_4 #page_'+p4_this).css("background-image","url(Application/Mall/Image/circle_hover.png)");
+	$('#goods_tap_1').toggleClass('taps_sel',false).toggleClass('taps_unsel',true);	//初始化标签指向第一个
+	$('.boxs_1').css("display","none");
+	$('.boxs_'+tap_s).css("display","block");
+	$('#goods_tap_'+tap_s).toggleClass('taps_unsel',false).toggleClass('taps_sel',true);
+
+	$('#read_more').click(function()	//每次从已读信息里请求10条记录ajax
+	{
+		var url="./?m=mall&c=goods&a=get_mess";
+		var data={"mess_page":mess_page};
+		$.post(url,data,function(r)
+		{
+			if(r.code>=1)
+			{
+				for(i=0;i<r.code;i++)
+				{
+					$('#caozuo_area').before('<div class="mes_line clearfix" id="'+r.data[i]['message_id']+'"><div style="float:left;"><span style="color:red;">&nbsp;&nbsp;&nbsp;</span> <a class="link_goods" href="./?m=mall&c=goods&id='+r.data[i]['goods_id']+'" target="_blank">您在主题 ‘'+r.data[i]['goods_name']+'’ 有新回复</a></div><div style="float:right;font-size:12px;">'+r.data[i]['data']+'</div></div>');
+					var panel_right=$('.panel-right').height();
+					var panel_center=$('.panel-center').height();
+					height=(panel_right>panel_center)?panel_right:panel_center;
+					$('.panel-left').css("height",height-(-30));	//设置左侧竖条的高度
+				}
+				mess_page++;
+			}
+			else if(r.code==0)
+				noty({text: '已读消息已全部显示',layout: 'center', type: 'error',timeout:'1000',});
+			else
+				noty({text: '更新出错',layout: 'center', type: 'error',timeout:'1000',});
+
+		},'json');
+	});
+
+	$('.panel-left').css("height",$('.panel-center').height()-(-240));	//设置左侧竖条的高度
+	$('.page_center').hover(
+		function()
+		{
+			var th=$(this);
+			th.css("background-image","url(Application/Mall/Image/circle_hover.png)");
+		},
+		function()
+		{
+			var th=$(this);
+			var page_=String(th.parents('.boxs').attr('class'));
+			var page_this=page_.substr(5,1);
+
+			if(page_this==2 && th.children().html() != p2_this || page_this==3 && th.children().html() != p3_this || page_this==4 && th.children().html() != p4_this)
+			{
+				th.css("background-image","url(Application/Mall/Image/circle.png)");
+			}
+		});
+
+	$('.link_goods').click(	//点击之后取消提醒状态，即ajax提醒后台将记录移到另一张表
+		function()
+		{
+			var id=$(this).parents('.mes_line').attr('id');
+			var url='./?m=mall&c=goods&a=read';
+			var data={"message_id":id};
+			$.post(url,data,function(r)
+			{},'json');
+		});
+
+	$('.taps_style').click(
+		function()
+		{
+			var th=$(this);
+			var x=String(th.attr('id'));
+			var num=x.substr(-1,1);
+
+			$('#goods_tap_'+tap_s).toggleClass('taps_sel',false).toggleClass('taps_unsel',true);
+			$('.boxs_'+tap_s).css("display","none");
+			$('.boxs_'+num).css("display","block");
+			th.toggleClass('taps_unsel',false).toggleClass('taps_sel',true);
+			tap_s=num;
+
+			var panel_right=$('.panel-right').height();
+			var panel_center=$('.panel-center').height();
+			height=(panel_right>panel_center)?panel_right:panel_center;
+			$('.panel-left').css("height",height-(-30));	//设置左侧竖条的高度
+		});
+
+	$('.edit').hover(
+		function()
+		{
+			$(this).attr('src','Application/Mall/Image/edit_hover.png');
+		},
+		function()
+		{
+			$(this).attr('src','Application/Mall/Image/edit.png');
+		});
+
+	$('.edit').click(function()
+	{
+		var th=$(this);
+		window.location.href='./?c=edit&ed='+th.parents('.home_box').attr('id');
+	});
+
+	$('.delete').hover(
+		function()
+		{
+			$(this).attr('src','Application/Mall/Image/delete_hover.png');
+		},
+		function()
+		{
+			$(this).attr('src','Application/Mall/Image/delete.png');
+		});
+
+	$('.delete').click(
+		function()
+		{
+			var th=$(this);
+			var collect_id=th.parents('.box').attr('id');
+			var url="./?m=home&a=del_col";
+			var data={"collect_id":collect_id};
+			var r=confirm("确认删除该条目？");
+			if(r==true)
+			{
+				$.post(url,data,function(r)
+				{
+					if(r.code==-1)	
+					{
+						noty({text: '无此数据,请刷新页面',layout: 'center', type: 'error',timeout:'1000',});
+					}
+					else if(r.code == 1)
+					{
+						noty({text: '删除成功',layout: 'center', type: 'success',timeout:'1000',});
+						th.parents('.box').remove();
+					}
+				});
+			}
+		});
+
+	$('#all_read').click(	//点击全部标记为已读
+		function()
+		{
+			$('.boxs_1').children().each(function(i)
+				{
+					var id=$(this).attr('id');
+					if(id!=undefined)
+					{
+						var url='./?m=mall&c=goods&a=read';
+						var data={"message_id":id};
+						$.post(url,data,function(r)
+						{
+							window.location.href=window.location.href;
+						},'json');
+
+					}
+				});
+		});
+
+	$('.goods_delete,.newgoods_delete').hover(
+		function()
+		{
+			$(this).attr('src','Application/Mall/Image/delete_hover.png');
+		},
+		function()
+		{
+			$(this).attr('src','Application/Mall/Image/delete.png');
+		});
+
+	$('.goods_up').hover(
+		function()
+		{
+			$(this).attr('src','Application/Common/Image/up_hover.png');
+		},
+		function()
+		{
+			$(this).attr('src','Application/Common/Image/up.png');
+		});
+
+	$('.goods_up').click(
+		function()
+		{
+			var th=$(this);
+			id=th.parents('.home_box').attr('id');
+			//alert(id);
+			url="./?m=mall&c=goods&a=goods_up";
+			data={"goods_id":id};
+			$.post(url,data,function(r){
+				if(r.code==1)
+					noty({text: '置顶成功',layout: 'center', type: 'success',timeout:'1000',});
+				else
+					noty({text: '操作失败'+r.code,layout: 'center', type: 'error',timeout:'1000',});
+			},'json');
+		});
+
+	$('.newgoods_soldout').hover(
+		function()
+		{
+			$(this).attr('src','Application/Common/Image/soldout_hover.png');
+		},
+		function()
+		{
+			$(this).attr('src','Application/Common/Image/soldout.png');
+		});
+
+	$('.newgoods_delete').click(function(){	//新物品删除
+		var r=confirm("删除后不可恢复，确认删除？");
+		if (r==true)
+		{
+			var th=$(this);
+			id=th.parents('.home_box').attr('id');
+			url="./?m=mall&c=goods&a=delete_goods";
+			data={"goods_id":id};
+			$.post(url,data,function(r){
+				if(r.code==1)
+					noty({text: '删除成功',layout: 'center', type: 'success',timeout:'1000',});
+				else
+					noty({text: '删除失败,刷新页面后若仍未删除请联系管理员'+r.code,layout: 'center', type: 'error',timeout:'1000',});
+			},'json');
+		}
+	});
+
+	$('.newgoods_soldout').click(function(){	//新物品已售出
+		var r=confirm("确认本商品已售出？");
+		if(r==true)
+		{
+			url="./?m=mall&c=goods&a=trade_over";
+			data={"goods_id":$(this).parents('.home_box').attr('id')};
+			$.post(url,data,function(r){
+					if(r.code==1)
+						noty({text: '交易成功，感谢您支持纸飞机',layout: 'center', type: 'success',timeout:'1000',});
+					else
+						noty({text: '操作失败,刷新页面后若仍未完成交易请联系管理员'+r.code,layout: 'center', type: 'error',timeout:'1000',});
+				},'json');
+		}
+	});
+
+});
+</script>
+</html>

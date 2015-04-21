@@ -1,0 +1,319 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>{$app_title}</title>
+	<link rel="stylesheet" type="text/css" href="./Application/Common/Css/common.css">
+	<link rel="stylesheet" type="text/css" href="./Application/Common/Magnifier/magnifier.css">
+	<script type="text/javascript" src="./Application/Common/Js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="./Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+	<script type="text/javascript" src="./Application/Common/Js/collect.js"></script>
+	<script type="text/javascript" src="./Application/Common/Magnifier/Magnifier.js"></script>
+	<script type="text/javascript" src="./Application/Common/Magnifier/Event.js"></script>
+	<script type="text/javascript">
+		var evt = new Event();
+    	m = new Magnifier(evt);
+		var page="mall";
+		var goods_id={$goods['goods_id']};
+		var goods_name="{$goods['goods_name']}";
+		var sold_uid={$goods['uid']};
+		var sold_username="{$goods['username']}";
+		jQuery(function($){
+			m.attach({
+				    thumb: '.img',
+				    largeWrapper: 'preview',
+				    zoom:2,
+				    zoomable:true
+				});
+		});
+		
+	</script>
+	<style>
+	.bdsharebuttonbox a{color:black;}
+	</style>
+</head>
+<body>
+	<include file="./Application/Common/View/common_header_mall.html" />
+	<div class="set_width panel-all clearfix">
+		<div class="goods-content box" id="{$goods['goods_id']}">
+			<IF condition="$goods['need_type'] eq 1"><div class="goods-info clearfix" style="padding-bottom:10px;"><ELSE/><div class="goods-info_want clearfix" style="padding-bottom:20px;"></IF>
+				<div class="info-left">
+					<div class="info-left-top">
+						<div>
+						    <a class="magnifier-thumb-wrapper">
+						    	<IF condition="$photo_num gt 0">
+							    	<FOR start="0" end="$photo_num">
+							    		<IF condition="$i eq 0">
+							        		<img class="img photo_{$i}" src="./Uploads{$goods['photo_lit'][$i]}" data-large-img-url="./Uploads{$goods['photo_cut'][$i]}">
+							        	<ELSE/>
+							        		<img class="img photo_{$i}" src="./Uploads{$goods['photo_lit'][$i]}" style="display:none;" data-large-img-url="./Uploads{$goods['photo_cut'][$i]}">
+							        	</IF>
+							   		</FOR>
+							   	<ELSE/>
+							   		<img class="img" src="./Uploads/logo.jpg" data-large-img-url="./Uploads/logo.jpg">
+							   </IF>
+						    </a> 
+						</div>
+					</div>
+				    <div class="magnifier-preview" id="preview" style="width: 400px;height: 400px;position: absolute;top: 140px;margin-left:330px;"></div>
+					<div class="info-left-bottom">
+						<IF condition="$photo_num gt 0">
+							<FOR start="0" end="$photo_num">
+							    <img src="./Uploads{$goods['photo_lit'][$i]}" class="photo" id="pho_{$i}" width="60px" style="margin-right:10px;border:2px solid grey;"/>
+							</FOR>
+						<ELSE/>	
+							<img src="./Uploads/logo.jpg" class="photo" id="pho_{$i}" width="60px" style="margin-right:10px;border:2px solid grey;"/>
+						</IF>
+					</div>
+				</div>
+				<div class="info-right">
+					<div class="self-cansee"><IF condition="$goods.type eq 'new'"><IF condition="$uid eq $goods['uid']"><a href="./?m=mall&c=edit&ed={$goods['goods_id']}">编辑</a><ELSE/>&nbsp;&nbsp;</IF><ELSE/>&nbsp;&nbsp;</IF></div>
+					<div class="info-content">
+						<IF condition="$goods.need_type eq 1"><span style="color:#FE4241;font-size:18px;">出售</span><ELSE/><span style="color:#34B787;font-size:18px;">求购</span></IF>&nbsp;&nbsp;&nbsp;<span style="font-size:16px;font-weight:bold;">{$goods['goods_name']}</span><div style="line-height:4px;">&nbsp;</div>
+						<span style="color:#C1C1C1;font-size:14px;">{$goods['username']}<IF condition="$goods.Concern_shopid neq '0'"><span style="font-size:14px;font-weight:bold;color:#BBA;">(店铺)</span></IF> 在 {$goods['data']} 发布</span><br/><div style="line-height:10px;">&nbsp;</div>
+						<div class="clearfix" style="width:375px;">
+							<div style="float:left;"><span style="font-size:18px;font-weight:bold;">￥</span><IF condition="$goods.price neq 0"><span style="font-size:26px;color:#FE4241;">{$goods['price']}<ELSE/><span style="font-size:20px;color:#FE4241;">面议</IF></span></div>
+							<div style="float:right;margin-top:10px;"><IF condition="$goods['is_co'] eq 1"><img src="Application/Mall/Image/heart.png"  class="heart" title="已收藏"><ELSE /><img src="Application/Mall/Image/heart_grey.png"  class="heart" title="收藏"></IF> <span style="color:#FE5252;" class="col_num">{$goods['col_num']}</span>&nbsp;&nbsp;<img src="Application/Mall/Image/talk_green.png" title="回复"> <span style="color:#66C8A3;">{$mess_count}</span></div>
+						</div>
+						<div style="border-top:2px dotted grey;width:375px;margin-top:10px;"></div>
+						<div class="clearfix" style="width:375px;margin-top:15px;">
+							<div class="bac">{$location}</div><div class="bac">{$classify}</div>
+						</div>
+						<div class="bdsharebuttonbox" style="margin-top:15px;"><a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a><a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧">百度贴吧</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a></div>
+						<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["weixin","tqq","tqf","douban","tsohu","sqq"],"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16},"image":{"viewList":["tsina","renren","tieba","qzone"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","renren","tieba","qzone"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+						<div style="font-size:14px;margin-top:8px;">联系方式 : {$goods['contact']}</div>
+						<div style="width:100%;font-size:14px;margin-top:15px;min-height:150px;" class="description">{$goods['description']}</div>
+						<IF condition="$goods.type eq 'soldout'">
+							<div style="width:100%;" class="clearfix">
+								<div class="button_green" style="background-color:#EDB93A;width:100px;float:right;">已售出</div>
+							</div>
+						<ELSEIF condition="$goods.type eq 'new'"/>
+							<IF condition="$uid eq $goods['uid']"><div style="width:100%;margin-top:15px;margin-bottom:10px;" class="clearfix">
+								<div class="button_grey" id="delete_it" style="float:right;width:100px;">不想卖/买了</div>
+								<div class="button_green" id="trade_over" style="float:right;">交易完成</div>
+							</div></IF>
+						</IF>
+					</div>
+				</div>
+			</div>
+			<div class="talk clearfix" id="talk_both">
+				<div style="float:left;color:#A5A5A5;font-size:18px;">看看大家的讨论</div>
+				<div style="float:right;width:610px;border-top:5px solid #34B787;margin-top:12px;">
+				</div>
+			</div>
+			<div id="mess_content">
+				<IF condition="$mess_count gt 0">
+					<FOREACH name="mess" item="vo">
+						<div class="talk_box clearfix" uid="{$vo.from_uid}" username="{$vo.from_username}">
+							<div class="talk_avator"><img src="http://my.nuaa.edu.cn/uc_server/avatar.php?uid={$vo.from_uid}&size=middle" width="60px"></div>
+							<div class="talk_centent">
+								{$vo['from_username']} &nbsp;&nbsp;&nbsp;<span style="color:#8C8B8C;">发表于 {$vo.data}<br/>{$vo.content}</span>	
+							</div>
+							<div class="talk_re"><a href='#textarea'>回复</a></div>
+						</div>
+					</FOREACH>
+				<ELSE />
+					<span style="font-size:14px;line-height:25px;" id="no-reply"><br/>此商品尚未有回复哦~~</span>
+				</IF>
+			</div>
+			
+			<div class="my_talk clearfix">
+				<div style="float:left;color:#A5A5A5;font-size:18px;">发表我的讨论</div>
+				<div style="float:right;width:615px;border-top:5px solid #34B787;margin-top:12px;">
+				</div>
+			</div>
+			<div class="my_talk clearfix" style="margin-top:15px;">
+				<div class="talk_avator" style="margin-top:0px;"><img src="http://my.nuaa.edu.cn/ucenter/avatar.php?uid={$uid}&size=middle" width="60px" /></div>
+				<textarea class="my_talk_box" id="textarea"></textarea>
+			</div>
+			<div class="button_green" id="out_talk" style="width:60px;margin-right:20px;margin-top:5px;float:right;">发 表</div><br/><br/><br/>
+		</div>
+		<div class="panel-right" style="margin-top:5px;">
+			<IF condition="$goods.Concern_shopid neq 0">
+				<div class="record_font">&nbsp;&nbsp;该店铺出售的其他商品</div>
+			<ELSE/>
+				<div class="record_font">&nbsp;&nbsp;该用户出售的其他商品</div>
+			</IF>
+			<div class="record_area" style="padding-top:5px;background-color:#EAF8F3;">
+				<IF condition="$panel_goods_num eq 0">
+					<span style="font-size:13px;">&nbsp;该用户暂无其他出售的商品</span>
+				<ELSE/>
+					<span style="font-size:13px;">
+					<FOREACH name="panel_goods" item="vo">
+						<div class="guess_style clearfix"><div style="float:left;">&nbsp;<IF condition="$vo.need_type eq 1"><span style="color:#F56C7E;"><b>出</b></span><ELSE/><span style="color:#35B787;"><b>求</b></span></IF></div><div style="margin-left:8px;float:left;width:175px;"><a href="./?m=mall&c=goods&id={$vo.goods_id}">{$vo.goods_name}</a></div></div>
+					</FOREACH>
+					</span>
+				</IF>
+			</div>
+			<div class="record_font">&nbsp;&nbsp;谁还喜欢这件商品</div>
+			<div class="record_area" style="padding-top:5px;background-color:#EAF8F3;">
+				<IF condition="$panel_likes_num eq 0">
+					<span style="font-size:13px;">&nbsp;暂无其他用户收藏这件商品</span>
+				<ELSE/>
+					<span style="font-size:13px;">
+					<FOREACH name="panel_likes" item="vo">
+						<div class="guess_style clearfix"><div style="float:left;">&nbsp;{$vo.username}</div><div style="float:right;">{$vo.collect_time}&nbsp;</div></div>
+					</FOREACH>
+					</span>
+				</IF>
+			</div>
+			<div class="record_font">&nbsp;&nbsp;猜你喜欢</div>
+			<div class="record_area" style="padding-top:5px;background-color:#EAF8F3;">
+				<FOREACH name="guess" item="vo">
+					<div class="guess_style clearfix"><div style="float:left;">&nbsp;<IF condition="$vo.need_type eq 1"><span style="color:#F56C7E;"><b>出</b></span><ELSE/><span style="color:#35B787;"><b>求</b></span></IF></div><div style="margin-left:8px;float:left;width:175px;"><a href="./?m=mall&c=goods&id={$vo.goods_id}">{$vo.goods_name}</a></div></div>
+				</FOREACH>
+			</div>
+		</div>
+	</div>
+	<include file="./Application/Common/View/common_bottom.html" />
+</body>
+<script>
+function htmlEncode(str) 
+{  
+    var s = "";  
+    if (str.length == 0) return "";  
+    s = str.replace(/&/g, "&amp;");  
+    s = s.replace(/</g, "&lt;");  
+    s = s.replace(/>/g, "&gt;");    
+    s = s.replace(/'/g, "&apos;");  
+    s = s.replace(/"/g, "&quot;");  
+    return s;  
+};
+
+jQuery(function($){
+	var pho_pre=0;
+	$('#preview').css("display","none");
+	$('.header_bottom_mall').css("display","none");
+
+	$('.description').each(function(){	//textarea换行
+		var str= String($(this).html());
+		var reg=new RegExp("\n","g"); 
+		str= str.replace(reg,"<br/>"); 
+		$(this).html(str);
+	});
+	$('.photo').hover(
+		function()
+		{
+			var xx=String($(this).attr('id'));
+			xx=xx.split('_');
+			xx=xx[1];
+			$('.photo_'+pho_pre).css("display","none");
+			$('.photo_'+xx).css("display","block");
+			pho_pre=xx;
+		});	
+
+	$('.talk_re').click(	//回复按钮点击之后为textarea增加属性并且增加文字
+		function()
+		{
+			var th=$(this).parents('.talk_box');
+			var uid=th.attr('uid');
+			var username=th.attr('username');
+			$('#textarea').attr("uid-re",uid).attr("username-re",username).focus().val("回复 "+username+" : ");;
+		});
+
+	$('#out_talk').click(	//ajax提交留言
+		function()
+		{
+			var url='./?m=mall&c=goods&a=talk_add';
+			var re_uid=$('#textarea').attr('uid-re');
+			if(re_uid!=undefined) //如果定义过
+				var to_uid=re_uid;
+			else
+				var to_uid=sold_uid;
+
+			var re_username=$('#textarea').attr('username-re');
+			if(re_username!=undefined) //如果定义过
+				var to_username=re_username;
+			else
+				var to_username=sold_username;
+
+			var content=$('#textarea').val();
+			
+			var data={"to_uid":to_uid,"to_username":to_username,"content":content,"goods_id":goods_id,"goods_name":goods_name,};
+			if('{$uid}'=='')
+			{
+				noty({text: '回复失败,尚未登录！',layout: 'center', type: 'error',timeout:'1000',});
+			}
+			else
+			{
+				$.post(url,data,function(r)
+				{
+					if(r.code == -1)
+					{
+						noty({text: '回复失败',layout: 'center', type: 'error',timeout:'1000',});
+					}
+					else if(r.code == 1)
+					{
+						noty({text: '回复成功',layout: 'center', type: 'success',timeout:'1000',});
+						$('#no-reply').remove();
+						$('#mess_content').append('<div class="talk_box clearfix" uid="{$uid}" username="{$username}"><div class="talk_avator"><img src="http://my.nuaa.edu.cn/ucenter/avatar.php?uid={$uid}&size=middle" width="60px"></div><div class="talk_centent">{$username} &nbsp;&nbsp;&nbsp;<span style="color:#8C8B8C;">发表于 '+r.time+'<br/>'+htmlEncode(content)+'</span></div><div class="talk_re"><a href="#textarea">回复</a></div></div>');
+						$('#textarea').val('').removeAttr('uid-re').removeAttr('username-re');
+					}
+				},'json');	
+			}
+		});
+
+	$('#delete_it').click(	//点击之后删除对应的商品信息ajax
+		function()
+		{
+			var r=confirm("删除后不可恢复，确认删除？");
+			if (r==true)
+			{
+				url="./?m=mall&c=goods&a=delete_goods";
+				data={"goods_id":goods_id};
+				$.post(url,data,function(r){
+					console.log(r);
+					if(r.code==1)
+						noty({text: '删除成功',layout: 'center', type: 'success',timeout:'1000',});
+					else
+						noty({text: '删除失败,刷新页面后若仍未删除请联系管理员'+r.code,layout: 'center', type: 'error',timeout:'1000',});
+				},'json');
+			}
+		});
+
+	$('#trade_over').click(	//点击之后ajax将对应商品的信息移到另一张表里
+		function()
+		{
+			var r=confirm("确认本商品已售出？");
+			if(r==true)
+			{
+				url="./?m=mall&c=goods&a=trade_over";
+				data={"goods_id":goods_id};
+				$.post(url,data,function(r){
+						if(r.code==1)
+							noty({text: '交易成功，感谢您支持纸飞机',layout: 'center', type: 'success',timeout:'1000',});
+						else
+							noty({text: '操作失败,刷新页面后若仍未完成交易请联系管理员'+r.code,layout: 'center', type: 'error',timeout:'1000',});
+					},'json');
+			}
+		});
+
+	$('#pho_1').hover(	//不知道为啥后面的几张照片放大框的大小为0，此处手动重置大小
+		function()
+		{
+			$('#magnifier-item-1-lens').css({"width":"150px","height":"150px"});
+		});
+	$('#pho_2').hover(
+		function()
+		{
+			$('#magnifier-item-2-lens').css({"width":"150px","height":"150px"});
+		});
+	$('#pho_3').hover(
+		function()
+		{
+			$('#magnifier-item-3-lens').css({"width":"150px","height":"150px"});
+		});
+
+	$('.info-left-top').hover(
+		function()
+		{
+			$("#preview").css("display","block");
+		},
+		function()
+		{
+			$("#preview").css("display","none");
+		});
+});
+</script>
+</html>

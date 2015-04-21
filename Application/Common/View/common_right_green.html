@@ -1,0 +1,36 @@
+<div class="panel-right">
+	<IF condition="$vo.notice_aName eq ''">
+		
+		<div class="record_font" style="background-color:red;display:none;+display:block;">&nbsp;&nbsp;通知</div>
+		<div class="record_area" style="background-color:#f66c7f;min-height:50px;padding-bottom:5px;display:none;+display:block;">
+			商城暂不兼容IE8内核以下的浏览器(包括360浏览器)，我们对给您造成的不便表示抱歉，感谢您的支持.
+		</div>
+		<ELSE />
+	</IF>
+
+	<div class="record_font">&nbsp;&nbsp;商城公告</div>
+	<div class="record_area" style="min-height:50px;padding-bottom:5px;">
+		<ul>
+			<FOREACH name="notice" item="vo">
+				<li><a href='./?m=admin&c=notice&id={$vo.notice_id}'>{$vo.notice_title}</a></li>
+			</FOREACH>
+		</ul>
+	</div>
+	<div class="record_font">&nbsp;&nbsp;最新店铺<div id="new_shop_a" style="font-size:12px;display:inline;float:right;padding-top:3px;margin-right:6px;">&nbsp;<a href="./?m=mall&c=shop&a=new_shop">我要开店</a></div></div>
+	<div class="record_area clearfix" style="min-height:10px;">
+		<ul>
+			<FOREACH name="new_shop" item="vo">
+				<li><a href='./?m=mall&c=shop&id={$vo.shop_id}'>{$vo.shop_name}</a></li>
+			</FOREACH>
+		</ul>
+		<div class="a_underline" style="float:right;margin:10px 5px 6px 0px;font-size:13px;"><a href='./?m=mall&c=shop&a=shop_list'>更多店铺...</a></div>
+	</div>
+	<div class="record_font">&nbsp;&nbsp;全站推荐</div>
+	<div class="record_area" style="padding-top:10px;">
+		<FOREACH name="ad" item="vo">
+			<div style="width:185px;margin:0 auto;margin-bottom:10px;">
+				<IF condition="$vo.href eq ''"><a href='#'><img width="185px" src="./Uploads{$vo.content}"/></a><ELSE/><a href='{$vo.href}'><img width="185px" src="./Uploads{$vo.content}"/></a></IF>
+			</div>
+		</FOREACH>
+	</div>
+</div>

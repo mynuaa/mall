@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>{$app_title}</title>
+	<link rel="stylesheet" type="text/css" href="./Application/Admin/Css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./Application/Admin/Css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="./Application/Common/Js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="./Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+	<script type="text/javascript" src="./Application/Admin/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div style="width:1000px;margin:30px auto;border:2px solid #CCC;border-radius:10px;min-height:200px;padding:15px 20px;">
+		<a href="./?m=admin">返回管理员中心</a>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<td>#</td>
+					<td>ID</td>
+					<td>权限等级</td>
+					<td>给予权限的时间</td>
+					<td>XXX</td>
+				</tr>
+			</thead>
+			<tbody>
+				<FOREACH name="data" item="vo">
+					<tr class="active" id="{$vo.admin_id}" name="{$vo.admin_name}">
+						<td>{$vo.admin_id}</td>
+						<td>{$vo.admin_name}</td>
+						<td>{$vo.admin_grade}</td>
+						<td>{$vo.admin_time}</td>
+						<td><a href='javascript:void;' class="delete">删除</a></td>
+					</tr>
+				</FOREACH>
+			</tbody>
+		</table>
+	</div>
+</body>
+<script>
+jQuery(function($){
+		$('.delete').click(function(){
+			var id=$(this).parents('tr');
+			var url="./?m=admin&c=other&a=delete_admin";
+			var data={"admin_id":id.attr('id')};
+			var m=confirm("确认要删除ID="+id.attr('name')+"的管理员权限？删除后不可恢复！");
+			if (m==true)
+			{
+				$.post(url,data,function(r){
+					if(r.code==1)
+						noty({text: '删除成功！',layout: 'center', type: 'success',timeout:'1000',});
+					else if(r.code==-2)
+						noty({text: '操作失败！管理员权限不足！',layout: 'center', type: 'error',timeout:'2000',});
+					else
+						noty({text: '操作失败！'+r.code,layout: 'center', type: 'error',timeout:'2000',});
+				},'json');
+			}
+		});
+	});
+</script>
+</html>
