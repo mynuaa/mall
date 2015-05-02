@@ -5,7 +5,6 @@ a{text-decoration: none;}
 a:hover{text-decoration: underline;}
 .clearfix{	clear:both;	display:block;}
 .clearfix:after{	clear:both;	content:" ";	display: block;	visibility: hidden;	height: 0;}
-#load_area{	display: none;}
 input,textarea
 {	transition: all 0.30s ease-in-out;	-webkit-transition: all 0.30s ease-in-out;	-moz-transition: all 0.30s ease-in-out;
 	outline:none;	font-family: 微软雅黑,Tahoma,Verdana,STHeiTi,simsun,sans-serif;}
@@ -863,13 +862,11 @@ li
 	width:100%;
 	margin: 5px 0px;
 }
-
 .shop_img
 {
 	margin-right: 14px;
 	border:1px solid #CCC;
 }
-
 .description_class
 {
 	float:right;
@@ -877,11 +874,6 @@ li
 	max-height: 200px;
 	overflow: hidden;
 }
-
-
-
-
-
 #to_top
 {
 	position: fixed;
@@ -894,4 +886,17 @@ li
 	-webkit-border-radius: 2px;
 	background: transparent url(../Image/sideToolbar.gif) -1px -62px no-repeat;
 	display: none;
+}
+/* by Rex */
+.fl{float:left;}
+.fr{float:right;}
+.header_top>div{
+	line-height:30px;
+	font-size:14px;
+	padding:0 10px;
+	overflow:hidden;
+}
+.header_top>div a{
+	margin:0 5px;
+	display:inline-block;
 }

@@ -1,14 +1,13 @@
 <?php
-// 本类由系统自动生成，仅供测试用途
 namespace Home\Controller;
 use Think\Controller;
-header("Content-Type: text/html; charset=utf8");
 Vendor('ThinkphpUcenter.UcApi');
-class IndexController extends Controller 
+header("Content-Type: text/html; charset=utf8");
+class IndexController extends PublicController
 {
     public function index()
     { 
-        if(session('?uid')==0) $this->error('请先登录！！','./?m=mall&load=1');
+        if(session('?uid')==0) $this->error('请先登录！！','/sso/?page=login');
 
         $Newgoods = D("Newgoods");
         $Soldout = D("Soldout");
@@ -156,7 +155,7 @@ class IndexController extends Controller
         {
             if(!session('?uid'))  
             {
-                $this->error('尚未登录！！','./?m=mall');
+                $this->error('尚未登录！！','/sso/?page=login');
                 return false;
             }
             else

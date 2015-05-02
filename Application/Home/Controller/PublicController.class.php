@@ -1,5 +1,5 @@
 <?php
-namespace Mall\Controller;
+namespace Home\Controller;
 use Think\Controller;
 Vendor('ThinkphpUcenter.UcApi');  //载入UcApi扩展
 
