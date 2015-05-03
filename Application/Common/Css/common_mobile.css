@@ -1,0 +1,154 @@
+*{
+	outline:none;
+}
+html,body{
+	margin:0;
+	padding:0;
+	position:absolute;
+	width:100%;
+	min-height:100%;
+}
+#header_top{
+	background:#34B787;
+	min-height:50px;
+	overflow:hidden;
+}
+#header_top>button{
+	background:#34B787;
+	border:none;
+	color:#FFF;
+	font-size:1.2em;
+	float:right;
+	width:50px;
+	height:50px;
+	text-align:center;
+	transition:background 200ms;
+}
+#header_top>button.expand{
+	background:#149767;
+}
+#header_title{
+	float:left;
+	height:50px;
+	line-height:50px;
+	font-size:1.1em;
+	color:#FFF;
+	padding:0 0.8em;
+}
+#navbar{
+	background:#149767;
+	clear:both;
+	position:absolute;
+	top:50px;
+	left:0;
+	right:0;
+	height:0;
+	list-style-type:none;
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	transition:all 400ms;
+	z-index:2;
+	opacity:0;
+}
+#navbar.expand{
+	height:240px;
+	opacity:1;
+}
+#navbar>a{
+	display:block;
+	height:40px;
+	line-height:40px;
+	text-decoration:none;
+	color:#FFF;
+	font-size:0.9em;
+}
+#navbar hr{
+	border:none;
+	border-top:1px solid rgba(0,0,0,0.1);
+}
+#navbar>a>li{
+	height:40px;
+	line-height:40px;
+	padding-left:1em;
+}
+#header_center{
+	position:relative;
+}
+#header_center_nav{
+	height:45px;
+	background:#F2F2F2;
+}
+#header_center_nav span{
+	float:left;
+	width:50%;
+	height:45px;
+	line-height:45px;
+	text-align:center;
+	box-sizing:border-box;
+}
+.bottom_mall{
+	color:#149767;
+	border-bottom:2px solid #149767;
+}
+.bottom_home{
+	color:#F56C7E;
+	border-bottom:2px solid #F56C7E;
+}
+#searchbar{
+	position:absolute;
+	background:#149767;
+	top:50px;
+	left:0;
+	right:0;
+	height:0;
+	line-height:50px;
+	z-index:1;
+	transition:all 200ms;
+	overflow:hidden;
+	opacity:0;
+}
+#searchbar.expand{
+	height:50px;
+	opacity:1;
+}
+input[type=text]{
+	background:rgba(0,0,0,0);
+	border:none;
+	border-bottom:1px solid rgba(255,255,255,0.6);
+	color:rgba(255,255,255,0.6);
+	height:30px;
+	font-family:"微软雅黑";
+	padding:0.2em 0.5em;
+}
+input[type=submit]{
+	height:30px;
+	margin:0 0.5em;
+	padding:0 0.5em;
+	border-radius:0.4em;
+	background:rgba(0,0,0,0);
+	border:none;
+}
+select{
+	height:30px;
+	margin:0 0.5em;
+	border:none;
+	padding:0 0.5em;
+	border-radius:0.4em;
+}
+#common_bottom{
+	position:absolute;
+	width:100%;
+	bottom:0;
+	background:#555;
+	color:#AAA;
+	padding:20px 0;
+	font-size:0.9em;
+}
+#common_bottom>div{
+	text-align:center;
+}
+#common_bottom a{
+	text-decoration:none;
+	color:#DDD;
+}

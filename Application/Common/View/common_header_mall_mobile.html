@@ -1,0 +1,111 @@
+<div id="header_top">
+	<div id="header_title">南航Mall</div>
+	<button id="btn-navbar" onclick="toggleMenu('navbar','searchbar')"><i class="fa fa-user"></i></button>
+	<button id="btn-searchbar" onclick="toggleMenu('searchbar','navbar')"><i class="fa fa-search"></i></button>
+	<ul id="navbar">
+		<IF condition="session('?uid') eq 0">
+		<a href="/sso/?page=login&redirect_uri={:base64_encode($_SERVER['REQUEST_URI'])}" id="load_button"><li>登录</li></a>
+		<ELSE/>
+		<IF condition="$shop_id gt 0">
+		<a href="?m=mall&c=shop&id={$shop_id}"><li>查看我的店铺</li></a>
+		<a href="?m=mall&c=shop&a=edit&id={$shop_id}"><li>修改店铺信息</li></a>
+		<hr>
+		</IF>
+		<a href='?m=home&lb=4'><li>我的收藏</li></a>
+		<a href='?m=home&lb=2'><li>我的东西</li></a>
+		<hr>
+		<a href='?m=home&lb=1'>
+		<IF condition="$mess_id neq 0">
+		<span style="color:#9bff1b;"><li><b>提醒（{$mess_id}）</b></li></span>
+		<ELSE/><li>提醒</li></IF>
+		</a>
+		<hr>
+		<a href="?m=home&lb=1"><li>{$username}</li></a>
+		<a href="/sso/?action=logout&redirect_uri={:base64_encode($_SERVER['REQUEST_URI'])}"><li>注销</li></a>
+		</IF>
+	</ul>
+	<div id="searchbar">
+		<form name="search" method="post" action="?m=mall&a=search">
+			<div class="miao">
+				<input type="hidden" name="search_type" id="search_type_top" value="0">
+				<select id="search_sort_list">
+					<option class="search_list" id="search_all">全部</option>
+					<option class="search_list" id="search_mall">集市</option>
+					<option class="search_list" id="search_chan">换客</option>
+				</select>
+				<input type="text" name="search_content" class="search_content" id="search_content_top" x-webkit-speech>
+				<input type="submit" value="搜索">
+			</div>
+		</form>
+	</div>
+</div>
+<div id="header_center">
+	<div id="header_center_nav">
+		<a href="?m=mall">
+			<IF condition="$m eq 'mall'">
+				<span id="header_center_mall" class="bottom_mall">集市</span>
+			<ELSE/>
+				<span id="header_center_mall">集市</span>
+			</IF>
+		</a>
+		<a href="?m=home">
+			<IF condition="$m eq 'home'">
+				<span id="header_center_personal" class="bottom_home">个人中心</span>
+			<ELSE/>
+				<span id="header_center_personal">个人中心</span>	
+			</IF>
+		</a>
+	</div>
+</div>
+			<IF condition="$m eq 'chan'"><div class="banner_left_chan"><ELSE/><div class="banner_left"></IF>
+				<div class="menu">
+					<table class="menu_table" border="0">
+						<tr>
+							<td><a href="?m=mall&a=scan&lb=0">手机</a></td>
+							<td><a href="?m=mall&a=scan&lb=1">电子</a></td> 
+						</tr>
+						<tr>
+							<td><a href="?m=mall&a=scan&lb=2">书籍</a></td>
+							<td><a href="?m=mall&a=scan&lb=3">车辆</a></td> 
+						</tr>
+						<tr>
+							<td><a href="?m=mall&a=scan&lb=4">服饰</a></td>
+							<td><a href="?m=mall&a=scan&lb=5">化妆</a></td> 
+						</tr>
+						<tr>
+							<td><a href="?m=mall&a=scan&lb=6">日用</a></td>
+							<td><a href="?m=mall&a=scan&lb=7">乐器</a></td> 
+						</tr>
+						<tr>
+							<td><a href="?m=mall&a=scan&lb=10">虚拟</a></td>
+							<td><a href="?m=mall&a=scan&lb=11">食品</a></td> 
+						</tr>
+						<tr>
+							<td><a href="?m=mall&a=scan&lb=8">房屋</a></td>
+							<td><a href="?m=mall&a=scan&lb=9">其他</a></td> 
+						</tr>
+					</table>
+				</div>	
+			</div>
+			<IF condition="$m eq 'chan'"><div class="banner_center_chan"></div><ELSE/><div class="banner_center"></div></IF>
+			<div class="banner_right">
+				<form method="post" id="new_demand" action="?c=newgoods">
+					<div style="width:126px;margin:0px auto;height:28px;border:0px solid black;">
+						<div class="in_where" id="in_mall">在集市</div>
+						<div class="in_where" id="in_change">在换客</div>
+					</div>
+					<input type="hidden" name="in_where" id="in_where_input" value="0"/>
+					<div class="out_put">发布新需求</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+function toggleMenu(id,other){
+	document.querySelector("#"+id).classList.toggle("expand");
+	document.querySelector("#"+other).classList.remove("expand");
+	document.querySelector("#btn-"+id).classList.toggle("expand");
+	document.querySelector("#btn-"+other).classList.remove("expand");
+}
+</script>
