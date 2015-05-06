@@ -17,9 +17,15 @@
 </head>
 <body>
 	<include file="Application/Common/View/common_header_mall_mobile.html" />
-	<div class="set_width panel-all clearfix">
-		<div class="panel-left"></div>
-		<div class="panel-center">
+	<div id="board">
+		<div id="board-header">商城公告</div>
+		<ul>
+			<FOREACH name="notice" item="vo">
+				<li><a href='./?m=admin&c=notice&id={$vo.notice_id}'>{$vo.notice_title}</a></li>
+			</FOREACH>
+		</ul>
+	</div>
+	<div class="panel-center">
 			<div class="content">
 				<foreach name="data" item="vo" key="k" >
 					<div class="box clearfix" id="{$vo.goods_id}">
@@ -65,7 +71,6 @@
 				</IF>
 			</div>
 		</div>
-		<include file="Application/Common/View/common_right_green.html" />
 	</div>
 	<include file="Application/Common/View/common_bottom_mobile.html" />
 </body>
