@@ -1,8 +1,18 @@
 <div id="header_top">
 	<div id="header_title">南航Mall</div>
-	<button id="btn-navbar" onclick="toggleMenu('navbar','searchbar')"><i class="fa fa-user"></i></button>
-	<button id="btn-searchbar" onclick="toggleMenu('searchbar','navbar')"><i class="fa fa-search"></i></button>
+	<button id="btn-navbar" onclick="toggleMenu('navbar','searchbar','class')"><i class="fa fa-user"></i></button>
+	<button id="btn-searchbar" onclick="toggleMenu('searchbar','navbar','class')"><i class="fa fa-search"></i></button>
+	<button id="btn-class" onclick="toggleMenu('class','navbar','searchbar')"><i class="fa fa-reorder"></i></button>
 	<ul id="navbar">
+		<form method="post" id="new_demand" action="?c=newgoods">
+		<div>
+						<div class="in_where" id="in_mall">在集市</div>
+						<div class="in_where" id="in_change">在换客</div>
+					</div>
+					<input type="hidden" name="in_where" id="in_where_input" value="0"/>
+					<div class="out_put">发布新需求</div>
+		</form>
+		
 		<IF condition="session('?uid') eq 0">
 		<a href="/sso/?page=login&redirect_uri={:base64_encode($_SERVER['REQUEST_URI'])}" id="load_button"><li>登录</li></a>
 		<ELSE/>
@@ -38,6 +48,26 @@
 			</div>
 		</form>
 	</div>
+	<div id="class">
+		<table>
+			<tr>
+				<a href="?m=mall&a=scan&lb=0"><td>手机</td></a>
+				<a href="?m=mall&a=scan&lb=1"><td>电子</td></a>
+				<a href="?m=mall&a=scan&lb=2"><td>书籍</td></a>
+				<a href="?m=mall&a=scan&lb=3"><td>车辆</td></a>
+				<a href="?m=mall&a=scan&lb=4"><td>服饰</td></a>
+				<a href="?m=mall&a=scan&lb=5"><td>化妆</td></a>
+			</tr>
+			<tr>
+				<a href="?m=mall&a=scan&lb=6"><td>日用</td></a>
+				<a href="?m=mall&a=scan&lb=7"><td>乐器</td></a>
+				<a href="?m=mall&a=scan&lb=8"><td>虚拟</td></a>
+				<a href="?m=mall&a=scan&lb=9"><td>食品</td></a>
+				<a href="?m=mall&a=scan&lb=10"><td>房屋</td></a>
+				<a href="?m=mall&a=scan&lb=11"><td>其他</td></a>
+			</tr>
+		</table>
+	</div>
 </div>
 <div id="header_center">
 	<div id="header_center_nav">
@@ -57,55 +87,21 @@
 		</a>
 	</div>
 </div>
-			<IF condition="$m eq 'chan'"><div class="banner_left_chan"><ELSE/><div class="banner_left"></IF>
-				<div class="menu">
-					<table class="menu_table" border="0">
-						<tr>
-							<td><a href="?m=mall&a=scan&lb=0">手机</a></td>
-							<td><a href="?m=mall&a=scan&lb=1">电子</a></td> 
-						</tr>
-						<tr>
-							<td><a href="?m=mall&a=scan&lb=2">书籍</a></td>
-							<td><a href="?m=mall&a=scan&lb=3">车辆</a></td> 
-						</tr>
-						<tr>
-							<td><a href="?m=mall&a=scan&lb=4">服饰</a></td>
-							<td><a href="?m=mall&a=scan&lb=5">化妆</a></td> 
-						</tr>
-						<tr>
-							<td><a href="?m=mall&a=scan&lb=6">日用</a></td>
-							<td><a href="?m=mall&a=scan&lb=7">乐器</a></td> 
-						</tr>
-						<tr>
-							<td><a href="?m=mall&a=scan&lb=10">虚拟</a></td>
-							<td><a href="?m=mall&a=scan&lb=11">食品</a></td> 
-						</tr>
-						<tr>
-							<td><a href="?m=mall&a=scan&lb=8">房屋</a></td>
-							<td><a href="?m=mall&a=scan&lb=9">其他</a></td> 
-						</tr>
-					</table>
-				</div>	
-			</div>
-			<IF condition="$m eq 'chan'"><div class="banner_center_chan"></div><ELSE/><div class="banner_center"></div></IF>
-			<div class="banner_right">
-				<form method="post" id="new_demand" action="?c=newgoods">
-					<div style="width:126px;margin:0px auto;height:28px;border:0px solid black;">
-						<div class="in_where" id="in_mall">在集市</div>
-						<div class="in_where" id="in_change">在换客</div>
-					</div>
-					<input type="hidden" name="in_where" id="in_where_input" value="0"/>
-					<div class="out_put">发布新需求</div>
-				</form>
-			</div>
+	</div>
+			
+				
+					
+			
 		</div>
 	</div>
 </div>
 <script>
-function toggleMenu(id,other){
+function toggleMenu(id,other,other1){
 	document.querySelector("#"+id).classList.toggle("expand");
 	document.querySelector("#"+other).classList.remove("expand");
+	document.querySelector("#"+other1).classList.remove("expand");
 	document.querySelector("#btn-"+id).classList.toggle("expand");
 	document.querySelector("#btn-"+other).classList.remove("expand");
+	document.querySelector("#btn-"+other1).classList.remove("expand");
 }
 </script>

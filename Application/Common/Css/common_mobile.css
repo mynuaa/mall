@@ -1,6 +1,9 @@
 *{
 	outline:none;
 }
+a{
+	text-decoration:none;
+}
 html,body{
 	margin:0;
 	padding:0;
@@ -112,14 +115,41 @@ html,body{
 	height:50px;
 	opacity:1;
 }
+#class{
+	position:absolute;
+	background:#149767;
+	width:100%;
+	top:50px;
+	left:0;
+	right:0;
+	height:0;
+	z-index:1;
+	overflow:hidden;
+	opacity:0;
+	transition:all 200ms;
+}
+#class.expand{
+	height:90px;
+	opacity:1;
+}
+#class>table
+{
+	line-height:40px;
+	font-size:1em;
+	width:100%;
+	text-align:center;
+	color:#FFF;
+	font-family:"微软雅黑";
+}		
 input[type=text]{
 	background:rgba(0,0,0,0);
 	border:none;
-	border-bottom:1px solid rgba(255,255,255,0.6);
+	border:2px solid rgba(255,255,255,0.6);
 	color:rgba(255,255,255,0.6);
 	height:30px;
 	font-family:"微软雅黑";
 	padding:0.2em 0.5em;
+	width:50%;
 }
 input[type=submit]{
 	height:30px;
@@ -152,3 +182,41 @@ select{
 	text-decoration:none;
 	color:#DDD;
 }
+#board{
+	margin:10px 0;
+	border-radius:1em;
+	width:100%;
+	min-height:120px;
+	background:#EAF8F3;
+}
+#board-header{
+	padding-left:10px;
+	display:inline-block;
+	width:100%;
+	border-radius:0.3em;
+	background:#34B787;
+	height:40px;
+	font-size:1.4em;
+	text-align:left;
+	color:#FFF;
+	line-height:40px;
+	letter-spacing:0.5em;
+	font-family:"微软雅黑";
+	overflow:hidden;
+	box-sizing:border-box;
+}
+#board a{
+	font-size:1em;
+	color:black;
+}
+#board ul{
+	margin:0;
+}
+#board li{
+	height:30px;
+	line-height:30px;
+	text-align:left;
+	width:100%;
+}
+
+
