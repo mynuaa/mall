@@ -2,7 +2,11 @@
 	<div id="header_title">南航Mall</div>
 	<button id="btn-navbar" onclick="toggleMenu('navbar','searchbar')"><i class="fa fa-user"></i></button>
 	<button id="btn-searchbar" onclick="toggleMenu('searchbar','navbar')"><i class="fa fa-search"></i></button>
+	<IF condition="session('?uid') eq 0">
+	<ul id="navbar" class="guest">
+	<ELSE/>
 	<ul id="navbar">
+	</IF>
 		<IF condition="session('?uid') eq 0">
 		<a href="/sso/?page=login&redirect_uri={:base64_encode($_SERVER['REQUEST_URI'])}" id="load_button"><li>登录</li></a>
 		<ELSE/>

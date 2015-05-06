@@ -55,6 +55,9 @@ html,body{
 	height:240px;
 	opacity:1;
 }
+#navbar.guest.expand{
+	height:40px;
+}
 #navbar>a{
 	display:block;
 	height:40px;
