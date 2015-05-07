@@ -5,14 +5,13 @@
 	<button id="btn-class" onclick="toggleMenu('class','navbar','searchbar')"><i class="fa fa-reorder"></i></button>
 	<ul id="navbar">
 		<form method="post" id="new_demand" action="?c=newgoods">
-		<div>
-						<div class="in_where" id="in_mall">在集市</div>
-						<div class="in_where" id="in_change">在换客</div>
-					</div>
-					<input type="hidden" name="in_where" id="in_where_input" value="0"/>
-					<div class="out_put">发布新需求</div>
+		<input type="hidden" name="in_where" id="in_where_input"/>
+		<div id="newgoods">发布新需求</div>
+		<select>
+			<option id="in_mall">集市</option>
+			<option id="in_change">换客</option>
+		</select>
 		</form>
-		
 		<IF condition="session('?uid') eq 0">
 		<a href="/sso/?page=login&redirect_uri={:base64_encode($_SERVER['REQUEST_URI'])}" id="load_button"><li>登录</li></a>
 		<ELSE/>
@@ -39,9 +38,9 @@
 			<div class="miao">
 				<input type="hidden" name="search_type" id="search_type_top" value="0">
 				<select id="search_sort_list">
-					<option class="search_list" id="search_all">全部</option>
-					<option class="search_list" id="search_mall">集市</option>
-					<option class="search_list" id="search_chan">换客</option>
+					<option id="search_all">全部</option>
+					<option id="search_mall">集市</option>
+					<option id="search_chan">换客</option>
 				</select>
 				<input type="text" name="search_content" class="search_content" id="search_content_top" x-webkit-speech>
 				<input type="submit" value="搜索">
@@ -85,14 +84,6 @@
 				<span id="header_center_personal">个人中心</span>	
 			</IF>
 		</a>
-	</div>
-</div>
-	</div>
-			
-				
-					
-			
-		</div>
 	</div>
 </div>
 <script>
