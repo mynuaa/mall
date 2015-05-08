@@ -158,8 +158,7 @@ input[type=submit]{
 	height:30px;
 	margin:0 0.5em;
 	padding:0 0.5em;
-	border-radius:0.4em;
-	background:rgba(0,0,0,0);
+	background:rgba(255,255,255,0.6);
 	border:none;
 }
 select{
@@ -167,7 +166,7 @@ select{
 	margin:0 0.5em;
 	border:none;
 	padding:0 0.5em;
-	border-radius:0.4em;
+	background: rgba(255,255,255,0.6);
 }
 #common_bottom{
 	position:absolute;
@@ -175,7 +174,7 @@ select{
 	bottom:0;
 	background:#555;
 	color:#AAA;
-	padding:20px 0;
+	padding:5px 0;
 	font-size:0.9em;
 }
 #common_bottom>div{
@@ -186,24 +185,23 @@ select{
 	color:#DDD;
 }
 #board{
-	margin:10px 0;
-	border-radius:1em;
+	margin:0.5em 0;
+	padding:0 0.5em;
 	width:100%;
-	min-height:120px;
 	background:#EAF8F3;
+	box-sizing:border-box;
+	height:auto;
 }
 #board-header{
 	padding-left:10px;
 	display:inline-block;
+	float:left;
 	width:100%;
-	border-radius:0.3em;
 	background:#34B787;
 	height:40px;
-	font-size:1.4em;
 	text-align:left;
 	color:#FFF;
 	line-height:40px;
-	letter-spacing:0.5em;
 	font-family:"微软雅黑";
 	overflow:hidden;
 	box-sizing:border-box;
@@ -214,12 +212,30 @@ select{
 }
 #board ul{
 	margin:0;
+	float:left;
+	background:#EAF8F3;
+	width:100%;
+	box-sizing:border-box;
+	padding:1em 1.5em;
 }
 #board li{
 	height:30px;
 	line-height:30px;
 	text-align:left;
 	width:100%;
+}
+#newgoods{
+	padding:0 1em;
+	display:inline-block;
+	height:40px;
+	line-height:40px;
+	text-decoration:none;
+	color:#FFF;
+	font-size:0.9em;
+}
+#content{
+	width:100%;
+	padding:0 1.5em;
 }
 
 
