@@ -5,7 +5,7 @@ a{
 	text-decoration:none;
 }
 html,body{
-	margin:0;
+	margin:0 auto;
 	padding:0;
 	position:absolute;
 	width:100%;
@@ -37,6 +37,8 @@ html,body{
 	font-size:1.1em;
 	color:#FFF;
 	padding:0 0.8em;
+	letter-spacing:0.2em;
+	text-shadow:5px 2px 3px black;
 }
 #navbar{
 	background:#149767;
@@ -173,6 +175,7 @@ select{
 	color:#AAA;
 	padding:5px 0;
 	font-size:0.9em;
+	box-sizing:border-box;
 }
 #common_bottom>div{
 	text-align:center;
@@ -182,12 +185,12 @@ select{
 	color:#DDD;
 }
 #board{
-	margin:0.5em 0;
-	padding:0 0.5em;
-	width:100%;
+	margin:0.5em;
+	width:100%-1em;
 	background:#EAF8F3;
 	box-sizing:border-box;
 	height:auto;
+	overflow:hidden;
 }
 #board-header{
 	padding-left:10px;
@@ -213,11 +216,11 @@ select{
 	background:#EAF8F3;
 	width:100%;
 	box-sizing:border-box;
-	padding:1em 1.5em;
+	padding:0.5em 1.5em;
 }
 #board li{
-	height:30px;
-	line-height:30px;
+	height:20px;
+	line-height:20px;
 	text-align:left;
 	width:100%;
 }
@@ -231,8 +234,105 @@ select{
 	font-size:0.9em;
 }
 #content{
-	width:100%;
-	padding:0 1.5em;
+	margin:0.5em;
+	overflow:hidden;
 }
+#box{
+	margin:10px 0;
+	height:100px;
+	width:100%;
+	overflow:hidden;
+}
+#box_left{
+	width:60px;
+	float:left;
+	
+}
+#box_left img{
+	width:60px;
+	height:60px;
+	border-radius:10em;
+	border:2px solid #34B787;
+	overflow:hidden;
+}
+#username{
+	width:100%;
+	height:30px;
+	text-align:center;
+	font-size:0.5em;
+	overflow:hidden;
+}
+#box_right{
+	width:70%;
+	float:right;
+	margin:0 0.5em;
+	height:90px;
+	border:2px solid #34B787;
+}
+#box_right_top{
+	height:25px;
+	border-bottom:2px dotted #CBCBCB;
+}
+#goodscondition1{
+	float:left;
+	font-size:0.4em;
+	padding:0 0.8em;
+	font-weight:bold;
+	height:25px;
+	line-height:25px;
+	color:#FE5252;
+}
+#goodscondition2{
+	padding:0 0.8em;
+	height:25px;
+	line-height:25px;
+	float:left;
+	font-size:0.4em;
+	text-align:center;
+	font-weight:bold;
+	color:#66C8A3;
+}
+#box_right_top a{
+	height:25px;
+	line-height:25px;
+	font-size:1.0em;
+	font-weight:bold;
+	color:black;
+	padding-right:1em; 
+}
+#box_right_top span{
+	height:25px;
+	line-height:25px;
+	font-size:0.5em;
+	color:black;
+}
+#box_right_bottom{
+	height:55px;
+	padding:0.5em;
+}
+#description{
+	font-size:0.7em;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+#page{
+	line-height:40px;
+	height:40px;
+	width:100;
+	margin:0 auto;
+	text-align:center;
+	color:#34B787;
+	font-weight:bold;
+	font-size:0.6em;
+}
+#page div{
+	display:inline-block;
+}
+.page_center
+{
+	font-size:1.6em;
+}
+
 
 
