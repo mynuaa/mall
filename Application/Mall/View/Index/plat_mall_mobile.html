@@ -17,8 +17,8 @@
 </head>
 <body>
 	<include file="Application/Common/View/common_header_mall_mobile.html" />
-	<div id="board">
-		<div id="board-header">商城公告</div>
+	<div class="board">
+		<div class="board-header">商城公告</div>
 		<ul>
 			<FOREACH name="notice" item="vo">
 				<li><a href='./?m=admin&c=notice&id={$vo.notice_id}'>{$vo.notice_title}</a></li>
@@ -44,9 +44,9 @@
 			<div id="box_right">
 				<div id="box_right_top">
 					<IF condition="$vo.need_type eq 1">
-						<div id="goodscondition1">出售</div>
+						<div id="goodcondition1">出售</div>
 					<ELSE/>
-						<div id="goodscondition2">求购</div>
+						<div id="goodcondition2">求购</div>
 					</IF>
 					<a href="?c=goods&id={$vo.goods_id}" target="_blank">{$vo.goods_name}</a>
 					<IF condition="$vo.price eq 0">
@@ -61,7 +61,8 @@
 						<span><img src="Application/Mall/Image/heart_grey.png"  class="heart" title="收藏"></span>
 					</IF> 
 					<span style="color:#FE5252;" class="col_num">{$vo.col_num}</span>
-					<span><img src="Application/Mall/Image/talk_green.png" onclick="document.location.href='?m=mall&c=goods&id={$vo.goods_id}#talk_both'" style="cursor:pointer;" title="查看回复"></span>
+					<span>
+					<img src="Application/Mall/Image/talk_green.png" onclick="document.location.href='?m=mall&c=goods&id={$vo.goods_id}#talk_both'" style="cursor:pointer;" title="查看回复"></span>
 					<span style="color:#66C8A3;">{$vo.mess_goods}</span>
 				</div>
 			    <div id="box_right_bottom" onclick="window.open('?m=mall&c=goods&id={$vo.goods_id}','_blank')" style="cursor:pointer;">
@@ -81,6 +82,15 @@
 			</div>
 		</div>
 	</foreach>
+	</div>
+	<div class="board">
+		<div class="board-header">最新店铺</div>
+		<ul>
+			<FOREACH name="new_shop" item="vo">
+				<li><a href='./?m=mall&c=shop&id={$vo.shop_id}'>{$vo.shop_name}</a></li>
+			</FOREACH>
+		</ul>
+		<div id="more-new-shop"><a href='./?m=mall&c=shop&a=shop_list'>更多店铺...</a></div>
 	</div>
 	<IF condition="$page_num gt 0">
 	<div id="page">

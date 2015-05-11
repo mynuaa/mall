@@ -10,6 +10,8 @@ html,body{
 	position:absolute;
 	width:100%;
 	min-height:100%;
+	padding-bottom:60px;
+	box-sizing:border-box;
 }
 #header_top{
 	background:#34B787;
@@ -184,15 +186,15 @@ select{
 	text-decoration:none;
 	color:#DDD;
 }
-#board{
+.board{
 	margin:0.5em;
-	width:100%-1em;
+	min-height:60px;
 	background:#EAF8F3;
-	box-sizing:border-box;
 	height:auto;
 	overflow:hidden;
+	box-sizing:border-box;
 }
-#board-header{
+.board-header{
 	padding-left:10px;
 	display:inline-block;
 	float:left;
@@ -206,11 +208,11 @@ select{
 	overflow:hidden;
 	box-sizing:border-box;
 }
-#board a{
+.board a{
 	font-size:1em;
 	color:black;
 }
-#board ul{
+.board ul{
 	margin:0;
 	float:left;
 	background:#EAF8F3;
@@ -218,11 +220,17 @@ select{
 	box-sizing:border-box;
 	padding:0.5em 1.5em;
 }
-#board li{
+.board li{
 	height:20px;
 	line-height:20px;
 	text-align:left;
 	width:100%;
+}
+#more-new-shop{
+	float:right;
+	margin:0.4em;
+	font-size:0.8em;
+	text-decoration:underline;
 }
 #newgoods{
 	padding:0 1em;
@@ -273,7 +281,7 @@ select{
 	height:25px;
 	border-bottom:2px dotted #CBCBCB;
 }
-#goodscondition1{
+#goodcondition1{
 	float:left;
 	font-size:0.4em;
 	padding:0 0.8em;
@@ -282,7 +290,7 @@ select{
 	line-height:25px;
 	color:#FE5252;
 }
-#goodscondition2{
+#goodcondition2{
 	padding:0 0.8em;
 	height:25px;
 	line-height:25px;
@@ -332,6 +340,130 @@ select{
 .page_center
 {
 	font-size:1.6em;
+}
+#info-image{
+	width:100%;
+	height:360px;
+	overflow:hidden;
+	box-sizing:border-box;
+	border-bottom:5px solid #34B787;
+}
+#info-description{
+	font-family:"微软雅黑";
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	box-sizing:border-box;
+}
+#id-top{
+	min-height:100px;
+	padding:0.5em;
+	border-bottom:2px dotted grey;
+	box-sizing:border-box;
+}
+#id-bottom{
+	min-height:100px;
+	padding:0.5em;
+	font-size:1.1em;
+}
+#info-image-top img{
+	width:100%;
+	height:260px;
+}
+#info-image-bottom img{
+	width:80px;
+	margin-right:10px;
+	border:2px solid grey;"
+}
+#infocondition1{
+	padding-right:1em;
+	float:left;
+	font-weight:bold;
+	height:25px;
+	line-height:25px;
+	color:#FE5252;
+}
+#infocondition2{
+	padding-right:1em;
+	float:left;
+	font-weight:bold;
+	height:25px;
+	line-height:25px;
+	color:#66C8A3;
+}
+#info-goodsname{
+	font-weight:bold;
+	font-size:1.5em;
+}
+#info-price{
+	margin:0.5em 0;
+	font-family: "Helvetica Neue",Helvetica,Arial,Sans-serif;
+}
+#ip-right{
+	display:inline-block;
+	float:right;
+	margin-top:10px;
+	padding-right:1em;
+}
+.goodcondition{
+	float:right;
+	color:grey;
+	font-weight:bold;
+	font-size:1.5em;
+	margin-top:15px;
+}
+#info-discuss{
+	width:100%;
+	min-height:200px;
+}
+#talk-both,#my-talk{
+	padding:0.5em;
+	width:100%;
+	overflow:hidden;
+	box-sizing:border-box;
+}
+#talk-left,#info-mytalk{
+	display:block;
+	font-size:1em;
+	float:left;
+	color:grey;
+	font-family:"微软雅黑";
+}
+#info-line{
+	border-bottom:5px solid #34B787;
+	height:10px;
+}
+#mytalk-text{
+	padding:0.5em;
+	overflow:hidden;
+	box-sizing:border-box;
+	position:relative;
+}
+#mytalk-text img{
+	width:60px;
+	height:60px;
+	float:left;
+}
+#mytalk-text textarea{
+	margin-left:2em;
+	width:60%;
+	height:130px;
+	float:left;
+}
+#out_talk{
+	position:absolute;
+	top:80px;
+	display:block;
+	width:60px;
+	float:left;
+	height:60px;
+	line-height:60px;
+	color:white;
+	text-align:center;
+	cursor:pointer;
+	font-size:1em;
+	background-color:#34B787;
+	font-family:"微软雅黑";
 }
 
 

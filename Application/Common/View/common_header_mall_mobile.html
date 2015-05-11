@@ -4,6 +4,10 @@
 	<button id="btn-searchbar" onclick="toggleMenu('searchbar','navbar','class')"><i class="fa fa-search"></i></button>
 	<button id="btn-class" onclick="toggleMenu('class','navbar','searchbar')"><i class="fa fa-reorder"></i></button>
 	<ul id="navbar">
+		
+		<IF condition="session('?uid') eq 0">
+		<a href="/sso/?page=login&redirect_uri={:base64_encode($_SERVER['REQUEST_URI'])}" id="load_button"><li>登录</li></a>
+		<ELSE/>
 		<form method="post" id="new_demand" action="?c=newgoods">
 		<input type="hidden" name="in_where" id="in_where_input"/>
 		<div id="newgoods">发布新需求</div>
@@ -12,9 +16,6 @@
 			<option id="in_change">换客</option>
 		</select>
 		</form>
-		<IF condition="session('?uid') eq 0">
-		<a href="/sso/?page=login&redirect_uri={:base64_encode($_SERVER['REQUEST_URI'])}" id="load_button"><li>登录</li></a>
-		<ELSE/>
 		<IF condition="$shop_id gt 0">
 		<a href="?m=mall&c=shop&id={$shop_id}"><li>查看我的店铺</li></a>
 		<a href="?m=mall&c=shop&a=edit&id={$shop_id}"><li>修改店铺信息</li></a>
