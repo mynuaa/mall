@@ -11,6 +11,7 @@ html,body{
 	width:100%;
 	min-height:100%;
 	padding-bottom:60px;
+	overflow:hidden;
 	box-sizing:border-box;
 }
 #header_top{
@@ -464,6 +465,28 @@ select{
 	font-size:1em;
 	background-color:#34B787;
 	font-family:"微软雅黑";
+}
+#notice{
+	font-family:"微软雅黑";
+	padding:0.5em;
+}
+#notice a{
+	color:#34B787;
+	font-size:0.8em;
+}
+#notice-head{
+	min-height:40px;
+	padding-bottom:0.5em;
+	border-bottom:2px dotted grey;
+}
+#notice-title{
+	font-size:1.8em;
+	font-weight:bold;
+}
+#notice-content{
+	font-size:1.2em;
+	padding-top:0.5em;
+	font-family:"宋体";
 }
 
 
