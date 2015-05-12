@@ -4,6 +4,8 @@
 a{
 	text-decoration:none;
 }
+.fl{float:left;}
+.fr{float:right;}
 html,body{
 	margin:0 auto;
 	padding:0;
@@ -491,6 +493,29 @@ select{
 	padding-top:0.5em;
 	font-family:"宋体";
 }
-
-
-
+.boxs-title{
+	background:#BBB;
+	padding-left:10px;
+	height:40px;
+	line-height:40px;
+	box-sizing:border-box;
+	color:#000;
+}
+.self-info{
+	overflow:hidden;
+	padding:1em;
+	padding-bottom:0.5em;
+	box-sizing:border-box;
+}
+.box-groups{
+	margin:0 0.5em;
+}
+.boxs{
+	background:#F3F3F3;
+	margin:0.5em 0;
+}
+.boxs-content{
+	padding:0.5em;
+	box-sizing:border-box;
+	font-size:0.9em;
+}

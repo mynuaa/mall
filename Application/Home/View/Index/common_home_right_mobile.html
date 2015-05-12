@@ -1,0 +1,25 @@
+<div class="boxs">
+	<div class="boxs-title">我的关注<a href="?m=home&c=config">[设置]</a></div>
+	<div class="boxs-content">
+		<IF condition="$attention_num eq 0">
+			<span>暂无关注的分类</span>
+		<ELSE/>
+			<b>今日更新:</b>
+			<FOREACH name="attention_panel" item="vo">
+				<IF condition="$attention_array[$vo] neq '' " >
+					<a href="?m=mall&a=scan&&lb={$vo}">{$attention_array[$vo]} <span style="color:#F56C7E;">({$attention_daynum[$vo]})</span></a>
+				</IF>
+			</FOREACH>
+		</IF>
+	</div>
+</div>
+<div class="boxs">
+	<div class="boxs-title">猜你喜欢</div>
+	<div class="boxs-content">
+		<FOREACH name="guess" item="vo">
+			<IF condition="$vo.need_type eq 1"><span style="color:#F56C7E;"><b>出</b></span><ELSE/><span style="color:#35B787;"><b>求</b></span></IF>
+			<a href="?m=mall&c=goods&id={$vo.goods_id}">{$vo.goods_name}</a>
+		</FOREACH>
+	</div>
+</div>
+<br>
