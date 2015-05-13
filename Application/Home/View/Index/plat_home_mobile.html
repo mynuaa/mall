@@ -22,7 +22,7 @@
 			<div class="content-home">
 				<div class="self-info">
 					<div class="fl">
-						<img src="http://my.nuaa.edu.cn/ucenter/avatar.php?uid={$uid}&size=middle" width="80">
+						<img src="/ucenter/avatar.php?uid={$uid}&size=middle" width="80">
 					</div>
 					<div class="fl shop-info">
 						<div class="info-user">{$username}</div>
@@ -39,6 +39,7 @@
 				</div>
 				<div class="box-groups">
 					<div class="boxs">
+						<a name="lb1"></a>
 						<div class="boxs-title">最新消息</div>
 						<div class="boxs-content" id="mes-line">
 							<IF condition="$mess_num eq 0">
@@ -67,6 +68,7 @@
 						</div>
 					</div>
 					<div class="boxs">
+						<a name="lb2"></a>
 						<div class="boxs-title">我的出售/求购</div>
 						<div class="boxs-content">
 							<IF condition="$num eq 0">
@@ -101,16 +103,17 @@
 								</div>
 								</FOREACH>
 								<div class="page">
-									<a href="?m=home&lb=2&p2=1">首页</a>
-									<IF condition="$p2_this neq 1"><a href="?m=home&lb=2&p2={$p2_this-1}">上一页</a></IF>
+									<a href="?m=home&p2=1#lb2">首页</a>
+									<IF condition="$p2_this neq 1"><a href="?m=home&p2={$p2_this-1}#lb2">上一页</a></IF>
 									<span>第 {$p2_this}/{$p2_num} 页</span>
-									<IF condition="$p2_this neq $p2_num"><a href="?m=home&lb=2&p2={$p2_this+1}">下一页</a></IF>
-									<a href="?m=home&lb=2&p2={$p2_num}">尾页</a>
+									<IF condition="$p2_this neq $p2_num"><a href="?m=home&p2={$p2_this+1}#lb2">下一页</a></IF>
+									<a href="?m=home&p2={$p2_num}#lb2">尾页</a>
 								</div>
 							</IF>
 						</div>
 					</div>
 					<div class="boxs">
+						<a name="lb3"></a>
 						<div class="boxs-title">已出售</div>
 						<div class="boxs-content">
 							<IF condition="$num_sold eq 0">
@@ -145,16 +148,17 @@
 								</div>
 								</FOREACH>
 								<div class="page">
-									<a href="?m=home&lb=3&p3=1">首页</a>
-									<IF condition="$p3_this neq 1"><a href="?m=home&lb=3&p3={$p3_this-1}">上一页</a></IF>
+									<a href="?m=home&p3=1#lb3">首页</a>
+									<IF condition="$p3_this neq 1"><a href="?m=home&p3={$p3_this-1}#lb3">上一页</a></IF>
 									<span>第 {$p3_this}/{$p3_num} 页</span>
-									<IF condition="$p3_this neq $p3_num"><a href="?m=home&lb=3&p3={$p3_this+1}">下一页</a></IF>
-									<a href="?m=home&lb=3&p3={$p3_num}">尾页</a>
+									<IF condition="$p3_this neq $p3_num"><a href="?m=home&p3={$p3_this+1}#lb3">下一页</a></IF>
+									<a href="?m=home&p3={$p3_num}#lb3">尾页</a>
 								</div>
 							</IF>
 						</div>
 					</div>
 					<div class="boxs">
+						<a name="lb4"></a>
 						<div class="boxs-title">我的收藏</div>
 						<div class="boxs-content">
 							<IF condition="$num_colle eq 0">
@@ -186,11 +190,11 @@
 								</div>
 								</FOREACH>
 								<div class="page">
-									<a href="?m=home&lb=4&p4=1">首页</a>
-									<IF condition="$p4_this neq 1"><a href="?m=home&lb=4&p4={$p4_this-1}">上一页</a></IF>
+									<a href="?m=home&p4=1#lb4">首页</a>
+									<IF condition="$p4_this neq 1"><a href="?m=home&p4={$p4_this-1}#lb4">上一页</a></IF>
 									<span>第 {$p4_this}/{$p4_num} 页</span>
-									<IF condition="$p4_this neq $p4_num"><a href="?m=home&lb=4&p4={$p4_this+1}">下一页</a></IF>
-									<a href="?m=home&lb=4&p4={$p4_num}">尾页</a>
+									<IF condition="$p4_this neq $p4_num"><a href="?m=home&p4={$p4_this+1}#lb4">下一页</a></IF>
+									<a href="?m=home&p4={$p4_num}#lb4">尾页</a>
 								</div>
 							</IF>
 						</div>

@@ -22,7 +22,7 @@
 				<foreach name="data" item="vo" key="k" >
 					<div class="box clearfix" id="{$vo.goods_id}">
 						<div class="box_left">
-							<a href="Http://my.nuaa.edu.cn/?{$vo.uid}"><IF condition="$vo.Concern_shopid eq 0"><img src="http://my.nuaa.edu.cn/ucenter/avatar.php?uid={$vo.uid}&size=middle" width="80px" /><ELSE/><img src="Uploads{$vo.shop_avator}" width="80px" /></IF></a>
+							<IF condition="$vo.Concern_shopid eq 0"><img src="http://my.nuaa.edu.cn/ucenter/avatar.php?uid={$vo.uid}&size=middle" width="80px" /><ELSE/><img src="Uploads{$vo.shop_avator}" width="80px" /></IF>
 							<div style="text-align:center;font-size:12px;">{$vo.username}<input type="hidden" value="{$vo.uid}" id="uid" /></br><span style="color:#8D8B8C;">{$vo.data}</span></div>
 						</div>
 						<IF condition="$vo.need_type eq 1"><div class="box_right"><ELSE /><div class="box_right_want"></IF>

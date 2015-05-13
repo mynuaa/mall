@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+	<title>{$app_title}</title>
+	<link rel="stylesheet" href="Application/Common/Css/common_mobile.css">
+	<script src="Application/Common/Js/jquery-1.10.2.min.js"></script>
+	<script src="Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+	<script>
+		var page="home";
+	</script>
+</head>
+<body>
+	<include file="Application/Common/View/common_header_mall_mobile.html" />
+	<div class="panel-all">
+		<div class="panel-center">
+			<div class="box-groups">
+				<div class="boxs">
+					<div class="boxs-title">个人信息</div>
+					<div class="boxs-content">
+						<div class="form-title">联系方式</div>
+						<div class="form-content"><input name="contact" class="input_style contact" placeholder="QQ，手机号等" type="text" value="{$data['contact']}"></div>
+						<div class="form-tip">* 建议30字以内</div>
+						<div class="form-title">所在地</div>
+						<div class="form-content">
+							<IF condition="$data['location'] eq 1"><input name="location" type="radio" value="1" id="location_1" checked="checked"><ELSE /><input name="location" type="radio" value="1" id="location_1"></IF><label for="location_1">江宁</label>
+							<IF condition="$data['location'] eq 0"><input name="location" id="location_0" type="radio" value="0" checked="checked"><ELSE /><input name="location" id="location_0" type="radio" value="0"></IF><label for="location_0">本部</label>
+							<IF condition="$data['location'] eq 2"><input name="location" id="location_2" type="radio" value="2" checked="checked"><ELSE/><input name="location" id="location_2" type="radio" value="2"></IF><label for="location_2">不限</label>
+						</div>
+						<div class="form-title">关注</div>
+						<div>
+							<in name="id0" value="$data.attention">
+								<input name="attention" type="checkbox" id="classify_0" value="x" checked="checked"><label for="classify_0">手机</label>
+							<else/>
+								<input name="attention" type="checkbox" id="classify_0" value="x"><label for="classify_0">手机</label>
+							</in>
+							<in name="id1" value="$data.attention">
+								<input name="attention" type="checkbox" id="classify_1" value="1" checked="checked"><label for="classify_1">电子</label>
+							<else/>
+								<input name="attention" type="checkbox" id="classify_1" value="1"><label for="classify_1">电子</label>
+							</in>
+							<in name="id2" value="$data.attention">
+								<input name="attention" type="checkbox" id="classify_2" value="2" checked="checked"><label for="classify_2">书籍</label>
+							<else/>
+								<input name="attention" type="checkbox" id="classify_2" value="2"><label for="classify_2">书籍</label>
+							</in>								
+							<in name="id3" value="$data.attention">
+								<input name="attention" type="checkbox" id="classify_3" value="3" checked="checked"><label for="classify_3">车辆</label>
+							<else/>
+								<input name="attention" type="checkbox" id="classify_3" value="3"><label for="classify_3">车辆</label>
+							</in>
+							<in name="id4" value="$data.attention">
+								<input name="attention" type="checkbox" id="classify_4" value="4" checked="checked"><label for="classify_4">服饰</label>
+							<else/>
+								<input name="attention" type="checkbox" id="classify_4" value="4"><label for="classify_4">服饰</label>
+							</in>
+							<in name="id5" value="$data.attention">
+								<input name="attention" type="checkbox" id="classify_5" value="5" checked="checked"><label for="classify_5">化妆</label>
+							<else/>
+								<input name="attention" type="checkbox" id="classify_5" value="5"><label for="classify_5">化妆</label>
+							</in>
+							<in name="id6" value="$data.attention">
+								<input name="attention" type="checkbox" id="classify_6" value="6" checked="checked"><label for="classify_6">日用</label>
+							<else/>
+								<input name="attention" type="checkbox" id="classify_6" value="6"><label for="classify_6">日用</label>
+							</in>
+
+							<in name="id7" value="$data.attention">
+								<input name="attention" type="checkbox" id="classify_7" value="7" checked="checked"><label for="classify_7">乐器</label>
+							<else/>
+								<input name="attention" type="checkbox" id="classify_7" value="7"><label for="classify_7">乐器</label>
+							</in>
+							<in name="id10" value="$data.attention">
+								<input name="attention" type="checkbox" id="classify_10" value="10" checked="checked"><label for="classify_10">虚拟</label>
+							<else/>
+								<input name="attention" type="checkbox" id="classify_10" value="10"><label for="classify_10">虚拟</label>
+							</in>
+							<in name="id11" value="$data.attention">
+								<input name="attention" type="checkbox" id="classify_11" value="11" checked="checked"><label for="classify_11">食品</label>
+							<else/>
+								<input name="attention" type="checkbox" id="classify_11" value="11"><label for="classify_11">食品</label>
+							</in>
+							<in name="id8" value="$data.attention">
+								<input name="attention" type="checkbox" id="classify_8" value="8" checked="checked"><label for="classify_8">房屋</label>
+							<else/>
+								<input name="attention" type="checkbox" id="classify_8" value="8"><label for="classify_8">房屋</label>
+							</in>
+							<in name="id9" value="$data.attention">
+								<input name="attention" type="checkbox" id="classify_9" value="9" checked="checked"><label for="classify_9">其他</label>
+							<else/>
+								<input name="attention" type="checkbox" id="classify_9" value="9"><label for="classify_9">其他</label>
+							</in>
+						</div>
+						<div class="form-title">注意事项</div>
+						<div>1. 在发布新需求时，将自动为您填充联系方式和所在地。</div>
+						<div>2. 在右侧导航栏，将为您推荐所关注分类的最新最热商品。</div>
+						<p>
+							<span class="self_submit btn btn-green">保存</span>
+							<span class="self_quxiao btn btn-red">取消</span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="box-groups">
+			<include file="Application/Home/View/Index/common_home_right_mobile.html" />
+		</div>
+	</div>
+	<include file="Application/Common/View/common_bottom_mobile.html" />
+</body>
+<script>
+jQuery(function($){
+	$('.self_submit').click(	//提交时的验证以及ajax
+		function()
+		{
+			var str='';
+			$('input[name="attention"]:checked').each(function(){
+				str=$(this).val()+','+str;
+			});
+			var location=$('input[name="location"]:checked').val();
+			var contact=$('.contact').val();
+			var xx=String(contact).length;
+			if(xx > 30)
+			{
+				noty({text: '联系方式不能超过30字',layout: 'center', type: 'error',timeout:'1000',});
+				return false;
+			}
+			var url="?m=home&c=config&a=config";
+			var data={"location":location,"attention":str,"contact":contact};
+			$.post(url,data,function(r)
+				{
+					if(r.code == -1)	
+					{
+						noty({text: '保存失败，请检查网络',layout: 'center', type: 'error',timeout:'1000',});
+					}
+					else if(r.code == 1)
+					{
+						noty({text: '保存成功',layout: 'center', type: 'success',timeout:'1000',});
+						setTimeout("window.location.href='?m=home'",2000);
+					}
+				});
+		});
+	$('.self_quxiao').click(function(){
+		window.location.href='?m=home';
+	});
+	$('.panel-left').css("height",$(document).height()-250);
+});
+</script>
+</html>

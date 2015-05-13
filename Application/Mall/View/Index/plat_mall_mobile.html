@@ -29,13 +29,11 @@
 	<foreach name="data" item="vo" key="k" >
 		<div id="box" id="{$vo.goods_id}">
 			<div id="box_left">
-				<a href="Http://my.nuaa.edu.cn/?{$vo.uid}">
-					<IF condition="$vo.Concern_shopid eq 0">
-					<img src="http://my.nuaa.edu.cn/ucenter/avatar.php?uid={$vo.uid}&size=middle" />
-					<ELSE/>
+				<IF condition="$vo.Concern_shopid eq 0">
+					<img src="/ucenter/avatar.php?uid={$vo.uid}&size=middle" />
+				<ELSE/>
 					<img src="Uploads{$vo.shop_avator}"/>
-					</IF>
-				</a>
+				</IF>
 				<div id="username">{$vo.username}
 					<input type="hidden" value="{$vo.uid}" id="uid" /></br>
 					<span style="color:#8D8B8C;">{$vo.data}</span>
@@ -94,19 +92,11 @@
 	</div>
 	<IF condition="$page_num gt 0">
 	<div id="page">
-		<div onclick="window.location.href='?m=mall'"><i class="fa fa-fast-backward"></i></div>
-		<IF condition="$page_this neq 1">
-		<div onclick="window.location.href='?m=mall&page={$page_this-1}'"><i class="fa fa-backward"></i></div>
-		</IF>
-		<FOR start="$page_start" end="$page_end">
-			<div class="page_center" id="page_{$i}" onclick="window.location.href='?m=mall&page={$i}'">
-				{$i}
-			</div>
-		</FOR>
-		<IF condition="$page_this neq $page_num">
-		<div onclick="window.location.href='?m=mall&page={$page_this+1}'"><i class="fa fa-forward"></i></div>
-		</IF>
-		<div onclick="window.location.href='?m=mall&page={$page_num}'"><i class="fa fa-fast-forward"></i></div>
+		<a href="?m=mall">首页</a>
+		<IF condition="$page_this neq 1"><a href="?m=mall&page={$page_this-1}">上一页</div></IF>
+		<span>第 {$page_this}/{$page_num} 页</span>
+		<IF condition="$page_this neq $page_num"><a href="?m=mall&page={$page_this+1}">下一页</div></IF>
+		<a href="?m=mall&page={$page_num}">尾页</div>
 	</div>
 	</IF>
 	<include file="Application/Common/View/common_bottom_mobile.html" />

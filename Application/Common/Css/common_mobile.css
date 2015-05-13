@@ -540,3 +540,11 @@ select{
 .good-all{margin:0.1em;border:2px solid #F56C7E;padding:0.5em;box-sizing:border-box;}
 .page{text-align:center;margin:0.3em 0 0.1em;}
 .page a{color:#000;}
+.form-title{margin:0.5em 0;font-weight:bold;font-size:1.1em;}
+.form-content{color:#000;}
+.form-content input[type=text]{color:#000;border-color:#BBB;width:100%;box-sizing:border-box;}
+.form-tip{color:gray;font-size:0.9em;margin:0.2em 0;}
+.btn{padding:0.5em 1em;color:#FFF;}
+.btn-green{background:#34B787;}
+.btn-red{background:#F56C7E;}
+label{white-space:nowrap;}

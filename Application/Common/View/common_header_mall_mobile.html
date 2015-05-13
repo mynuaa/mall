@@ -22,16 +22,16 @@
 		<a href="?m=mall&c=shop&a=edit&id={$shop_id}"><li>修改店铺信息</li></a>
 		<hr>
 		</IF>
-		<a href='?m=home&lb=4'><li>我的收藏</li></a>
-		<a href='?m=home&lb=2'><li>我的东西</li></a>
+		<a href='?m=home#lb4'><li>我的收藏</li></a>
+		<a href='?m=home#lb2'><li>我的东西</li></a>
 		<hr>
-		<a href='?m=home&lb=1'>
+		<a href='?m=home#lb1'>
 		<IF condition="$mess_id neq 0">
 		<span style="color:#9bff1b;"><li><b>提醒（{$mess_id}）</b></li></span>
 		<ELSE/><li>提醒</li></IF>
 		</a>
 		<hr>
-		<a href="?m=home&lb=1"><li>{$username}</li></a>
+		<a href="?m=home#lb1"><li>{$username}</li></a>
 		<a href="/sso/?action=logout&redirect_uri={:base64_encode($_SERVER['REQUEST_URI'])}"><li>注销</li></a>
 		</IF>
 	</ul>
