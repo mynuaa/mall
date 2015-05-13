@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+	<title>{$app_title}</title>
+	<link rel="stylesheet" type="text/css" href="./Application/Common/Css/common_mobile.css">
+	<script type="text/javascript" src="./Application/Common/Js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="./Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+	<script type="text/javascript">
+		var page="mall";
+	</script>
+</head>
+<body>
+	<include file="./Application/Common/View/common_header_mall_mobile.html" />
+	<div id="shop-edit">
+		<form action="./?m=mall&c=shop&a=save_change" method="post" id="new_goods" enctype="multipart/form-data">
+		<table>
+			<tr>
+				<td class="td1">
+					<span class="red_star">*</span>店铺名称:
+				</td>
+				<td class="td2">
+					<input class="shop_name" name="shop_name" value="{$shop.shop_name}" type="text" id="shopname"><br>
+					<span id="notice_3">*建议20个汉字以内<input type="hidden" name="shop_id" value="{$shop.shop_id}"/><span>
+				</td>
+			</tr>
+			<tr>
+				<td class="td1">
+					<span class="red_star">*</span>店铺分类:
+				</td>
+				<td>
+					<IN name="id0" value="$shop.shop_type">
+						<input name="classify1[]" type="checkbox" id="classify_0" value="x" checked="checked">手机
+					<ELSE/>
+						<input name="classify1[]" type="checkbox" id="classify_0" value="x">手机
+					</IN>
+					<IN name="id1" value="$shop.shop_type">
+						<input name="classify1[]" type="checkbox" id="classify_1" value="1" checked="checked">电子
+					<ELSE/>
+						<input name="classify1[]" type="checkbox" id="classify_1" value="1">电子
+					</IN>
+					<IN name="id2" value="$shop.shop_type">
+						<input name="classify1[]" type="checkbox" id="classify_2" value="2" checked="checked">书籍
+					<ELSE/>
+						<input name="classify1[]" type="checkbox" id="classify_2" value="2">书籍
+					</IN>
+					<IN name="id3" value="$shop.shop_type">
+						<input name="classify1[]" type="checkbox" id="classify_3" value="3" checked="checked">车辆
+					<ELSE/>
+						<input name="classify1[]" type="checkbox" id="classify_3" value="3">车辆
+					</IN>
+					<IN name="id4" value="$shop.shop_type">
+						<input name="classify1[]" type="checkbox" id="classify_4" value="4" checked="checked">服饰<br/>
+					<ELSE/>
+						<input name="classify1[]" type="checkbox" id="classify_4" value="4">服饰
+					</IN>
+					<IN name="id5" value="$shop.shop_type">
+						<input name="classify1[]" type="checkbox" id="classify_5" value="5" checked="checked">化妆
+					<ELSE/>
+						<input name="classify1[]" type="checkbox" id="classify_5" value="5">化妆<br/>
+					</IN>
+					<IN name="id6" value="$shop.shop_type">
+						<input name="classify1[]" type="checkbox" id="classify_6" value="6" checked="checked">日用
+					<ELSE/>
+						<input name="classify1[]" type="checkbox" id="classify_6" value="6">日用
+					</IN>
+					<IN name="id7" value="$shop.shop_type">
+						<input name="classify1[]" type="checkbox" id="classify_7" value="7" checked="checked">乐器
+					<ELSE/>
+						<input name="classify1[]" type="checkbox" id="classify_7" value="7">乐器
+					</IN>
+					<IN name="id10" value="$shop.shop_type">
+						<input name="classify1[]" type="checkbox" id="classify_10" value="10" checked="checked">虚拟
+					<ELSE/>
+						<input name="classify1[]" type="checkbox" id="classify_10" value="10">虚拟
+					</IN>
+					<IN name="id11" value="$shop.shop_type">
+						<input name="classify1[]" type="checkbox" id="classify_11" value="11" checked="checked">食品
+					<ELSE/>
+						<input name="classify1[]" type="checkbox" id="classify_11" value="11">食品
+					</IN>
+					<IN name="id8" value="$shop.shop_type">
+						<input name="classify1[]" type="checkbox" id="classify_8" value="8" checked="checked">房屋
+					<ELSE/>
+						<input name="classify1[]" type="checkbox" id="classify_8" value="8">房屋
+					</IN>
+					<IN name="id9" value="$shop.shop_type">
+						<input name="classify1[]" type="checkbox" id="classify_9" value="9" checked="checked">其他
+					<ELSE/>
+						<input name="classify1[]" type="checkbox" id="classify_9" value="9">其他
+					</IN>
+				</td>
+			</tr>
+			<tr>
+				<td class="td1">
+					<span>店铺封面:</span>
+				</td>
+				<td class="td2">
+					<span>注: 图片大小限制为9M,建议上传正方形图片以获取最佳浏览效果</span>
+					<input type="file" name="image" id="shopimage"/>
+				</td>
+			</tr>
+			<tr>
+				<td class="td1">
+					<span>描述:</span>
+				</td>
+				<td class="td2">
+					<input class="description" type="text" name="description" id="shopdescription" value="{$shop.description}" placeholder="店铺描述"><br>
+					<span class="notice" id="notice_4">*建议60字以内</span>
+				</td>
+			</tr>
+			<tr>
+				<td class="td1">
+					<span><span class="red_star">*</span>联系方式:</span>
+				</td>
+				<td class="td2">
+					<input class="contact" name="contact" id="shopcontact" placeholder="qq,手机号等" type="text" value="{$shop.contact}"><br>
+					<span class="notice" id="notice_5">*建议30字以内</span>
+				</td>
+			</tr>
+		</table>
+		</form>
+		<div class="button_green" id="shopedit-button">提交</div>
+	</div>
+	<include file="./Application/Common/View/common_right_green_mobile.html" />
+	<include file="./Application/Common/View/common_bottom_mobile.html" />
+</body>
+<script>
+jQuery(function($){
+	function change_notice( id_value, content, color)
+	{
+		//alert(id_value);
+		$(id_value).html(content).css({"color":color,"font-weight":"bold"});
+	}
+
+	$('.shop_name').change(function(){
+		var th=$(this);
+		var x=String(th.val());
+		if(x.length > 20)
+		{
+			change_notice('#notice_3','商品名称不能超过20字','red');
+		}
+		else
+		{
+			change_notice('#notice_3','√','#34B787');
+		}
+	});
+	$('.description').change(function(){
+		var th=$(this);
+		var x=String(th.val());
+		if(x.length > 60)
+		{
+			change_notice('#notice_4','店铺描述不能超过60字','red');
+		}
+		else
+		{
+			change_notice('#notice_4','√','#34B787');
+		}
+	});
+	$('.contact').change(function(){
+		var th=$(this);
+		var x=String(th.val());
+		if(x.length > 30)
+		{
+			change_notice('#notice_5','联系方式不能超过30字','red');
+		}
+		else
+		{
+			change_notice('#notice_5','√','#34B787');
+		}
+	});
+	$('.button_green').click(function(){
+		var str_name=String($('.shop_name').val());
+		var str_description=String($('.description').val());
+		var str_contact=String($('.contact').val());
+		var classify = $('input:checkbox[name="classify1[]"]:checked').length;
+		if(str_name.length >20 || str_description.length > 60 || str_contact.length > 30 || classify <=0 || str_name.length==0 || str_contact.length==0)
+			noty({text: '相关信息不完整/有误',layout: 'center', type: 'error',timeout:'1000',});
+		else
+			$('#new_goods').submit();
+	});
+});
+</script>
+</html>

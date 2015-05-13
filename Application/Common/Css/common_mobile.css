@@ -148,8 +148,8 @@ html,body{
 	text-align:center;
 	color:#FFF;
 	font-family:"微软雅黑";
-}		
-input[type=text]{
+}
+#search_content_top{
 	background:rgba(0,0,0,0);
 	border:none;
 	border:2px solid rgba(255,255,255,0.6);
@@ -157,9 +157,10 @@ input[type=text]{
 	height:30px;
 	font-family:"微软雅黑";
 	padding:0.2em 0.5em;
-	width:50%;
-}
-input[type=submit]{
+	width:60%;
+	margin-left:1em;
+}		
+#search_content_top_button{
 	height:30px;
 	margin:0 0.5em;
 	padding:0 0.5em;
@@ -285,8 +286,8 @@ select{
 	border:2px solid #34B787;
 }
 #box_right_top{
-	height:25px;
 	border-bottom:2px dotted #CBCBCB;
+	font-family:"Helvetica Neue",Helvetica,Arial,Sans-serif;
 }
 #goodcondition1{
 	font-family:"微软雅黑";
@@ -318,7 +319,7 @@ select{
 	padding-right:0.5em; 
 }
 #box_right_top span{
-	font-family:"Helvetica Neue",Helvetica,Arial,Sans-serif;
+	
 	height:25px;
 	line-height:25px;
 	font-size:0.8em;
@@ -327,11 +328,10 @@ select{
 #box_right_bottom{
 	height:55px;
 	padding:0.3em 0.5em;
-}
-#description{
 	font-size:1em;
 	overflow:hidden;
 	white-space:nowrap;
+	word-break:break-all;
 	font-family:"微软雅黑";
 	text-overflow:ellipsis;
 }
@@ -660,4 +660,41 @@ label{white-space:nowrap;}
 	line-height:40px;
 	font-size:1em;
 	border-bottom:2px dotted #CBCBCB;
+}
+#shop-edit{
+	height:500px;
+	margin:0.5em;
+	border:2px solid #34B787;
+}
+#shop-edit table{
+	font-family:"微软雅黑";
+	width:100%;
+}
+#shop-edit tr{
+	height:100px;
+}
+.td1{
+	width:80px;
+}
+.td2{
+	width:70%;
+	font-size:0.9em;
+}
+.red_star{
+	color:red;
+}
+.td2>input{
+	width:90%;
+}
+#shopedit-button{
+	font-family:"微软雅黑";
+	color:#FFF;
+	text-align: center;
+	background:#34B787;
+	float:right;
+	width:50px;
+	height:40px;
+	line-height:40px;
+	margin-bottom:0.5em;
+	border-radius:0.5em;
 }
