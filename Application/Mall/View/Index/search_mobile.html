@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+	<title>{$app_title}</title>
+	<link rel="stylesheet" type="text/css" href="./Application/Common/Css/common_mobile.css">
+	<script type="text/javascript" src="./Application/Common/Js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="./Application/Common/Js/collect.js"></script>	
+	<script type="text/javascript" src="./Application/Common/Js/page.js"></script>	
+	<script type="text/javascript">
+		var page="mall";
+		var page_this={$page_this};
+	</script>
+</head>
+<body>
+	<include file="./Application/Common/View/common_header_mall_mobile.html"/>
+	<div id="content">
+		<IF condition="$result_num eq 0">
+			<div id="no-result">搜索结果为空哎~~换个关键词吧！</div>
+		<ELSE/>
+		<foreach name="result" item="vo" key="k" >
+		<div class="box" id="{$vo.goods_id}">
+			<div id="box_left">
+				<a href="Http://my.nuaa.edu.cn/?{$vo.uid}">
+					<IF condition="$vo.Concern_shopid eq 0">
+					<img src="http://my.nuaa.edu.cn/ucenter/avatar.php?uid={$vo.uid}&size=middle" />
+					<ELSE/>
+					<img src="Uploads{$vo.shop_avator}"/>
+					</IF>
+				</a>
+				<div id="username">{$vo.username}
+					<input type="hidden" value="{$vo.uid}" id="uid" /></br>
+					<span style="color:#8D8B8C;">{$vo.data}</span>
+				</div>
+			</div>
+			<div id="box_right">
+				<div id="box_right_top">
+					<IF condition="$vo.need_type eq 1">
+						<div id="goodcondition1">出售</div>
+					<ELSE/>
+						<div id="goodcondition2">求购</div>
+					</IF>
+					<a href="?c=goods&id={$vo.goods_id}" target="_blank">{$vo.goods_name}</a>
+					<IF condition="$vo.price eq 0">
+						面议
+					<ELSE />
+						<span>{$vo.price}</span>
+					</IF>
+					<span>RMB</span>
+					<span>
+					<img src="Application/Mall/Image/talk_green.png" onclick="document.location.href='?m=mall&c=goods&id={$vo.goods_id}#talk_both'" style="cursor:pointer;" title="查看回复"></span>
+					<span style="color:#66C8A3;">{$vo.mess_goods}</span>
+				</div>
+			    <div id="box_right_bottom" onclick="window.open('?m=mall&c=goods&id={$vo.goods_id}','_blank')" style="cursor:pointer;">
+					<div id="description">
+					<div id="info_table">
+					地点:<IF condition="$vo.location eq 1">江宁
+					<ELSEIF condition="$vo.location eq 0"/>本部
+					<ELSE />不限
+					</IF>
+					分类 :<IF condition="$vo.classify eq 0">手机
+					<ELSEIF condition="$vo.classify eq 1"/>电子
+					<ELSEIF condition="$vo.classify eq 2"/>书籍
+					<ELSEIF condition="$vo.classify eq 3"/>车辆
+					<ELSEIF condition="$vo.classify eq 4"/>服饰
+					<ELSEIF condition="$vo.classify eq 5"/>化妆
+					<ELSEIF condition="$vo.classify eq 6"/>日用
+					<ELSEIF condition="$vo.classify eq 7"/>乐器
+					<ELSEIF condition="$vo.classify eq 8"/>房屋
+					<ELSE />其他</IF>
+					联系方式 :</td><td>{$vo.contact}
+				</div>
+					<IF condition="$vo.description neq ''">{$vo.description}
+						<ELSE/>
+							这个人很懒，没有留下任何商品描述
+						</IF>
+					</div>
+					<!--<IF condition="$vo.photo neq ''">
+						<div style="float:left;width:110px;">
+							<img src="Uploads{$vo.photo}" width="110px"/>
+						</div>
+						我也不知道要不要图
+					</IF>-->
+				</div>
+			</div>
+		</div>
+		</foreach>
+		</IF>
+	</div>
+	<div id="page">
+		<div onclick="next_page(1)"><i class="fa fa-fast-backward"></i></div>
+		<IF condition="$page_this neq 1">
+			<div class="page_left" onclick="next_page({$page_this-1})"><i class="fa fa-backward"></i></div>
+		</IF>
+		<IF condition="$page_num gt 9">		<!--//页数大于9-->
+			<IF condition="$page_this gt 5">
+				<FOR start="$page_this-4" end="$page_this+5">
+					<div id="page_{$i}" onclick="next_page({$i})">{$i}</div>
+				</FOR>
+			<ELSE/>
+				<FOR start="1" end="10">
+					<div id="page_{$i}" onclick="next_page({$i})">{$i}</div>
+				</FOR>
+			</IF>
+		</IF>
+		<IF condition="$page_num lt 10">	<!--//页数小于10-->
+			<FOR start="1" end="$page_num+1">
+				<div id="page_{$i}" onclick="next_page({$i})">{$i}</div>
+			</FOR>
+		</IF>
+		<IF condition="$page_this neq $page_num">
+		<div class="page_right" onclick="next_page({$page_this+1})"><i class="fa fa-forward"></i></div></IF>
+		<div class="page_right_right" onclick="next_page({$page_num})"><i class="fa fa-fast-forward"></i></div>
+	</div>
+	<include file="./Application/Common/View/common_right_green_mobile.html" />
+	<include file="./Application/Common/View/common_bottom_mobile.html" />
+</body>
+<script type="text/javascript">	
+jQuery(function($){
+	window.next_page=function(num)
+	{
+		window.location.href=window.location.href+'&page='+num;
+	}
+});
+</script>
+</html>

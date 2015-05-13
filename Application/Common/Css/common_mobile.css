@@ -42,8 +42,6 @@ html,body{
 	font-size:1.1em;
 	color:#FFF;
 	padding:0 0.8em;
-	letter-spacing:0.2em;
-	text-shadow:5px 2px 3px black;
 }
 #navbar{
 	background:#149767;
@@ -198,6 +196,7 @@ select{
 	background:#EAF8F3;
 	height:auto;
 	overflow:hidden;
+	font-family:"微软雅黑";
 	box-sizing:border-box;
 }
 .board-header{
@@ -250,17 +249,18 @@ select{
 #content{
 	margin:0.5em;
 	overflow:hidden;
+	border-bottom:2px dotted #CBCBCB;
 }
-#box{
+.box{
 	margin:10px 0;
-	height:100px;
+	height:120px;
 	width:100%;
 	overflow:hidden;
+	box-sizing:border-box;
 }
 #box_left{
-	width:60px;
-	float:left;
-	
+	width:70px;
+	float:left;	
 }
 #box_left img{
 	width:60px;
@@ -271,16 +271,17 @@ select{
 }
 #username{
 	width:100%;
-	height:30px;
+	height:50px;
 	text-align:center;
-	font-size:0.5em;
+	font-size:0.7em;
 	overflow:hidden;
+	font-family:"微软雅黑";
 }
 #box_right{
 	width:70%;
-	float:right;
-	margin:0 0.5em;
-	height:90px;
+	float:left;
+	margin-left:1em;
+	height:110px;
 	border:2px solid #34B787;
 }
 #box_right_top{
@@ -288,8 +289,9 @@ select{
 	border-bottom:2px dotted #CBCBCB;
 }
 #goodcondition1{
+	font-family:"微软雅黑";
 	float:left;
-	font-size:0.4em;
+	font-size:0.8em;
 	padding:0 0.8em;
 	font-weight:bold;
 	height:25px;
@@ -301,10 +303,11 @@ select{
 	height:25px;
 	line-height:25px;
 	float:left;
-	font-size:0.4em;
+	font-size:0.8em;
 	text-align:center;
 	font-weight:bold;
 	color:#66C8A3;
+	font-family:"Helvetica Neue",Helvetica,Arial,Sans-serif;
 }
 #box_right_top a{
 	height:25px;
@@ -312,33 +315,34 @@ select{
 	font-size:1.0em;
 	font-weight:bold;
 	color:black;
-	padding-right:1em; 
+	padding-right:0.5em; 
 }
 #box_right_top span{
+	font-family:"Helvetica Neue",Helvetica,Arial,Sans-serif;
 	height:25px;
 	line-height:25px;
-	font-size:0.5em;
+	font-size:0.8em;
 	color:black;
 }
 #box_right_bottom{
 	height:55px;
-	padding:0.5em;
+	padding:0.3em 0.5em;
 }
 #description{
-	font-size:0.7em;
+	font-size:1em;
 	overflow:hidden;
 	white-space:nowrap;
+	font-family:"微软雅黑";
 	text-overflow:ellipsis;
 }
 #page{
 	line-height:40px;
 	height:40px;
-	width:100;
 	margin:0 auto;
 	text-align:center;
 	color:#34B787;
 	font-weight:bold;
-	font-size:0.6em;
+	font-size:0.8em;
 }
 #page div{
 	display:inline-block;
@@ -434,6 +438,9 @@ select{
 	float:left;
 	color:grey;
 	font-family:"微软雅黑";
+}
+#mess_content{
+	padding:0 0.5em;
 }
 #info-line{
 	border-bottom:5px solid #34B787;
@@ -548,3 +555,109 @@ select{
 .btn-green{background:#34B787;}
 .btn-red{background:#F56C7E;}
 label{white-space:nowrap;}
+#shop-top{
+	padding:1em;
+	height:100px;
+	overflow:hidden;
+	border-bottom:2px dotted grey;
+}
+#self-photo{
+	float:left;
+}
+#self-photo img{
+	width:100px;
+	height:100px;
+}
+#self-info{
+	line-height:20px;
+	padding-left:1em;
+	width:100px;
+	height:100px;
+	float:left;
+}
+#self-info span{
+	font-size:0.8em;
+	font-family:"微软雅黑";
+}
+#si-title{
+	font-size:1.2em;
+	font-weight:bold;
+	color:#34B787; 
+}
+#shop-panel{
+	padding:0.5em;
+	overflow:hidden;
+	box-sizing:border-box;
+}
+.shop-box{
+	float:left;
+	margin:0.5em 0;
+	height:110px;
+	width:100%;
+	border:2px solid #34B787;
+	box-sizing:border-box;
+}
+#info_table{
+	color:grey;
+	font-family:"微软雅黑";
+	font-size:0.8em;
+	padding-bottom:0.2em;
+}
+#shop-list
+{
+	padding:0.5em;
+	overflow:hidden;
+	box-sizing:border-box;
+}
+#sl-box{
+	padding:0.5em;
+	min-height:100px;
+	border:2px solid #34B787;
+	margin-bottom:0.5em;
+	overflow:hidden;
+	box-sizing:border-box;
+}
+#sl-box-img{
+	display:inline-block;
+	width:80px;
+	height:80px;
+	float:left;
+}
+#sl-box img{
+	width:80px;
+	height:80px;
+}
+#sl-box-right{
+	display:inline-block;
+	float:left;
+	width:60%;
+	min-height:100px;
+	padding-left:0.5em;
+	overflow:hidden;
+}
+#sl-box-righttop{
+	font-size:0.8em;
+	width:100%;
+	min-height:40px;
+	font-family:"微软雅黑";
+	border-bottom:2px dotted #CBCBCB;
+}
+#sl-box-righttop a{
+	font-size:1em;
+	font-weight:bold;	
+}
+#sl-box-rightbottom{
+	width:100%;
+	min-height:20px;
+}
+#sl-box-rightbottom img{
+	height:60px;
+	width:60px;
+	margin:0.4em;
+}
+#no-result{
+	height:40px;
+	line-height:40px;
+	font-size:1em;
+	border-bottom:2px dotted #CBCBCB;
+}

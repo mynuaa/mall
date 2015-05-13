@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+	<title>{$app_title}</title>
+	<link rel="stylesheet" type="text/css" href="./Application/Common/Css/common_mobile.css">
+	<script type="text/javascript" src="./Application/Common/Js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="./Application/Common/Js/page.js"></script>
+	<script type="text/javascript" src="./Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+	<script type="text/javascript">
+		var page="mall";
+		var page_this='{$page_this}';
+	</script>
+</head>
+<body>
+	<include file="./Application/Common/View/common_header_mall_mobile.html"/>
+	<div id="shop-list">
+		<FOREACH name="shop" item="vo">
+			<div id="sl-box">
+				<div id="sl-box-img">
+					<Img src="./Uploads{$vo.cover}">
+				</div>
+				<div id="sl-box-right">
+					<div id="sl-box-righttop">
+						<a href='./?m=mall&c=shop&id={$vo.shop_id}'><span>{$vo.shop_name}</span></a><br>
+						<span>共有商品 {$vo.num}件</span>
+						<span style="float:right">主营 : {$vo.shop_type}</span>
+					</div>
+					<div id="sl-box-rightbottom">
+					<a href='./?m=mall&c=shop&id={$vo.shop_id}'>
+						<FOR start="0" end="$vo.photo_num">
+							<img src="./Uploads{$vo[photo][$i]}" class="shop_img" width="100px" />
+						</FOR>
+					</a>
+					</div>
+				</div>
+			</div>
+		</FOREACH>	
+	</div>
+	<div id="page">
+		<div onclick="link_to(1)"><i class="fa fa-fast-backward"></i></div>
+		<IF condition="$page_this neq 1">
+			<div class="page_left" onclick="link_to({$page_this-1})"><i class="fa fa-backward"></i></div>
+		</IF>
+		<IF condition="$page_num gt 9">		<!--//页数大于9-->
+			<IF condition="$page_this gt 5">
+				<FOR start="$page_this-4" end="$page_this+5">
+					<div id="page_{$i}" onclick="link_to({$i})">{$i}</div>
+				</FOR>
+			<ELSE/>
+				<FOR start="1" end="10">
+					<div id="page_{$i}" onclick="link_to({$i})">{$i}</div>
+				</FOR>
+			</IF>
+		</IF>
+		<IF condition="$page_num lt 10">	<!--//页数小于10-->
+			<FOR start="1" end="$page_num+1">
+				<div id="page_{$i}" onclick="link_to({$i})">{$i}</div>
+			</FOR>
+		</IF>
+		<IF condition="$page_this neq $page_num">
+		<div class="page_right" onclick="link_to({$page_this+1})"><i class="fa fa-forward"></i></div></IF>
+		<div class="page_right_right" onclick="link_to({$page_num})"><i class="fa fa-fast-forward"></i></div>
+	</div>
+	<include file="./Application/Common/View/common_right_green_mobile.html" />
+	<include file="./Application/Common/View/common_bottom_mobile.html" />
+</body>
+<script>
+jQuery(function($){
+	window.link_to=function(page)
+	{
+		window.location.href='./?m=mall&c=shop&a=shop_list&page='+page;
+	}});
+</script>
+</html>

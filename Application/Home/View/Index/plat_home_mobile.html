@@ -26,7 +26,7 @@
 					</div>
 					<div class="fl shop-info">
 						<div class="info-user">{$username}</div>
-						<IF condition="$shop_id eq 0">
+						<IF condition="$shop_id gt 0">
 							<div><a href="?m=mall&c=shop&id={$shop_id}">查看我的店铺</a></div>
 							<div><a href="?m=mall&c=shop&a=edit&id={$shop_id}">修改店铺信息</a></div>
 						</IF>

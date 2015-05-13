@@ -6,6 +6,7 @@
 	<title>{$app_title}</title>
 	<link rel="stylesheet" type="text/css" href="./Application/Common/Css/common_mobile.css">
 	<script type="text/javascript" src="./Application/Common/Js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="./Application/Common/Js/page.js"></script>
 	<script type="text/javascript" src="./Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
 	<script type="text/javascript" src="./Application/Common/Js/collect.js"></script>
 	<style>
@@ -90,11 +91,11 @@
 			<span>联系方式 : {$goods['contact']}</span><br>
 			<span>{$goods['description']}</span>
 			<IF condition="$goods.type eq 'soldout'">
-				<div class="info-goodcondition">已售出</div>
+				<div><b>已售出</b></div>
 			<ELSEIF condition="$goods.type eq 'new'"/>
 				<IF condition="$uid eq $goods['uid']">
-					<div id="delete_it" class="info-goodcondition">不想卖/买了</div>
-					<div id="trade_over" class="info-goodcondition">交易完成</div>
+					<div id="delete_it"><b>不想卖/买了</b></div>
+					<div id="trade_over"><b>交易完成</b></div>
 				</IF>
 			</IF>
 		</div>
@@ -119,7 +120,7 @@
 					</div>
 				</FOREACH>
 			<ELSE />
-				<span style="font-size:14px;line-height:25px;" id="no-reply"><br/>此商品尚未有回复哦~~</span>
+				<span id="no-reply"><br/>此商品尚未有回复哦~~</span>
 			</IF>
 		</div>
 		<div id="my-talk">
