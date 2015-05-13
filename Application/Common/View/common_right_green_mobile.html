@@ -1,0 +1,18 @@
+<div class="board">
+	<div class="board-header">商城公告</div>
+	<ul>
+		<FOREACH name="notice" item="vo">
+			<li><a href='./?m=admin&c=notice&id={$vo.notice_id}'>{$vo.notice_title}</a></li>
+		</FOREACH>
+	</ul>
+</div>
+<div class="board">
+	<div class="board-header">最新店铺</div>
+	<ul>
+		<FOREACH name="new_shop" item="vo">
+			<li><a href='./?m=mall&c=shop&id={$vo.shop_id}'>{$vo.shop_name}</a></li>
+		</FOREACH>
+	</ul>
+	<div id="more-new-shop"><a href='./?m=mall&c=shop&a=shop_list'>更多店铺...</a></div>
+</div>
+
