@@ -245,15 +245,17 @@ select{
 #content{
 	margin:0.5em;
 	overflow:hidden;
+	border-bottom:2px dotted #CBCBCB;
 }
 .box{
 	margin:10px 0;
 	height:120px;
 	width:100%;
 	overflow:hidden;
+	box-sizing:border-box;
 }
 #box_left{
-	width:60px;
+	width:70px;
 	float:left;	
 }
 #box_left img{
@@ -269,11 +271,12 @@ select{
 	text-align:center;
 	font-size:0.7em;
 	overflow:hidden;
+	font-family:"微软雅黑";
 }
 #box_right{
 	width:70%;
-	float:right;
-	margin:0 0.5em;
+	float:left;
+	margin-left:1em;
 	height:110px;
 	border:2px solid #34B787;
 }
@@ -325,6 +328,7 @@ select{
 	font-size:1em;
 	overflow:hidden;
 	white-space:nowrap;
+	font-family:"微软雅黑";
 	text-overflow:ellipsis;
 }
 #page{
@@ -591,6 +595,12 @@ select{
 	height:60px;
 	width:60px;
 	margin:0.4em;
+}
+#no-result{
+	height:40px;
+	line-height:40px;
+	font-size:1em;
+	border-bottom:2px dotted #CBCBCB;
 }
 
 
