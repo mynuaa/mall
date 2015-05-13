@@ -494,12 +494,12 @@ select{
 	font-family:"宋体";
 }
 .boxs-title{
-	background:#BBB;
+	background:#F56C7E;
 	padding-left:10px;
 	height:40px;
 	line-height:40px;
 	box-sizing:border-box;
-	color:#000;
+	color:#FFF;
 }
 .self-info{
 	overflow:hidden;
@@ -511,7 +511,7 @@ select{
 	margin:0 0.5em;
 }
 .boxs{
-	background:#F3F3F3;
+	background:#F8F3EA;
 	margin:0.5em 0;
 }
 .boxs-content{
@@ -519,3 +519,24 @@ select{
 	box-sizing:border-box;
 	font-size:0.9em;
 }
+#all-read,.button-config{background:#F56C7E;padding:0.4em 0.8em;color:#FFF;}
+.panel-info{text-align:right;font-size:0.8em;}
+.panel-info>div{margin:0.5em 0;}
+.shop-info{margin-left:0.5em;}
+.shop-info a{color:gray;font-size:0.8em;}
+.shop-info .info-user{font-weight:bold;line-height:2em;}
+#msg-config{font-size:0.8em;height:2.5em;line-height:3em;}
+#read-more{float:right;color:gray;}
+.good-name{color:#000;}
+.good-banner{overflow:hidden;}
+.good-price{color:#FE5252;}
+.goods-edit{padding:0.5em 0;}
+.goods-edit>*{color:#34B787;margin:0.2em;display:inline-block;}
+.goods-edit .delete{color:#EF424A;}
+.good-info{width:100%;color:gray;font-size:0.8em;}
+.good-desc{margin:0.4em 0 0.1em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.good-comments{color:#66C8A3;}
+.mes-line{overflow:hidden;}
+.good-all{margin:0.1em;border:2px solid #F56C7E;padding:0.5em;box-sizing:border-box;}
+.page{text-align:center;margin:0.3em 0 0.1em;}
+.page a{color:#000;}

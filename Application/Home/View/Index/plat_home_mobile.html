@@ -14,29 +14,6 @@
 		var p3_this=1;//{$p3_this};
 		var p4_this={$p4_this};
 	</script>
-	<style>
-		#all-read,.button-config{background:#F56C7E;padding:0.4em 0.8em;color:#FFF;}
-		.panel-info{text-align:right;font-size:0.8em;}
-		.panel-info>div{margin:0.5em 0;}
-		.shop-info{margin-left:0.5em;}
-		.shop-info a{color:gray;font-size:0.8em;}
-		.shop-info .info-user{font-weight:bold;line-height:2em;}
-		#msg-config{font-size:0.8em;height:2.5em;line-height:3em;}
-		#read-more{float:right;color:gray;}
-		.good-name{color:#000;}
-		.good-banner{overflow:hidden;}
-		.good-price{color:#FE5252;}
-		.goods-edit{padding:0.5em 0;}
-		.goods-edit>*{color:#34B787;margin:0.2em;display:inline-block;}
-		.goods-edit .delete{color:#EF424A;}
-		.good-info{width:100%;color:gray;font-size:0.8em;}
-		.good-desc{margin:0.4em 0 0.1em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-		.good-comments{color:#66C8A3;}
-		.mes-line{overflow:hidden;}
-		.good-all{margin:0.1em;border:2px solid #BBB;padding:0.5em;box-sizing:border-box;}
-		.page{text-align:center;margin:0.3em 0 0.1em;}
-		.page a{color:#000;}
-	</style>
 </head>
 <body>
 	<include file="Application/Common/View/common_header_mall_mobile.html" />	
@@ -63,7 +40,7 @@
 				<div class="box-groups">
 					<div class="boxs">
 						<div class="boxs-title">最新消息</div>
-						<div class="boxs-content">
+						<div class="boxs-content" id="mes-line">
 							<IF condition="$mess_num eq 0">
 								<div>没有未读的消息哦~</div>
 							<ELSE/>
@@ -96,16 +73,16 @@
 								<div>尚未发布过出售或者求购信息哦~</div>
 							<ELSE/>
 								<FOREACH name="data" item="vo" key="k">
-								<div class="good-all" onclick="window.location.href='?m=mall&c=goods&id={$vo.goods_id}'">
+								<div class="good-all" id="{$vo.goods_id}">
 									<div class="good-banner">
 										<b><IF condition="$vo.need_type eq 1"><span style="color:#FE5252">出售</span><ELSE/><span style="color:#66C8A3">求购</span></IF></b>
 										<a href="?c=goods&id={$vo.goods_id}" class="good-name">{$vo.goods_name}</a>
 										<span class="fr good-price"><IF condition="$vo.price eq 0">价格面议<ELSE/>￥{$vo.price}</IF></span>
 										<div class="goods-edit">
-											<span><i class="fa fa-pencil"></i>编辑</span>
-											<span class="delete"><i class="fa fa-trash"></i>删除</span>
-											<span><i class="fa fa-circle-thin"></i>已售出</span>
-											<span><i class="fa fa-hand-o-up"></i>置顶</span>
+											<span class="edit"><i class="fa fa-pencil"></i>编辑</span>
+											<span class="delete deletesold"><i class="fa fa-trash"></i>删除</span>
+											<span class="soldout"><i class="fa fa-circle-thin"></i>已售出</span>
+											<span class="maketop"><i class="fa fa-hand-o-up"></i>置顶</span>
 										</div>
 									</div>
 									<div>
@@ -184,13 +161,13 @@
 								<div>尚未收藏过商品哦~</div>
 							<ELSE/>
 								<FOREACH name="colle" item="vo" key="k">
-								<div class="good-all" onclick="window.location.href='?m=mall&c=goods&id={$vo.goods_id}'">
+								<div class="good-all" onclick="window.location.href='?m=mall&c=goods&id={$vo.goods_id}'" id="{$vo.goods_id}">
 									<div>
 										<b><IF condition="$vo.need_type eq 1"><span style="color:#FE5252">出售</span><ELSE/><span style="color:#66C8A3">求购</span></IF></b>
 										<a href="?c=goods&id={$vo.goods_id}" class="good-name">{$vo.goods_name}</a>
 										<span class="fr good-price"><IF condition="$vo.price eq 0">价格面议<ELSE/>￥{$vo.price}</IF></span>
 										<div class="goods-edit">
-											<span class="delete"><i class="fa fa-trash"></i>删除</span>
+											<span class="delete deletecoll"><i class="fa fa-trash"></i>删除</span>
 										</div>
 									</div>
 									<div>
@@ -227,244 +204,102 @@
 </body>
 <script>
 jQuery(function($){
-	$('.description').each(function(){
-		var str= String($(this).html());
-		var reg=new RegExp("\n","g"); 
-		str= str.replace(reg,"<br/>"); 
-		$(this).html(str);
-	});
-
 	var mess_page=2;
-	$('.boxs_2 #page_'+p2_this).css("background-image","url(Application/Mall/Image/circle_hover.png)");	//给当前页面的页码按钮增加阴影效果
-	$('.boxs_3 #page_'+p3_this).css("background-image","url(Application/Mall/Image/circle_hover.png)");
-	$('.boxs_4 #page_'+p4_this).css("background-image","url(Application/Mall/Image/circle_hover.png)");
-	$('#goods_tap_1').toggleClass('taps_sel',false).toggleClass('taps_unsel',true);	//初始化标签指向第一个
-	$('.boxs_1').css("display","none");
-	$('.boxs_'+tap_s).css("display","block");
-	$('#goods_tap_'+tap_s).toggleClass('taps_unsel',false).toggleClass('taps_sel',true);
-
-	$('#read_more').click(function()	//每次从已读信息里请求10条记录ajax
-	{
+	$('#read-more').click(function(){	//每次从已读信息里请求10条记录ajax
 		var url="?m=mall&c=goods&a=get_mess";
 		var data={"mess_page":mess_page};
-		$.post(url,data,function(r)
-		{
-			if(r.code>=1)
-			{
-				for(i=0;i<r.code;i++)
-				{
-					$('#caozuo_area').before('<div class="mes_line" id="'+r.data[i]['message_id']+'"><div style="float:left;"><span style="color:red;">&nbsp;&nbsp;&nbsp;</span> <a class="link_goods" href="?m=mall&c=goods&id='+r.data[i]['goods_id']+'" target="_blank">您在主题 ‘'+r.data[i]['goods_name']+'’ 有新回复</a></div><div style="float:right;font-size:12px;">'+r.data[i]['data']+'</div></div>');
-					var panel_right=$('.panel-right').height();
-					var panel_center=$('.panel-center').height();
-					height=(panel_right>panel_center)?panel_right:panel_center;
-					$('.panel-left').css("height",height-(-30));	//设置左侧竖条的高度
+		$.post(url,data,function(r){
+			if(r.code>=1){
+				for(i=0;i<r.code;i++){
+					$('#mes-line').before('<div class="mes-line" id="'+r.data[i]['goods_id']+'"><a class="fl" href="?m=mall&c=goods&id='+r.data[i]['goods_id']+'" target="_blank">您在主题 ‘'+r.data[i]['goods_name']+'’ 有新回复</a></div>');
 				}
 				mess_page++;
 			}
 			else if(r.code==0)
-				noty({text: '已读消息已全部显示',layout: 'center', type: 'error',timeout:'1000',});
+				noty({text:'已读消息已全部显示',layout:'center',type:'error',timeout:'1000',});
 			else
-				noty({text: '更新出错',layout: 'center', type: 'error',timeout:'1000',});
-
+				noty({text:'更新出错',layout:'center',type:'error',timeout:'1000',});
 		},'json');
 	});
 
-	$('.panel-left').css("height",$('.panel-center').height()-(-240));	//设置左侧竖条的高度
-	$('.page_center').hover(
-		function()
-		{
-			var th=$(this);
-			th.css("background-image","url(Application/Mall/Image/circle_hover.png)");
-		},
-		function()
-		{
-			var th=$(this);
-			var page_=String(th.parents('.boxs').attr('class'));
-			var page_this=page_.substr(5,1);
-
-			if(page_this==2 && th.children().html() != p2_this || page_this==3 && th.children().html() != p3_this || page_this==4 && th.children().html() != p4_this)
-			{
-				th.css("background-image","url(Application/Mall/Image/circle.png)");
+	$('#all-read').click(function(){
+		$('.mes-line').each(function(i){
+			var id=$(this).attr('id');
+			if(id){
+				var url='?m=mall&c=goods&a=read';
+				var data={"message_id":id};
+				$.post(url,data,function(r){
+					window.location.href=window.location.href;
+				},'json');
 			}
 		});
-
-	$('.link_goods').click(	//点击之后取消提醒状态，即ajax提醒后台将记录移到另一张表
-		function()
-		{
-			var id=$(this).parents('.mes_line').attr('id');
-			var url='?m=mall&c=goods&a=read';
-			var data={"message_id":id};
-			$.post(url,data,function(r)
-			{},'json');
-		});
-
-	$('.taps_style').click(
-		function()
-		{
-			var th=$(this);
-			var x=String(th.attr('id'));
-			var num=x.substr(-1,1);
-
-			$('#goods_tap_'+tap_s).toggleClass('taps_sel',false).toggleClass('taps_unsel',true);
-			$('.boxs_'+tap_s).css("display","none");
-			$('.boxs_'+num).css("display","block");
-			th.toggleClass('taps_unsel',false).toggleClass('taps_sel',true);
-			tap_s=num;
-
-			var panel_right=$('.panel-right').height();
-			var panel_center=$('.panel-center').height();
-			height=(panel_right>panel_center)?panel_right:panel_center;
-			$('.panel-left').css("height",height-(-30));	//设置左侧竖条的高度
-		});
-
-	$('.edit').hover(
-		function()
-		{
-			$(this).attr('src','Application/Mall/Image/edit_hover.png');
-		},
-		function()
-		{
-			$(this).attr('src','Application/Mall/Image/edit.png');
-		});
-
-	$('.edit').click(function()
-	{
-		var th=$(this);
-		window.location.href='?c=edit&ed='+th.parents('.home_box').attr('id');
 	});
 
-	$('.delete').hover(
-		function()
-		{
-			$(this).attr('src','Application/Mall/Image/delete_hover.png');
-		},
-		function()
-		{
-			$(this).attr('src','Application/Mall/Image/delete.png');
-		});
+	$('.edit').click(function(){
+		var th=$(this);
+		window.location.href='?c=edit&ed='+th.parents('.good-all').attr('id');
+	});
 
-	$('.delete').click(
-		function()
-		{
-			var th=$(this);
-			var collect_id=th.parents('.box').attr('id');
-			var url="?m=home&a=del_col";
-			var data={"collect_id":collect_id};
-			var r=confirm("确认删除该条目？");
-			if(r==true)
-			{
-				$.post(url,data,function(r)
-				{
-					if(r.code==-1)	
-					{
-						noty({text: '无此数据,请刷新页面',layout: 'center', type: 'error',timeout:'1000',});
-					}
-					else if(r.code == 1)
-					{
-						noty({text: '删除成功',layout: 'center', type: 'success',timeout:'1000',});
-						th.parents('.box').remove();
-					}
-				});
-			}
-		});
-
-	$('#all_read').click(	//点击全部标记为已读
-		function()
-		{
-			$('.boxs_1').children().each(function(i)
-				{
-					var id=$(this).attr('id');
-					if(id!=undefined)
-					{
-						var url='?m=mall&c=goods&a=read';
-						var data={"message_id":id};
-						$.post(url,data,function(r)
-						{
-							window.location.href=window.location.href;
-						},'json');
-
-					}
-				});
-		});
-
-	$('.goods_delete,.newgoods_delete').hover(
-		function()
-		{
-			$(this).attr('src','Application/Mall/Image/delete_hover.png');
-		},
-		function()
-		{
-			$(this).attr('src','Application/Mall/Image/delete.png');
-		});
-
-	$('.goods_up').hover(
-		function()
-		{
-			$(this).attr('src','Application/Common/Image/up_hover.png');
-		},
-		function()
-		{
-			$(this).attr('src','Application/Common/Image/up.png');
-		});
-
-	$('.goods_up').click(
-		function()
-		{
-			var th=$(this);
-			id=th.parents('.home_box').attr('id');
-			//alert(id);
-			url="?m=mall&c=goods&a=goods_up";
-			data={"goods_id":id};
-			$.post(url,data,function(r){
-				if(r.code==1)
-					noty({text: '置顶成功',layout: 'center', type: 'success',timeout:'1000',});
-				else
-					noty({text: '操作失败'+r.code,layout: 'center', type: 'error',timeout:'1000',});
-			},'json');
-		});
-
-	$('.newgoods_soldout').hover(
-		function()
-		{
-			$(this).attr('src','Application/Common/Image/soldout_hover.png');
-		},
-		function()
-		{
-			$(this).attr('src','Application/Common/Image/soldout.png');
-		});
-
-	$('.newgoods_delete').click(function(){	//新物品删除
+	$('.deletesold').click(function(){	//新物品删除
 		var r=confirm("删除后不可恢复，确认删除？");
-		if (r==true)
-		{
+		if (r){
 			var th=$(this);
-			id=th.parents('.home_box').attr('id');
+			id=th.parents('.good-all').attr('id');
 			url="?m=mall&c=goods&a=delete_goods";
 			data={"goods_id":id};
 			$.post(url,data,function(r){
 				if(r.code==1)
-					noty({text: '删除成功',layout: 'center', type: 'success',timeout:'1000',});
+					noty({text:'删除成功',layout:'center', type:'success',timeout:'1000',});
 				else
-					noty({text: '删除失败,刷新页面后若仍未删除请联系管理员'+r.code,layout: 'center', type: 'error',timeout:'1000',});
+					noty({text:'删除失败,刷新页面后若仍未删除请联系管理员'+r.code,layout:'center', type:'error',timeout:'1000',});
 			},'json');
 		}
 	});
 
-	$('.newgoods_soldout').click(function(){	//新物品已售出
+	$('.soldout').click(function(){
 		var r=confirm("确认本商品已售出？");
-		if(r==true)
-		{
+		if(r){
 			url="?m=mall&c=goods&a=trade_over";
-			data={"goods_id":$(this).parents('.home_box').attr('id')};
+			data={"goods_id":$(this).parents('.good-all').attr('id')};
 			$.post(url,data,function(r){
-					if(r.code==1)
-						noty({text: '交易成功，感谢您支持纸飞机',layout: 'center', type: 'success',timeout:'1000',});
-					else
-						noty({text: '操作失败,刷新页面后若仍未完成交易请联系管理员'+r.code,layout: 'center', type: 'error',timeout:'1000',});
-				},'json');
+				if(r.code==1)
+					noty({text:'交易成功，感谢您支持纸飞机',layout:'center', type:'success',timeout:'1000',});
+				else
+					noty({text:'操作失败,刷新页面后若仍未完成交易请联系管理员'+r.code,layout:'center', type:'error',timeout:'1000',});
+			},'json');
 		}
 	});
 
+	$('.maketop').click(function(){
+		var th=$(this);
+		id=th.parents('.good-all').attr('id');
+		url="?m=mall&c=goods&a=goods_up";
+		data={"goods_id":id};
+		$.post(url,data,function(r){
+			if(r.code==1)
+				noty({text:'置顶成功',layout:'center', type:'success',timeout:'1000',});
+			else
+				noty({text:'操作失败'+r.code,layout:'center', type:'error',timeout:'1000',});
+		},'json');
+	});
+
+	$('.deletecoll').click(function(){
+		var th=$(this);
+		var collect_id=th.parents('.good-all').attr('id');
+		var url="?m=home&a=del_col";
+		var data={"collect_id":collect_id};
+		var r=confirm("确认删除该条目？");
+		if(r){
+			$.post(url,data,function(r){
+				if(r.code==-1)
+					noty({text:'无此数据,请刷新页面',layout:'center', type:'error',timeout:'1000',});
+				else if(r.code == 1){
+					noty({text:'删除成功',layout:'center', type:'success',timeout:'1000',});
+					th.parents('.box').remove();
+				}
+			});
+		}
+	});
 });
 </script>
 </html>
