@@ -47,12 +47,7 @@
 						<div id="goodcondition2">求购</div>
 					</IF>
 					<a href="?c=goods&id={$vo.goods_id}" target="_blank">{$vo.goods_name}</a>
-					<IF condition="$vo.price eq 0">
-						面议
-					<ELSE />
-						<span>{$vo.price}</span>
-					</IF>
-					<span>RMB</span>
+					<IF condition="$vo.price eq 0">价格面议<ELSE/>￥{$vo.price}</IF>
 					<IF condition="$vo.is_co eq 1">
 						<span><img src="Application/Mall/Image/heart.png"  class="heart" title="已收藏"></span>
 					<ELSE />
