@@ -254,7 +254,7 @@ select{
 }
 .box{
 	margin:10px 0;
-	height:120px;
+	height:140px;
 	width:100%;
 	overflow:hidden;
 	box-sizing:border-box;
@@ -282,10 +282,11 @@ select{
 	width:70%;
 	float:left;
 	margin-left:1em;
-	height:110px;
+	height:130px;
 	border:2px solid #34B787;
 }
 #box_right_top{
+	font-size:0.9em;
 	border-bottom:2px dotted #CBCBCB;
 	font-family:"Helvetica Neue",Helvetica,Arial,Sans-serif;
 }
@@ -313,24 +314,22 @@ select{
 #box_right_top a{
 	height:25px;
 	line-height:25px;
-	font-size:1.0em;
 	font-weight:bold;
 	color:black;
 	padding-right:0.5em; 
 }
 #box_right_top span{
-	
 	height:25px;
 	line-height:25px;
-	font-size:0.8em;
+	font-size:0.7em;
 	color:black;
 }
 #box_right_bottom{
-	height:55px;
+	height:65px;
 	padding:0.3em 0.5em;
 	font-size:1em;
 	overflow:hidden;
-	white-space:nowrap;
+	white-space:normal;
 	word-break:break-all;
 	font-family:"微软雅黑";
 	text-overflow:ellipsis;
@@ -600,7 +599,7 @@ label{white-space:nowrap;}
 #info_table{
 	color:grey;
 	font-family:"微软雅黑";
-	font-size:0.8em;
+	font-size:0.7em;
 	padding-bottom:0.2em;
 }
 #shop-list
@@ -697,4 +696,11 @@ label{white-space:nowrap;}
 	line-height:40px;
 	margin-bottom:0.5em;
 	border-radius:0.5em;
+}
+#class a{
+	color:#FFF;
+}
+#scan-class{
+	padding:0.5em;
+	min-height:40px;
 }
