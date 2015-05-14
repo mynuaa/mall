@@ -106,7 +106,7 @@
 				<IF condition="$mess_count gt 0">
 					<FOREACH name="mess" item="vo">
 						<div class="talk_box clearfix" uid="{$vo.from_uid}" username="{$vo.from_username}">
-							<div class="talk_avator"><img src="http://my.nuaa.edu.cn/uc_server/avatar.php?uid={$vo.from_uid}&size=middle" width="60px"></div>
+							<div class="talk_avator"><img src="/ucenter/avatar.php?uid={$vo.from_uid}&size=middle" width="60px"></div>
 							<div class="talk_centent">
 								{$vo['from_username']} &nbsp;&nbsp;&nbsp;<span style="color:#8C8B8C;">发表于 {$vo.data}<br/>{$vo.content}</span>	
 							</div>
