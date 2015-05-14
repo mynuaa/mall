@@ -59,12 +59,10 @@
 					<span style="color:#66C8A3;">{$vo.mess_goods}</span>
 				</div>
 			    <div id="box_right_bottom" onclick="window.open('?m=mall&c=goods&id={$vo.goods_id}','_blank')" style="cursor:pointer;">
-					<div id="description">
 						<IF condition="$vo.description neq ''">{$vo.description}
 						<ELSE/>
 							这个人很懒，没有留下任何商品描述
 						</IF>
-					</div>
 					<!--<IF condition="$vo.photo neq ''">
 						<div style="float:left;width:110px;">
 							<img src="Uploads{$vo.photo}" width="110px"/>

@@ -2,8 +2,9 @@
 <html>
 <head>
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
 	<title>{$app_title}</title>
-	<link rel="stylesheet" type="text/css" href="./Application/Common/Css/common.css">
+	<link rel="stylesheet" type="text/css" href="./Application/Common/Css/common_mobile.css">
 	<script type="text/javascript" src="./Application/Common/Js/jquery-1.10.2.min.js"></script>
 	<script type="text/javascript" src="./Application/Common/Js/page.js"></script>
 	<script type="text/javascript" src="./Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
@@ -17,114 +18,133 @@
 	</script>
 </head>
 <body>
-	<include file="./Application/Common/View/common_header_mall.html" />
-	<div class="set_width panel-all clearfix">
-		<div class="panel-left"></div>
-		<div class="panel-center">
-			<div class="set_width content">
-				<div class="clearfix" style="margin-bottom:15px;">
-					<div style="float:left;line-height:29px;width:90px;font-size:15px;">检索条件 :</div>
-					<div class="dropdown" style="margin-left:6px;" id="dd">
-						<a href='#' class="main_down" onclick="javascript:return false;" style="margin-left:5px;">不限地点<b class="caret"></b></a>
-						<ul class="select">
-							<input type="hidden" value="">	
-							<li onclick="return check_dd(-1);"><a href="#">不限地点</a></li>
-							<li onclick="return check_dd(1);"><a href="#">江宁</a></li>
-							<li onclick="return check_dd(0);"><a href="#">本部</a></li>
-						</ul>
-					</div>
-					<div class="dropdown" id="lb">
-						<a href='#' class="main_down" onclick="javascript:return false;" style="margin-left:5px;">不限分类<b class="caret"></b></a>
-						<ul class="select">
-							<li onclick="return check_lb(-1);"><a href="#">不限分类</a></li>
-							<li onclick="return check_lb(0);"><a href="#">手机</a></li>
-							<li onclick="return check_lb(1);"><a href="#">电子</a></li>
-							<li onclick="return check_lb(2);"><a href="#">书籍</a></li>
-							<li onclick="return check_lb(3);"><a href="#">车辆</a></li>
-							<li onclick="return check_lb(4);"><a href="#">服饰</a></li>
-							<li onclick="return check_lb(5);"><a href="#">化妆</a></li>
-							<li onclick="return check_lb(6);"><a href="#">日用</a></li>
-							<li onclick="return check_lb(7);"><a href="#">乐器</a></li>
-							<li onclick="return check_lb(10);"><a href="#">虚拟</a></li>
-							<li onclick="return check_lb(11);"><a href="#">食品</a></li>
-							<li onclick="return check_lb(8);"><a href="#">房屋</a></li>
-							<li onclick="return check_lb(9);"><a href="#">其他</a></li>
-						</ul>
-					</div>
-					<div class="dropdown" id="lx">
-						<a href='#' class="main_down" onclick="javascript:return false;" style="margin-left:5px;">不限类型<b class="caret"></b></a>
-						<ul class="select">
-							<li onclick="return check_lx(-1);"><a href="#">不限类型</a></li>
-							<li onclick="return check_lx(1);"><a href="#">出售</a></li>
-							<li onclick="return check_lx(0);"><a href="#">求购</a></li>
-						</ul>
-					</div>
-				</div>
-				<foreach name="data" item="vo" key="k" >
-					<div class="box clearfix" id="{$vo.goods_id}">
-						<div class="box_left">
-							<IF condition="$vo.Concern_shopid eq 0"><a href="Http://my.nuaa.edu.cn/?{$uid}"><img src="http://my.nuaa.edu.cn/ucenter/avatar.php?uid={$vo.uid}&size=middle" width="80px" /><ELSE/><img src="Uploads{$vo.shop_avator}" width="80px" /></a></IF>
-							<div style="text-align:center;font-size:12px;">{$vo.username}<input type="hidden" value="{$vo.uid}" id="uid" /></br><span style="color:#8D8B8C;">{$vo.data}</span></div>
-						</div>
-						<IF condition="$vo.need_type eq 1"><div class="box_right"><ELSE /><div class="box_right_want"></IF>
-							<div class="box_right_top">
-								<IF condition="$vo.need_type eq 1"><div style="float:left;font-size:16px;line-height:32px;font-weight:bold;color:#FE5252;">出售<ELSE/><div style="float:left;font-size:16px;line-height:32px;font-weight:bold;color:#66C8A3;">求购</IF>
-							</div>
-							<div style="margin-left:8px;float:left;font-size:15px;min-width:200px;font-weight:bold;line-height:34px;"><a href="./?c=goods&id={$vo.goods_id}">{$vo.goods_name}</a></div>
-							<div style="float:left;font-size:18px;color:#FE5252;line-height:32px;"><IF condition="$vo.price eq 0">面议<ELSE />&nbsp;&nbsp;&nbsp;{$vo.price}</IF><span style="color:black;font-size:15px;"> RMB</span></div>
-							<div style="float:right;font-size:16px;line-height:36px;"><IF condition="$vo.is_co eq 1"><img src="Application/Mall/Image/heart.png"  class="heart" title="已收藏"><ELSE /><img src="Application/Mall/Image/heart_grey.png"  class="heart" title="收藏"></IF> <span style="color:#FE5252;" class="col_num">{$vo.col_num}</span>&nbsp;&nbsp;<img src="Application/Mall/Image/talk_green.png" onclick="document.location.href='./?m=mall&c=goods&id={$vo.goods_id}#talk_both'" style="cursor:pointer;" title="查看回复"> <span style="color:#66C8A3;">{$vo.mess_goods}</span></div>
-						</div>
-						<div class="box_right_center"></div>
-						<div class="box_right_bottom" onclick="document.location.href='./?m=mall&c=goods&id={$vo.goods_id}'" style="cursor:pointer;">
-							<table width="480px" height="28px" style="font-size:12px;float:left;" class="info_table">
-								<tr>
-									<td width="32px">地点 :</td><td width="33px"><IF condition="$vo.location eq 1">江宁<ELSEIF condition="$vo.location eq 0"/>本部<ELSE />不限</IF></td><td width="32px">分类 :</td><td width="35px"><IF condition="$vo.classify eq 0">手机<ELSEIF condition="$vo.classify eq 1"/>电子<ELSEIF condition="$vo.classify eq 2"/>书籍<ELSEIF condition="$vo.classify eq 3"/>车辆<ELSEIF condition="$vo.classify eq 4"/>服饰<ELSEIF condition="$vo.classify eq 5"/>化妆<ELSEIF condition="$vo.classify eq 6"/>日用<ELSEIF condition="$vo.classify eq 7"/>乐器<ELSEIF condition="$vo.classify eq 8"/>房屋<ELSEIF condition="$vo.classify eq 10"/>虚拟<ELSEIF condition="$vo.classify eq 11"/>食品<ELSE />其他</IF></td>
-									<td  width="55px">联系方式 :</td><td>{$vo.contact}</td>
-								</tr>
-							</table>
-							<div class="clearfix">
-								<IF condition="$vo.photo neq ''"><div style="float:left;width:110px;"><img src="./Uploads{$vo.photo}" width="110px"/></div><div class="description description_class"><IF condition="$vo.description neq ''">{$vo.description}<ELSE /><span style="color:grey;" class="description">这个人很懒，没有留下任何商品描述</span></IF></div><ELSE/><div class="description description_class" style="width:468px;"><IF condition="$vo.description neq ''">{$vo.description}<ELSE /><span style="color:grey;" class="description">这个人很懒，没有留下任何商品描述</span></IF></div></IF>
-							</div>
-						</div>
-						</div>
-						<div class="arrow"></div>
-					</div>
-				</foreach>
-				<a href='javascript:void' id="to_top"></a>
-				<IF condition="$page_num gt 0">
-					<div class="page">
-						<div class="page_left_left" onclick="window.location.href='./?m=mall&a=scan'"></div>
-						<IF condition="$page_this neq 1"><div class="page_left" onclick="return page_link({$page_this-1}
-							)"></div></IF>
-						<FOR start="$page_start" end="$page_end">
-							<div class="page_center" id="page_{$i}" onclick="return page_link({$i})"><div class="page_font">{$i}</div></div>
-						</FOR>
-						<IF condition="$page_this neq $page_num"><div class="page_right" onclick="return page_link({$page_this+1})"></div></IF>
-						<div class="page_right_right" onclick="return page_link({$page_num})"></div>
-					</div>
+	<include file="./Application/Common/View/common_header_mall_mobile.html" />
+	<div id="scan-class">
+		<div style="float:left;line-height:29px;width:90px;font-size:15px;">检索条件 :</div>
+		<div class="dropdown" style="margin-left:6px;" id="dd">
+			<a href='#' class="main_down" onclick="javascript:return false;" style="margin-left:5px;">不限地点<b class="caret"></b></a>
+			<ul class="select">
+				<input type="hidden" value="">	
+				<li onclick="return check_dd(-1);"><a href="#">不限地点</a></li>
+				<li onclick="return check_dd(1);"><a href="#">江宁</a></li>
+				<li onclick="return check_dd(0);"><a href="#">本部</a></li>
+			</ul>
+		</div>
+		<div class="dropdown" id="lb">
+			<a href='#' class="main_down" onclick="javascript:return false;" style="margin-left:5px;">不限分类<b class="caret"></b></a>
+			<ul class="select">
+				<li onclick="return check_lb(-1);"><a href="#">不限分类</a></li>
+				<li onclick="return check_lb(0);"><a href="#">手机</a></li>
+				<li onclick="return check_lb(1);"><a href="#">电子</a></li>
+				<li onclick="return check_lb(2);"><a href="#">书籍</a></li>
+				<li onclick="return check_lb(3);"><a href="#">车辆</a></li>
+				<li onclick="return check_lb(4);"><a href="#">服饰</a></li>
+				<li onclick="return check_lb(5);"><a href="#">化妆</a></li>
+				<li onclick="return check_lb(6);"><a href="#">日用</a></li>
+				<li onclick="return check_lb(7);"><a href="#">乐器</a></li>
+				<li onclick="return check_lb(10);"><a href="#">虚拟</a></li>
+				<li onclick="return check_lb(11);"><a href="#">食品</a></li>
+				<li onclick="return check_lb(8);"><a href="#">房屋</a></li>
+				<li onclick="return check_lb(9);"><a href="#">其他</a></li>
+			</ul>
+		</div>
+		<div class="dropdown" id="lx">
+			<a href='#' class="main_down" onclick="javascript:return false;" style="margin-left:5px;">不限类型<b class="caret"></b></a>
+			<ul class="select">
+				<li onclick="return check_lx(-1);"><a href="#">不限类型</a></li>
+				<li onclick="return check_lx(1);"><a href="#">出售</a></li>
+				<li onclick="return check_lx(0);"><a href="#">求购</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="content">
+	<foreach name="data" item="vo" key="k" >
+		<div class="box" id="{$vo.goods_id}">
+			<div id="box_left">
+				<IF condition="$vo.Concern_shopid eq 0">
+					<img src="/ucenter/avatar.php?uid={$vo.uid}&size=middle" />
+				<ELSE/>
+					<img src="Uploads{$vo.shop_avator}"/>
 				</IF>
+				<div id="username">{$vo.username}
+					<input type="hidden" value="{$vo.uid}" id="uid" /></br>
+					<span style="color:#8D8B8C;">{$vo.data}</span>
+				</div>
+			</div>
+			<div id="box_right">
+				<div id="box_right_top">
+					<IF condition="$vo.need_type eq 1">
+						<div id="goodcondition1">出售</div>
+					<ELSE/>
+						<div id="goodcondition2">求购</div>
+					</IF>
+					<a href="?c=goods&id={$vo.goods_id}" target="_blank">{$vo.goods_name}</a>
+					<IF condition="$vo.price eq 0">价格面议<ELSE/>￥{$vo.price}</IF>
+					<IF condition="$vo.is_co eq 1">
+						<span><img src="Application/Mall/Image/heart.png"  class="heart" title="已收藏"></span>
+					<ELSE />
+						<span><img src="Application/Mall/Image/heart_grey.png"  class="heart" title="收藏"></span>
+					</IF> 
+					<span style="color:#FE5252;" class="col_num">{$vo.col_num}</span>
+					<span>
+					<img src="Application/Mall/Image/talk_green.png" onclick="document.location.href='?m=mall&c=goods&id={$vo.goods_id}#talk_both'" style="cursor:pointer;" title="查看回复"></span>
+					<span style="color:#66C8A3;">{$vo.mess_goods}</span>
+				</div>
+			    <div id="box_right_bottom" onclick="window.open('?m=mall&c=goods&id={$vo.goods_id}','_blank')" style="cursor:pointer;">
+				    <div id="info_table">
+						地点:<IF condition="$vo.location eq 1">江宁
+						<ELSEIF condition="$vo.location eq 0"/>本部
+						<ELSE />不限
+						</IF>
+						分类 :<IF condition="$vo.classify eq 0">手机
+						<ELSEIF condition="$vo.classify eq 1"/>电子
+						<ELSEIF condition="$vo.classify eq 2"/>书籍
+						<ELSEIF condition="$vo.classify eq 3"/>车辆
+						<ELSEIF condition="$vo.classify eq 4"/>服饰
+						<ELSEIF condition="$vo.classify eq 5"/>化妆
+						<ELSEIF condition="$vo.classify eq 6"/>日用
+						<ELSEIF condition="$vo.classify eq 7"/>乐器
+						<ELSEIF condition="$vo.classify eq 8"/>房屋
+						<ELSE />其他</IF>
+						联系方式 :</td><td>{$vo.contact}
+					</div>
+					<IF condition="$vo.description neq ''">{$vo.description}
+					<ELSE/>
+						这个人很懒，没有留下任何商品描述
+					</IF>
+					<!--<IF condition="$vo.photo neq ''">
+						<div style="float:left;width:110px;">
+							<img src="Uploads{$vo.photo}" width="110px"/>
+						</div>
+						我也不知道要不要图
+					</IF>-->
+				</div>
 			</div>
 		</div>
-		<include file="./Application/Common/View/common_right_green.html" />
+	</foreach>
 	</div>
-	<include file="./Application/Common/View/common_bottom.html" />
+	<IF condition="$page_num gt 0">
+		<div class="page">
+			<div class="page_left_left" onclick="window.location.href='./?m=mall&a=scan'"></div>
+			<IF condition="$page_this neq 1"><div class="page_left" onclick="return page_link({$page_this-1}
+				)"></div></IF>
+			<FOR start="$page_start" end="$page_end">
+				<div class="page_center" id="page_{$i}" onclick="return page_link({$i})"><div class="page_font">{$i}</div></div>
+			</FOR>
+			<IF condition="$page_this neq $page_num"><div class="page_right" onclick="return page_link({$page_this+1})"></div></IF>
+			<div class="page_right_right" onclick="return page_link({$page_num})"></div>
+		</div>
+	</IF>
+	<a href='javascript:void' id="to_top"></a>
+	<include file="./Application/Common/View/common_right_green_mobile.html" />
+	<include file="./Application/Common/View/common_bottom_mobile.html" />
 </body>
 <script>
 var array_lb=new Array("手机","电子","书籍","车辆","服饰","化妆","日用","乐器","房屋","其他","虚拟","食品");
 jQuery(function($){
-
-	$('.description').each(function(){
-		var str= String($(this).html());
-		var reg=new RegExp("\n","g"); 
-		str= str.replace(reg,"<br/>"); 
-		$(this).html(str);
-	});
-
 	$(document).ready(
 		function()
 		{
-			$('#page_'+page_this).css("background-image","url(Application/Mall/Image/circle_hover.png)");
-
 			var ddd=$('#dd').children('.main_down');	//初始化标签的值
 			if(dd_page==1)
 				ddd.html('江宁<b class="caret"></b>');
@@ -148,10 +168,6 @@ jQuery(function($){
 				lbb.html('不限分类<b class="caret"></b>');
 		}
 	);
-
-	$(window).load(function(){
-		$('.panel-left').css("height",$(document).height()-(355));
-	});
 	window.page_link=function(page)
 	{
 		var lb=$('#lb').children('.main_down').html();
@@ -191,7 +207,6 @@ jQuery(function($){
 			$(this).css({"background-color":"#E5E2E2","border-color":"#C9C6C6"});
 		}
 	);
-
 	$('.dropdown').click(	//下拉菜单效果
 		function()
 		{
@@ -206,7 +221,6 @@ jQuery(function($){
 			}
 		}
 	);
-
 	$('.select li').click(	//点击下拉菜单更改相应的值
 		function()
 		{
@@ -215,7 +229,6 @@ jQuery(function($){
 			th.parent().prev('.main_down').html(val+'<b class="caret"></b>');
 		}
 	);
-
 	window.check_dd=function(num)//在点击地点标签的时候获取另外两项的值并链接到相应页面
 	{
 		var lb=$('#lb').children('.main_down').html();
@@ -240,7 +253,6 @@ jQuery(function($){
 
 		window.location.href="./?m=mall&a=scan&lb="+lb+"&lx="+lx+'&dd='+num;
 	}
-
 	window.check_lx=function(num)//0手机1电子2书籍3车辆4服饰5化妆6日用7乐器8房屋9其他
 	{
 		var lb=$('#lb').children('.main_down').html();
@@ -280,28 +292,9 @@ jQuery(function($){
 
 		window.location.href="./?m=mall&a=scan&lb="+num+"&lx="+lx+'&dd='+dd;
 	}
-
-	$(window).scroll(function(){
-        if ($(window).scrollTop()>1000){
-            $("#to_top").fadeIn(500);
-        }
-        else
-        {
-            $("#to_top").fadeOut(500);
-        }
-    });
-
-    $("#to_top").click(function(){
+	$("#to_top").click(function(){
         $('body,html').animate({scrollTop:0},1000);
         return false;
-    });
-
-    $("#to_top").hover(
-    function(){
-        $(this).css("background","transparent url(Application/Common/Image/sideToolbar.gif) -74px -62px no-repeat")
-    },
-    function(){
-    	$(this).css("background","transparent url(Application/Common/Image/sideToolbar.gif) -1px -62px no-repeat")
     });
 });
 </script>

@@ -58,7 +58,6 @@
 				<span style="color:#66C8A3;">{$vo.mess_goods}</span>
 			</div>
 		    <div id="box_right_bottom" onclick="document.location.href='./?m=mall&c=goods&id={$vo.goods_id}'">
-				<div id="description">
 				<div id="info_table">
 					地点:<IF condition="$vo.location eq 1">江宁
 					<ELSEIF condition="$vo.location eq 0"/>本部
@@ -80,7 +79,6 @@
 					<ELSE/>
 						这个人很懒，没有留下任何商品描述
 					</IF>
-				</div>
 				<!--<IF condition="$vo.photo neq ''">
 					<div style="float:left;width:110px;">
 						<img src="Uploads{$vo.photo}" width="110px"/>

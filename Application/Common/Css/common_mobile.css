@@ -147,8 +147,8 @@ html,body{
 	text-align:center;
 	color:#FFF;
 	font-family:"微软雅黑";
-}		
-input[type=text]{
+}
+#search_content_top{
 	background:rgba(0,0,0,0);
 	border:none;
 	border:2px solid rgba(255,255,255,0.6);
@@ -156,9 +156,10 @@ input[type=text]{
 	height:30px;
 	font-family:"微软雅黑";
 	padding:0.2em 0.5em;
-	width:50%;
-}
-input[type=submit]{
+	width:60%;
+	margin-left:1em;
+}		
+#search_content_top_button{
 	height:30px;
 	margin:0 0.5em;
 	padding:0 0.5em;
@@ -252,7 +253,7 @@ select{
 }
 .box{
 	margin:10px 0;
-	height:120px;
+	height:140px;
 	width:100%;
 	overflow:hidden;
 	box-sizing:border-box;
@@ -280,12 +281,13 @@ select{
 	width:70%;
 	float:left;
 	margin-left:1em;
-	height:110px;
+	height:130px;
 	border:2px solid #34B787;
 }
 #box_right_top{
-	height:25px;
+	font-size:0.9em;
 	border-bottom:2px dotted #CBCBCB;
+	font-family:"Helvetica Neue",Helvetica,Arial,Sans-serif;
 }
 #goodcondition1{
 	font-family:"微软雅黑";
@@ -311,26 +313,23 @@ select{
 #box_right_top a{
 	height:25px;
 	line-height:25px;
-	font-size:1.0em;
 	font-weight:bold;
 	color:black;
 	padding-right:0.5em; 
 }
 #box_right_top span{
-	font-family:"Helvetica Neue",Helvetica,Arial,Sans-serif;
 	height:25px;
 	line-height:25px;
-	font-size:0.8em;
+	font-size:0.7em;
 	color:black;
 }
 #box_right_bottom{
-	height:55px;
+	height:65px;
 	padding:0.3em 0.5em;
-}
-#description{
 	font-size:1em;
 	overflow:hidden;
-	white-space:nowrap;
+	white-space:normal;
+	word-break:break-all;
 	font-family:"微软雅黑";
 	text-overflow:ellipsis;
 }
@@ -599,7 +598,7 @@ label{white-space:nowrap;}
 #info_table{
 	color:grey;
 	font-family:"微软雅黑";
-	font-size:0.8em;
+	font-size:0.7em;
 	padding-bottom:0.2em;
 }
 #shop-list
@@ -659,4 +658,92 @@ label{white-space:nowrap;}
 	line-height:40px;
 	font-size:1em;
 	border-bottom:2px dotted #CBCBCB;
+}
+#shop-edit{
+	height:500px;
+	margin:0.5em;
+	border:2px solid #34B787;
+}
+#shop-edit table{
+	font-family:"微软雅黑";
+	width:100%;
+}
+#shop-edit tr{
+	height:100px;
+}
+.td1{
+	width:80px;
+}
+.td2{
+	width:70%;
+	font-size:0.9em;
+}
+.red_star{
+	color:red;
+}
+.td2>input{
+	width:90%;
+}
+.td2>textarea{
+	width:90%;
+	height:90%;
+}
+#shopedit-button{
+	font-family:"微软雅黑";
+	color:#FFF;
+	text-align: center;
+	background:#34B787;
+	float:right;
+	width:50px;
+	height:40px;
+	line-height:40px;
+	margin-bottom:0.5em;
+	border-radius:0.5em;
+}
+#class a{
+	color:#FFF;
+}
+#scan-class{
+	padding:0.5em;
+	min-height:40px;
+}
+#newgoodpanel{
+	margin:0.5em;
+	border:2px solid #34B787;
+}
+#newgoodpanel table{
+	font-family:"微软雅黑";
+	width:100%;
+	border-bottom:2px dotted #CBCBCB;
+}
+#newgoodpanel tr{
+	height:100px;
+}
+#newbuttons{
+	margin:0.5em;
+}
+#newbuttons a{	
+	color:#FFF;
+	font-family:"微软雅黑";
+}
+#newbuttons>div{
+	text-align:center;
+	margin:0.5em 0;
+	height:30px;
+	line-height: 30px;
+	width:50px;
+	background:#34B787;
+}
+.add_new{
+	text-align:center;
+	margin:0.5em;
+	height:30px;
+	line-height: 30px;
+	width:150px;
+	background:#34B787;
+	color:#FFF;
+	font-family:"微软雅黑";
+}
+#newgood-confirm{
+	margin:0.5em;
 }
