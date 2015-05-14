@@ -44,7 +44,7 @@
 					<option id="search_chan">换客</option>
 				</select>-->
 				<input type="text" name="search_content" class="search_content" id="search_content_top" x-webkit-speech>
-				<input type="submit" value="搜索" id="search_content_top_button">
+				<input type="submit" value="搜索" id="search_button">
 			</div>
 		</form>
 	</div>
@@ -99,4 +99,10 @@ function toggleMenu(id,other,other1){
 $('.out_put').click(function(){
 		$('#new_demand').submit();
 	});
+$('#search_button').click(	//搜索不为空
+		function(e){
+			e.preventDefault();
+			if($('#search_content_top').val()!='')
+				window.location.href="?m=mall&a=search&search_content="+$('#search_content_top').val()+"&search_type="+$('#search_type_top').val();
+		});
 </script>
