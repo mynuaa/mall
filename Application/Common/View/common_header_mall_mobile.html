@@ -10,7 +10,7 @@
 		<ELSE/>
 		<form method="post" id="new_demand" action="?c=newgoods">
 		<input type="hidden" name="in_where" id="in_where_input"/>
-		<div id="newgoods">发布新需求</div>
+		<div id="newgoods" class="out_put">发布新需求</div>
 		<!--<select>
 			<option id="in_mall">集市</option>
 			<option id="in_change">换客</option>
@@ -52,19 +52,19 @@
 		<table>
 			<tr>
 				<td><a href="?m=mall&a=scan&lb=0">手机</a></td>
-				<td><a href="?m=mall&a=scan&lb=1">电子</td></a>
-				<td><a href="?m=mall&a=scan&lb=2">书籍</td></a>
-				<td><a href="?m=mall&a=scan&lb=3">车辆</td></a>
-				<td><a href="?m=mall&a=scan&lb=4">服饰</td></a>
-				<td><a href="?m=mall&a=scan&lb=5">化妆</td></a>
+				<td><a href="?m=mall&a=scan&lb=1">电子</a></td>
+				<td><a href="?m=mall&a=scan&lb=2">书籍</a></td>
+				<td><a href="?m=mall&a=scan&lb=3">车辆</a></td>
+				<td><a href="?m=mall&a=scan&lb=4">服饰</a></td>
+				<td><a href="?m=mall&a=scan&lb=5">化妆</a></td>
 			</tr>
 			<tr>
-				<td><a href="?m=mall&a=scan&lb=6">日用</td></a>
-				<td><a href="?m=mall&a=scan&lb=7">乐器</td></a>
-				<td><a href="?m=mall&a=scan&lb=8">虚拟</td></a>
-				<td><a href="?m=mall&a=scan&lb=9">食品</td></a>
-				<td><a href="?m=mall&a=scan&lb=10">房屋</td></a>
-				<td><a href="?m=mall&a=scan&lb=11">其他</td></a>
+				<td><a href="?m=mall&a=scan&lb=6">日用</a></td>
+				<td><a href="?m=mall&a=scan&lb=7">乐器</a></td>
+				<td><a href="?m=mall&a=scan&lb=8">虚拟</a></td>
+				<td><a href="?m=mall&a=scan&lb=9">食品</a></td>
+				<td><a href="?m=mall&a=scan&lb=10">房屋</a></td>
+				<td><a href="?m=mall&a=scan&lb=11">其他</a></td>
 			</tr>
 		</table>
 	</div>
@@ -96,4 +96,7 @@ function toggleMenu(id,other,other1){
 	document.querySelector("#btn-"+other).classList.remove("expand");
 	document.querySelector("#btn-"+other1).classList.remove("expand");
 }
+$('.out_put').click(function(){
+		$('#new_demand').submit();
+	});
 </script>

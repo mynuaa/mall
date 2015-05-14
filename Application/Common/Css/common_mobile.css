@@ -685,6 +685,10 @@ label{white-space:nowrap;}
 .td2>input{
 	width:90%;
 }
+.td2>textarea{
+	width:90%;
+	height:90%;
+}
 #shopedit-button{
 	font-family:"微软雅黑";
 	color:#FFF;
@@ -703,4 +707,44 @@ label{white-space:nowrap;}
 #scan-class{
 	padding:0.5em;
 	min-height:40px;
+}
+#newgoodpanel{
+	margin:0.5em;
+	border:2px solid #34B787;
+}
+#newgoodpanel table{
+	font-family:"微软雅黑";
+	width:100%;
+	border-bottom:2px dotted #CBCBCB;
+}
+#newgoodpanel tr{
+	height:100px;
+}
+#newbuttons{
+	margin:0.5em;
+}
+#newbuttons a{	
+	color:#FFF;
+	font-family:"微软雅黑";
+}
+#newbuttons>div{
+	text-align:center;
+	margin:0.5em 0;
+	height:30px;
+	line-height: 30px;
+	width:50px;
+	background:#34B787;
+}
+.add_new{
+	text-align:center;
+	margin:0.5em;
+	height:30px;
+	line-height: 30px;
+	width:150px;
+	background:#34B787;
+	color:#FFF;
+	font-family:"微软雅黑";
+}
+#newgood-confirm{
+	margin:0.5em;
 }
