@@ -264,21 +264,11 @@ select{
 	margin:10px 0;
 	height:140px;
 	width:100%;
+	border:2px solid #34B787;
 	overflow:hidden;
 	box-sizing:border-box;
 }
-#box_left{
-	width:70px;
-	float:left;	
-}
-#box_left img{
-	width:60px;
-	height:60px;
-	border-radius:10em;
-	border:2px solid #34B787;
-	overflow:hidden;
-}
-#username{
+.username{
 	width:100%;
 	height:50px;
 	text-align:center;
@@ -286,31 +276,38 @@ select{
 	overflow:hidden;
 	font-family:"微软雅黑";
 }
-#box_right{
-	width:70%;
+.box_left{
+	width:25%;
+	min-height:1em;
 	float:left;
-	margin-left:1em;
-	height:130px;
-	border:2px solid #34B787;
+}
+.box_right{
+	width:75%;
+	float:left;
 	overflow:hidden;
 }
-#box_right_top{
-	font-size:0.9em;
-	border-bottom:2px dotted #CBCBCB;
+.box_right_top{
+	font-size:0.8em;
 	font-family:"Helvetica Neue",Helvetica,Arial,Sans-serif;
 }
-#goodcondition1{
+.good_title{
+	width:100%;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+.goodcondition1{
 	font-family:"微软雅黑";
 	float:left;
 	font-size:0.8em;
-	padding:0 0.8em;
+	padding:0 0.5em;
 	font-weight:bold;
 	height:25px;
 	line-height:25px;
 	color:#FE5252;
 }
-#goodcondition2{
-	padding:0 0.8em;
+.goodcondition2{
+	padding:0 0.5em;
 	height:25px;
 	line-height:25px;
 	float:left;
@@ -320,20 +317,20 @@ select{
 	color:#66C8A3;
 	font-family:"Helvetica Neue",Helvetica,Arial,Sans-serif;
 }
-#box_right_top a{
+.box_right_top a{
 	height:25px;
 	line-height:25px;
 	font-weight:bold;
 	color:black;
 	padding-right:0.5em; 
 }
-#box_right_top span{
+.box_right_top span{
 	height:25px;
 	line-height:25px;
 	font-size:0.7em;
 	color:black;
 }
-#box_right_bottom{
+.box_right_bottom{
 	height:100%;
 	width:100%;
 	box-sizing:border-box;
@@ -757,4 +754,9 @@ hr{
 	border:0;
 	border-bottom:1px solid #BBB;
 	margin:0.5em 0;
+}
+#newshop{
+	float:right;
+	color:#FFF;
+	margin-right:0.5em;
 }

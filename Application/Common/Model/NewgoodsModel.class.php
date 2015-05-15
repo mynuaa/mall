@@ -83,14 +83,14 @@ class NewgoodsModel extends Model
                 $x=explode(',',$value['photo']);
                 $list[$key]['photo']=substr($x[0], 1);
             } 
-            if(strlen($value['goods_name']) > 28)	//限制题目长度
+            /*if(strlen($value['goods_name']) > 28)	//限制题目长度
             {
                 $list[$key]['goods_name']=mb_substr($value['goods_name'],0,12,'utf-8').'...';
             }
             if(strlen($value['description']) > 280)	//限制内容长度
             {
                 $list[$key]['description']=mb_substr($value['description'],0,140,'utf-8').'...';
-            }
+            }*/
             if($value['Concern_shopid'] != 0)   //如果属于商铺商品
             {
                 $shop_name=get_shop_name($value['Concern_shopid']);
@@ -132,10 +132,10 @@ class NewgoodsModel extends Model
             $x=explode(',',$value['photo']);//默认显示第一张图片
             $list[$key]['photo']=substr($x[0], 1);
 
-            if(strlen($value['description']) > 280)	//商品描述长度限制
+            /*if(strlen($value['description']) > 280)	//商品描述长度限制
             {
                 $list[$key]['description']=mb_substr($value['description'],0,140,'utf-8').'...';
-            }
+            }*/
             if($value['Concern_shopid'] != 0)   //如果属于商铺商品
             {
                 $list[$key]['username']=get_shop_name($value['Concern_shopid']);
@@ -156,10 +156,10 @@ class NewgoodsModel extends Model
 		$goods=$this->where('uid=%d',$uid)->limit(15)->order('data desc')->select();
 		foreach ($goods as $key => $value) 
         {
-            if(strlen($value['goods_name']) > 24)
+            /*if(strlen($value['goods_name']) > 24)
             {
                 $panel_goods[$key]['goods_name']=mb_substr($value['goods_name'],0,12,'utf-8').'...';
-            }
+            }*/
             foreach ($value as $keys => $values) 
             {
                 $panel_goods[$key][$keys]=htmlspecialchars($values);
@@ -175,13 +175,13 @@ class NewgoodsModel extends Model
             $xxx[0],$xxx[1],$xxx[2],$xxx[3],$xxx[4],$xxx[5],$xxx[6])->order('data desc')->limit(10)->select();
         if(count($gus) == 0)
             $gus=$this->order('data desc')->limit(10)->select();
-        foreach ($gus as $key => $value) 
+        /*foreach ($gus as $key => $value) 
         {
             if(strlen($value['goods_name']) > 24)
             {
                 $gus[$key]['goods_name']=mb_substr($value['goods_name'],0,12,'utf-8').'...';
             }
-        }
+        }*/
 
         return $gus;
 	}

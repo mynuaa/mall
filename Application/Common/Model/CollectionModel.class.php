@@ -80,7 +80,7 @@ class CollectionModel extends Model
 	public function get_user_collection($uid,$page)
 	{
 		$list=$this->where('uid=%d',$uid)->page($page,10)->order('collect_time desc')->select();
-		foreach ($list as $key => $value) 
+		/*foreach ($list as $key => $value) 
         {
             if(strlen($value['goods_name']) > 24)
             {
@@ -90,7 +90,7 @@ class CollectionModel extends Model
             {
                 $list[$key]['description']=mb_substr($value['description'],0,140,'utf-8').'...';
             }
-        }
+        }*/
 
 		return $list;
 	}

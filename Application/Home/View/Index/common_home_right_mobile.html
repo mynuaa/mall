@@ -6,11 +6,11 @@
 		<ELSE/>
 			<b>今日更新:</b>
 			<FOREACH name="attention_panel" item="vo">
-				<div>
+				<span>
 					<IF condition="$attention_array[$vo] neq '' " >
 					<a href="?m=mall&a=scan&&lb={$vo}">{$attention_array[$vo]} <span style="color:#F56C7E;">({$attention_daynum[$vo]})</span></a>
 					</IF>
-				</div>
+				</span>
 			</FOREACH>
 		</IF>
 	</div>

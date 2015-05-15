@@ -28,50 +28,47 @@
 	<div id="content">
 	<foreach name="data" item="vo" key="k" >
 		<div class="box" id="{$vo.goods_id}">
-			<div id="box_left">
-				<IF condition="$vo.Concern_shopid eq 0">
-					<img src="/ucenter/avatar.php?uid={$vo.uid}&size=middle" />
-				<ELSE/>
-					<img src="Uploads{$vo.shop_avator}"/>
+			<div class="box_left">
+				<IF condition="$vo.photo neq ''">
+				<img src="Uploads{$vo.photo}" width="100%">
 				</IF>
-				<div id="username">{$vo.username}
-					<input type="hidden" value="{$vo.uid}" id="uid" /></br>
-					<span style="color:#8D8B8C;">{$vo.data}</span>
-				</div>
 			</div>
-			<div id="box_right">
-				<div id="box_right_top">
-					<IF condition="$vo.need_type eq 1">
-						<div id="goodcondition1">出售</div>
-					<ELSE/>
-						<div id="goodcondition2">求购</div>
-					</IF>
-					<a href="?c=goods&id={$vo.goods_id}" target="_blank">{$vo.goods_name}</a>
-					<IF condition="$vo.price eq 0">价格面议<ELSE/>￥{$vo.price}</IF>
-					<IF condition="$vo.is_co eq 1">
-						<span><img src="Application/Mall/Image/heart.png"  class="heart" title="已收藏"></span>
-					<ELSE />
-						<span><img src="Application/Mall/Image/heart_grey.png"  class="heart" title="收藏"></span>
-					</IF> 
-					<span style="color:#FE5252;" class="col_num">{$vo.col_num}</span>
-					<span>
-					<img src="Application/Mall/Image/talk_green.png" onclick="document.location.href='?m=mall&c=goods&id={$vo.goods_id}#talk_both'" style="cursor:pointer;" title="查看回复"></span>
-					<span style="color:#66C8A3;">{$vo.mess_goods}</span>
+			<div class="box_right">
+				<div class="box_right_top">
+					<div class="good_title">
+						<IF condition="$vo.need_type eq 1">
+							<div class="goodcondition1">出</div>
+						<ELSE/>
+							<div class="goodcondition2">求</div>
+						</IF>
+						<a href="?c=goods&id={$vo.goods_id}" target="_blank">{$vo.goods_name}</a>
+					</div>
+					<div>
+						<IF condition="$vo.price eq 0">价格面议<ELSE/>￥{$vo.price}</IF>
+						<span style="color:#FE5252">
+							<IF condition="$vo.is_co eq 1">
+								<i class="fa fa-heart heart"></i>
+							<ELSE/>
+								<i class="fa fa-heart-o heart"></i>
+							</IF> 
+							<span class="col_num">{$vo.col_num}</span>
+						</span>
+						<span style="color:#66C8A3">
+							<i onclick="document.location.href='?m=mall&c=goods&id={$vo.goods_id}#talk_both'" class="fa fa-twitch"></i>
+							<span>{$vo.mess_goods}</span>
+						</span>
+					</div>
+					<div>{$vo.username}，{$vo.data}</div>
 				</div>
 			    <div id="box_right_bottom" onclick="window.open('?m=mall&c=goods&id={$vo.goods_id}','_blank')">
 					<IF condition="$vo.description neq ''">{$vo.description}<ELSE/>这个人很懒，没有留下任何商品描述</IF>
 				</div>
-				<IF condition="$vo.photo neq ''">
-				<div style="float:left;width:110px;">
-					<img src="Uploads{$vo.photo}" width="110px"/>
-				</div>
-				</IF>
 			</div>
 		</div>
 	</foreach>
 	</div>
 	<div class="board">
-		<div class="board-header">最新店铺</div>
+		<div class="board-header">最新店铺<a href="?m=mall&c=shop&a=new_shop" id="newshop">我要开店</a></div>
 		<ul>
 			<FOREACH name="new_shop" item="vo">
 				<li><a href='./?m=mall&c=shop&id={$vo.shop_id}'>{$vo.shop_name}</a></li>
