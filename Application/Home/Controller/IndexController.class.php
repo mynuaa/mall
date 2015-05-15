@@ -7,7 +7,7 @@ class IndexController extends PublicController
 {
     public function index()
     { 
-        if(session('?uid')==0) $this->error('请先登录！！','/sso/?page=login');
+        if(session('?uid')==0) $this->error('请先登录！！','/sso/?page=login&redirect_uri=' . base64_encode($_SERVER['REQUEST_URI']));
 
         $Newgoods = D("Newgoods");
         $Soldout = D("Soldout");

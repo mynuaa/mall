@@ -6,9 +6,11 @@
 		<ELSE/>
 			<b>今日更新:</b>
 			<FOREACH name="attention_panel" item="vo">
-				<IF condition="$attention_array[$vo] neq '' " >
+				<div>
+					<IF condition="$attention_array[$vo] neq '' " >
 					<a href="?m=mall&a=scan&&lb={$vo}">{$attention_array[$vo]} <span style="color:#F56C7E;">({$attention_daynum[$vo]})</span></a>
-				</IF>
+					</IF>
+				</div>
 			</FOREACH>
 		</IF>
 	</div>
@@ -17,8 +19,10 @@
 	<div class="boxs-title">猜你喜欢</div>
 	<div class="boxs-content">
 		<FOREACH name="guess" item="vo">
-			<IF condition="$vo.need_type eq 1"><span style="color:#F56C7E;"><b>出</b></span><ELSE/><span style="color:#35B787;"><b>求</b></span></IF>
-			<a href="?m=mall&c=goods&id={$vo.goods_id}">{$vo.goods_name}</a>
+			<div>
+				<IF condition="$vo.need_type eq 1"><span style="color:#F56C7E;"><b>出</b></span><ELSE/><span style="color:#35B787;"><b>求</b></span></IF>
+				<a href="?m=mall&c=goods&id={$vo.goods_id}">{$vo.goods_name}</a>
+			</div>
 		</FOREACH>
 	</div>
 </div>

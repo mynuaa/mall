@@ -4,152 +4,116 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
 	<title>{$app_title}</title>
-	<link rel="stylesheet" type="text/css" href="./Application/Common/Css/common_mobile.css">
-	<script type="text/javascript" src="./Application/Common/Js/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" src="./Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
-	<script type="text/javascript">
+	<link rel="stylesheet" href="Application/Common/Css/common_mobile.css">
+	<script src="Application/Common/Js/jquery-1.10.2.min.js"></script>
+	<script src="Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+	<script>
 		var page="mall";
 	</script>
 </head>
 <body>
-	<include file="./Application/Common/View/common_header_mall_mobile.html" />
+	<include file="Application/Common/View/common_header_mall_mobile.html" />
 	<div id="newgoodpanel">
-		<form action="./?m=mall&c=newgoods&a=add_goods" method="post" id="new_goods" enctype="multipart/form-data">
+		<form action="?m=mall&c=newgoods&a=add_goods" method="post" id="new_goods" enctype="multipart/form-data">
 		<div class="display_statu status" id="goods_table_1">
-			<table>
-				<tr>
-					<td class="td1">
-						<span class="red_star">*</span>商品名称
-						<input type="hidden" id="table_num_box" name="table_num_box[]" value="1"></td>
-					</td>
-					<td class="td2">
-						<input name="goods_name[]" class="goods_name" type="text"><br>
-						<span class="notice" id="notice_3">*建议15个汉字以内<span>
-					</td>
-				</tr>
-				<tr style="height:30px;">
-					<td class="td1">
-						<span class="red_star">*</span>需求类型
-					</td>
-					<td>
-						<input name="need_type1" type="radio" value="1" id="need_type_1">
-						<label for="need_type_1">出售</label>
-						<input name="need_type1" id="need_type_0" type="radio" value="0">
-						<label for="need_type_0">求购</label>
-					</td>
-				</tr>
-				<tr>
-					<td class="td1">
-						<span class="red_star">*</span>所在地
-					</td>
-					<td>
-						<IF condition="$data['location'] eq 1">
-						<input name="location1" type="radio" value="1" id="location_1" checked="checked">
-						<ELSE/>
-						<input name="location1" type="radio" value="1" id="location_1">
-						</IF>
-						<label for="location_1">江宁</label>
-						<IF condition="$data['location'] eq 0">
-						<input name="location1" id="location_0" type="radio" value="0" checked="checked">
-						<ELSE/>
-						<input name="location1" id="location_0" type="radio" value="0">
-						</IF>
-						<label for="location_0">本部</label>
-						<IF condition="$data['location'] eq 2">
-						<input name="location1" id="location_2" type="radio" value="2" checked="checked">
-						<ELSE/>
-						<input name="location1" id="location_2" type="radio" value="2">
-						</IF>
-						<label for="location_2">不限</label>
-					</td>
-				</tr>
-				<tr>
-					<td class="td1">
-						<span class="red_star">*</span>分类
-					</td>
-					<td>
-						<input name="classify1" type="radio" id="classify_0" value="0"><label for="classify_0">手机</label>
-						<input name="classify1" type="radio" id="classify_1" value="1"><label for="classify_1">电子</label>
-						<input name="classify1" type="radio" id="classify_2" value="2"><label for="classify_2">书籍</label>
-						<input name="classify1" type="radio" id="classify_3" value="3"><label for="classify_3">车辆</label>
-						<input name="classify1" type="radio" id="classify_4" value="4"><label for="classify_4">服饰</label>
-						<input name="classify1" type="radio" id="classify_5" value="5"><label for="classify_5">化妆</label><br/>
-						<input name="classify1" type="radio" id="classify_6" value="6"><label for="classify_6">日用</label>
-						<input name="classify1" type="radio" id="classify_7" value="7"><label for="classify_7">乐器</label>
-						<input name="classify1" type="radio" id="classify_10" value="10"><label for="classify_10">虚拟</label>
-						<input name="classify1" type="radio" id="classify_11" value="11"><label for="classify_11">食品</label>
-						<input name="classify1" type="radio" id="classify_8" value="8"><label for="classify_8">房屋</label>
-						<input name="classify1" type="radio" id="classify_9" value="9"><label for="classify_9">其他</label>
-					</td>
-				</tr>
-				<tr>
-					<td class="td1">
-						<span>照片</span>
-					</td>
-					<td>
-						<span>注: 图片大小限制为9M,最多可显示四张照片,求购时不可上传照片</span><br/>
-						<input type="button" value="上传更多照片" class="add_file_upload">
-					</td>
-				</tr>
-				<tr>
-					<td class="td1">
-						<span>价格</span>
-					</td>
-					<td class="td2">
-						<input name="price[]" class="price input_style" type="text"> RMB<br>
-						<span class="notice" id="notice_4">*请输入价格(0~9999),
-						<span class="red_star">出售时必填,面议请输入0</span>
-						</span>
-					</td>
-				</tr>
-				<tr>
-					<td class="td1">
-						<span>描述</span>
-					</td>
-					<td class="td2">
-						<textarea name="description[]" class="text_style" placeholder="如：1.新旧程度 2.使用时间 3.注意事项..."></textarea>
-					</td>
-				</tr>
-				<tr>
-					<td class="td1">
-						<span class="red_star">*</span>联系方式
-					</td>
-					<td class="td2">
-						<input name="contact[]" class="input_style contact" placeholder="qq,手机号等" type="text" value="{$data['contact']}"><br>
-						<span class="notice" id="notice_5">*建议30字以内</span>
-					</td>
-				</tr>
-			</table>
+			<input type="hidden" id="table_num_box" name="table_num_box[]" value="1"></td>
+			<div class="form-title">商品名称</div>
+			<div class="form-content"><input name="goods_name[]" class="form-content" type="text"></div>
+			<div class="form-tip" id="notice_3">* 建议15个汉字以内</div>
+			<div class="form-title">需求类型</div>
+			<div class="form-content">
+				<input name="need_type1" type="radio" value="1" id="need_type_1"><label for="need_type_1">出售</label>
+				<input name="need_type1" type="radio" value="0" id="need_type_0"><label for="need_type_0">求购</label>
+			</div>
+			<div class="form-title">所在地</div>
+			<div class="form-content">
+				<IF condition="$data['location'] eq 1">
+				<input name="location1" type="radio" value="1" id="location_1" checked="checked">
+				<ELSE/>
+				<input name="location1" type="radio" value="1" id="location_1">
+				</IF>
+				<label for="location_1">江宁</label>
+				<IF condition="$data['location'] eq 0">
+				<input name="location1" id="location_0" type="radio" value="0" checked="checked">
+				<ELSE/>
+				<input name="location1" id="location_0" type="radio" value="0">
+				</IF>
+				<label for="location_0">本部</label>
+				<IF condition="$data['location'] eq 2">
+				<input name="location1" id="location_2" type="radio" value="2" checked="checked">
+				<ELSE/>
+				<input name="location1" id="location_2" type="radio" value="2">
+				</IF>
+				<label for="location_2">不限</label>
+			</div>
+			<div class="form-title">分类</div>
+			<div class="form-content">
+				<input name="classify1" type="radio" id="classify_0" value="0"><label for="classify_0">手机</label>
+				<input name="classify1" type="radio" id="classify_1" value="1"><label for="classify_1">电子</label>
+				<input name="classify1" type="radio" id="classify_2" value="2"><label for="classify_2">书籍</label>
+				<input name="classify1" type="radio" id="classify_3" value="3"><label for="classify_3">车辆</label>
+				<input name="classify1" type="radio" id="classify_4" value="4"><label for="classify_4">服饰</label>
+				<input name="classify1" type="radio" id="classify_5" value="5"><label for="classify_5">化妆</label>
+				<input name="classify1" type="radio" id="classify_6" value="6"><label for="classify_6">日用</label>
+				<input name="classify1" type="radio" id="classify_7" value="7"><label for="classify_7">乐器</label>
+				<input name="classify1" type="radio" id="classify_10" value="10"><label for="classify_10">虚拟</label>
+				<input name="classify1" type="radio" id="classify_11" value="11"><label for="classify_11">食品</label>
+				<input name="classify1" type="radio" id="classify_8" value="8"><label for="classify_8">房屋</label>
+				<input name="classify1" type="radio" id="classify_9" value="9"><label for="classify_9">其他</label>
+			</div>
+			<div class="form-title">照片</div>
+			<div class="form-content">
+				<input type="button" value="上传更多照片" class="add_file_upload">
+			</div>
+			<div class="form-tip">* 图片大小限制为9M,最多可显示四张照片,求购时不可上传照片</div>
+			<div class="form-title">价格</div>
+			<div class="form-content">
+				<input name="price[]" class="price" type="text" placeholder="单位：￥">
+			</div>
+			<div class="form-tip">
+				<div class="notice" id="notice_4">* 请输入价格(0~9999)</div>
+				<div class="red_star">* 出售时必填,面议请输入0</div>
+			</div>
+			<div class="form-title">描述</div>
+			<div class="form-content">
+				<textarea name="description[]" class="text_style" placeholder="如：1.新旧程度 2.使用时间 3.注意事项..."></textarea>
+			</div>
+			<div class="form-title">联系方式</div>
+			<div class="form-content">
+				<input name="contact[]" class="contact" placeholder="qq,手机号等" type="text" value="{$data['contact']}"><br>
+			</div>
+			<div class="form-tip notice" id="notice_5">* 建议30字以内</div>
 			<div id="newbuttons" class="buttons">
-				<div class="buttons_new delete_it" >
-				<a href="javascript:void;">删除</a>
-				</div>
-				<div class="buttons_new save_it">
-				<a href="javascript:void;">收起</a>
-				</div>
+				<div class="buttons_new delete_it"><a href="javascript:void;">删除</a></div>
+				<div class="buttons_new save_it"><a href="javascript:void;">收起</a></div>
+				<div class="add_new">+ 添加新商品</div>
 			</div>	
 		</div>
-		<div class="add_new">+点击添加新商品</div>
+		<hr>
 		<div id="newgood-confirm">
-			<IF condition="$shop_id eq '1'"><input name="is_shop" id="is_shop" type="checkbox"/>
-			<label for="is_shop">
-			<span>发布为商铺商品</span></label></IF><br/>
-			<img src="./?m=mall&c=newgoods&a=ver" id="ver"><br><input class="input_type" id="ver_val">
+			<IF condition="$shop_id eq '1'">
+			<div>
+				<input name="is_shop" id="is_shop" type="checkbox">
+				<label for="is_shop">发布为商铺商品</label>
+			</div>
+			</IF>
+			<img src="?m=mall&c=newgoods&a=ver" id="ver">
+			<input class="input_type" id="ver_val" type="text" style="width:30%">
 			<div class="button_green" onclick="return check_it()">提交</div>
 			<div id="loading" style="padding-top:5px;display:none;">
 			<img src="Application/Common/Image/loading.gif" width="16px"><span>正在上传图片...</span></div>
 		</div>
 		</form>
 	</div>
-	<include file="./Application/Common/View/common_right_green_mobile.html" />
-	<include file="./Application/Common/View/common_bottom_mobile.html" />
+	<include file="Application/Common/View/common_right_green_mobile.html" />
+	<include file="Application/Common/View/common_bottom_mobile.html" />
 </body>
-<script type="text/javascript">
+<script>
 jQuery(function($){
 		var goods_count=1;	//商品编号最大数
 		var total=1;	//当前商品总数<=6
 		$('#ver').click(function(){
-			$(this).attr("src",'./?m=mall&c=newgoods&a=ver&'+new Date().getTime());
+			$(this).attr("src",'?m=mall&c=newgoods&a=ver&'+new Date().getTime());
 		});
 
 		$('.panel-left').css("min-height","800px");
@@ -207,7 +171,7 @@ jQuery(function($){
 			total++;
 			if(total <= 6)
 			{
-				var j='<tbody><tr><td class="td1"><span class="red_star">*</span>商品名称<input type="hidden" id="table_num_box" name="table_num_box[]" value="'+goods_count+'"></td><td class="td1"><input name="goods_name[]" class="goods_name input_style" type="text"><span class="notice" id="notice_3">*建议15个汉字以内<span></td></tr><tr height="47px"><td  class="col"><span class="red_star">*</span>需求类型</td><td><input name="need_type'+goods_count+'" type="radio" value="1" id="need_type_1">出售<input name="need_type'+goods_count+'" id="need_type_0" type="radio" value="0">求购</td></tr><tr height="47px"><td  class="col"><span class="red_star">*</span>所在地</td><td><IF condition="$data.location eq 1"><input name="location'+goods_count+'" type="radio" value="1" id="location_1" checked="checked"><ELSE/><input name="location'+goods_count+'" type="radio" value="1" id="location_1"></IF>江宁<IF condition="$data.location eq 0"><input name="location'+goods_count+'" id="location_0" type="radio" value="0" checked="checked"><ELSE/><input name="location'+goods_count+'" id="location_0" type="radio" value="0"></IF>本部<IF condition="$data.location eq 2"><input name="location'+goods_count+'" id="location_2" type="radio" value="2" checked="checked"><ELSE/><input name="location'+goods_count+'" id="location_2" type="radio" value="2"></IF>不限</td></tr><tr><td  class="col"><span class="red_star">*</span>分类</td><td><input name="classify'+goods_count+'" type="radio" id="classify_0" value="0">手机<input name="classify'+goods_count+'" type="radio" id="classify_1" value="1">电子<input name="classify'+goods_count+'" type="radio" id="classify_2" value="2">书籍<input name="classify'+goods_count+'" type="radio" id="classify_3" value="3">车辆<input name="classify'+goods_count+'" type="radio" id="classify_4" value="4">服饰<input name="classify'+goods_count+'" type="radio" id="classify_5" value="5">化妆<br/><input name="classify'+goods_count+'" type="radio" id="classify_6" value="6">日用<input name="classify'+goods_count+'" type="radio" id="classify_7" value="7">乐器<input name="classify'+goods_count+'" type="radio" id="classify_10" value="10">虚拟<input name="classify'+goods_count+'" type="radio" id="classify_11" value="11">食品<input name="classify'+goods_count+'" type="radio" id="classify_8" value="8">房屋<input name="classify'+goods_count+'" type="radio" id="classify_9" value="9">其他</td></tr><tr><td  class="col">照片</td><td><span style="color:red;font-size:12px;line-height:12px;">注: 图片大小限制为9M,最多可显示四张照片,求购时不可上传照片</span><br/><input type="button" value="上传更多照片" class="add_file_upload"></td></tr><tr><td  class="col">价格</td><td><input name="price[]" class="price input_style" style="width:50px;" type="text"> RMB<span class="notice" id="notice_4">*请输入价格(0~9999),<span class="red_star">出售时必填</span></span></td></tr><tr><td  class="col">描述</td><td><textarea name="description[]" class="text_style" placeholder="如：1.新旧程度 2.使用时间 3.注意事项..."></textarea></td></tr><tr><td  class="col"><span class="red_star">*</span>联系方式</td><td><input name="contact[]" class="input_style contact" style="width:250px;" placeholder="qq,手机号等" type="text" value="{$data.contact}"><span class="notice" id="notice_5">*建议30字以内</span></td></tr></tbody>';
+				var j='<tbody><tr><td class="td1"><span class="red_star">*</span>商品名称<input type="hidden" id="table_num_box" name="table_num_box[]" value="'+goods_count+'"></td><td class="td1"><input name="goods_name[]" class="goods_name" type="text"><span class="notice" id="notice_3">*建议15个汉字以内<span></td></tr><tr height="47px"><td  class="col"><span class="red_star">*</span>需求类型</td><td><input name="need_type'+goods_count+'" type="radio" value="1" id="need_type_1">出售<input name="need_type'+goods_count+'" id="need_type_0" type="radio" value="0">求购</td></tr><tr height="47px"><td  class="col"><span class="red_star">*</span>所在地</td><td><IF condition="$data.location eq 1"><input name="location'+goods_count+'" type="radio" value="1" id="location_1" checked="checked"><ELSE/><input name="location'+goods_count+'" type="radio" value="1" id="location_1"></IF>江宁<IF condition="$data.location eq 0"><input name="location'+goods_count+'" id="location_0" type="radio" value="0" checked="checked"><ELSE/><input name="location'+goods_count+'" id="location_0" type="radio" value="0"></IF>本部<IF condition="$data.location eq 2"><input name="location'+goods_count+'" id="location_2" type="radio" value="2" checked="checked"><ELSE/><input name="location'+goods_count+'" id="location_2" type="radio" value="2"></IF>不限</td></tr><tr><td  class="col"><span class="red_star">*</span>分类</td><td><input name="classify'+goods_count+'" type="radio" id="classify_0" value="0">手机<input name="classify'+goods_count+'" type="radio" id="classify_1" value="1">电子<input name="classify'+goods_count+'" type="radio" id="classify_2" value="2">书籍<input name="classify'+goods_count+'" type="radio" id="classify_3" value="3">车辆<input name="classify'+goods_count+'" type="radio" id="classify_4" value="4">服饰<input name="classify'+goods_count+'" type="radio" id="classify_5" value="5">化妆<br/><input name="classify'+goods_count+'" type="radio" id="classify_6" value="6">日用<input name="classify'+goods_count+'" type="radio" id="classify_7" value="7">乐器<input name="classify'+goods_count+'" type="radio" id="classify_10" value="10">虚拟<input name="classify'+goods_count+'" type="radio" id="classify_11" value="11">食品<input name="classify'+goods_count+'" type="radio" id="classify_8" value="8">房屋<input name="classify'+goods_count+'" type="radio" id="classify_9" value="9">其他</td></tr><tr><td  class="col">照片</td><td><span style="color:red;font-size:12px;line-height:12px;">注: 图片大小限制为9M,最多可显示四张照片,求购时不可上传照片</span><br/><input type="button" value="上传更多照片" class="add_file_upload"></td></tr><tr><td  class="col">价格</td><td><input name="price[]" class="price" style="width:50px;" type="text"> RMB<span class="notice" id="notice_4">*请输入价格(0~9999),<span class="red_star">出售时必填</span></span></td></tr><tr><td  class="col">描述</td><td><textarea name="description[]" class="text_style" placeholder="如：1.新旧程度 2.使用时间 3.注意事项..."></textarea></td></tr><tr><td  class="col"><span class="red_star">*</span>联系方式</td><td><input name="contact[]" class="contact" style="width:250px;" placeholder="qq,手机号等" type="text" value="{$data.contact}"><span class="notice" id="notice_5">*建议30字以内</span></td></tr></tbody>';
 					$('.add_new').before('<div class="display_statu clearfix status" id="goods_table_'+goods_count+'" ><div class="hide_statu_left">'+goods_count+'</div><div class="goods_content"><table width="560px" class="content_table">'+j+'</table></div><div class="buttons clearfix"><div class="buttons_new delete_it" style="margin-right:4px;"><a href="javascript:void;">删除</a></div><div class="buttons_new save_it"><a href="javascript:void;">收起</a></div></div></div>');	
 			}
 			else
@@ -275,7 +239,7 @@ jQuery(function($){
 				return false;
 			}
 
-			var url="./?m=mall&c=newgoods&a=check_ver";
+			var url="?m=mall&c=newgoods&a=check_ver";
 			var data={"ver_val":ver_val};
 			$.post(url,data,function(r){
 				if(r.code == 0)
@@ -319,7 +283,7 @@ jQuery(function($){
 					//保存设置信息
 					var location=$('input[name="location1"]:checked').val();
 					var contact=$('.contact').val();
-					var n_url="./?m=home&c=config&a=config";
+					var n_url="?m=home&c=config&a=config";
 					var n_data={"location":location,"attention":'',"contact":contact};
 					$.post(n_url,n_data,function(r)
 					{},'json');

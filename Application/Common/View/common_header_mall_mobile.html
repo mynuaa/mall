@@ -4,23 +4,20 @@
 	<button id="btn-navbar" onclick="toggleMenu('navbar','searchbar','class')"><i class="fa fa-user"></i></button>
 	<button id="btn-searchbar" onclick="toggleMenu('searchbar','navbar','class')"><i class="fa fa-search"></i></button>
 	<button id="btn-class" onclick="toggleMenu('class','navbar','searchbar')"><i class="fa fa-reorder"></i></button>
+	<IF condition="session('?uid') eq 0">
+	<ul id="navbar" class="guest">
+	<ELSE/>
 	<ul id="navbar">
+	</IF>
 		<IF condition="session('?uid') eq 0">
 		<a href="/sso/?page=login&redirect_uri={:base64_encode($_SERVER['REQUEST_URI'])}" id="load_button"><li>登录</li></a>
 		<ELSE/>
-		<form method="post" id="new_demand" action="?c=newgoods">
-		<input type="hidden" name="in_where" id="in_where_input"/>
-		<div id="newgoods" class="out_put">发布新需求</div>
-		<!--<select>
-			<option id="in_mall">集市</option>
-			<option id="in_change">换客</option>
-		</select>-->
-		</form>
-		<IF condition="$shop_id gt 0">
-		<a href="?m=mall&c=shop&id={$shop_id}"><li>查看我的店铺</li></a>
-		<a href="?m=mall&c=shop&a=edit&id={$shop_id}"><li>修改店铺信息</li></a>
-		<hr>
+		<a href="?c=newgoods"><li>发布新需求</li></a>
+			<IF condition="$shop_id gt 0">
+			<a href="?m=mall&c=shop&id={$shop_id}"><li>查看我的店铺</li></a>
+			<a href="?m=mall&c=shop&a=edit&id={$shop_id}"><li>修改店铺信息</li></a>
 		</IF>
+		<hr>
 		<a href='?m=home#lb4'><li>我的收藏</li></a>
 		<a href='?m=home#lb2'><li>我的东西</li></a>
 		<hr>
@@ -29,9 +26,7 @@
 		<span style="color:#9bff1b;"><li><b>提醒（{$mess_id}）</b></li></span>
 		<ELSE/><li>提醒</li></IF>
 		</a>
-		<hr>
-		<a href="?m=home#lb1"><li>{$username}</li></a>
-		<a href="/sso/?action=logout&redirect_uri={:base64_encode($_SERVER['REQUEST_URI'])}"><li>注销</li></a>
+		<a href="/sso/?action=logout&redirect_uri={:base64_encode($_SERVER['REQUEST_URI'])}"><li>注销 {$username}</li></a>
 		</IF>
 	</ul>
 	<div id="searchbar">
@@ -96,7 +91,7 @@ function toggleMenu(id,other,other1){
 	document.querySelector("#btn-"+other).classList.remove("expand");
 	document.querySelector("#btn-"+other1).classList.remove("expand");
 }
-$('.out_put').click(function(){
-		$('#new_demand').submit();
-	});
+document.getElementById("navbar").onclick=function(){toggleMenu("navbar","searchbar","class");}
+document.getElementById("searchbar").onclick=function(){toggleMenu("searchbar","navbar","class");}
+document.getElementById("class").onclick=function(){toggleMenu("class","navbar","searchbar");}
 </script>

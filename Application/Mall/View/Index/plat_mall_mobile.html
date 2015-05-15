@@ -58,18 +58,14 @@
 					<img src="Application/Mall/Image/talk_green.png" onclick="document.location.href='?m=mall&c=goods&id={$vo.goods_id}#talk_both'" style="cursor:pointer;" title="查看回复"></span>
 					<span style="color:#66C8A3;">{$vo.mess_goods}</span>
 				</div>
-			    <div id="box_right_bottom" onclick="window.open('?m=mall&c=goods&id={$vo.goods_id}','_blank')" style="cursor:pointer;">
-						<IF condition="$vo.description neq ''">{$vo.description}
-						<ELSE/>
-							这个人很懒，没有留下任何商品描述
-						</IF>
-					<!--<IF condition="$vo.photo neq ''">
-						<div style="float:left;width:110px;">
-							<img src="Uploads{$vo.photo}" width="110px"/>
-						</div>
-						我也不知道要不要图
-					</IF>-->
+			    <div id="box_right_bottom" onclick="window.open('?m=mall&c=goods&id={$vo.goods_id}','_blank')">
+					<IF condition="$vo.description neq ''">{$vo.description}<ELSE/>这个人很懒，没有留下任何商品描述</IF>
 				</div>
+				<IF condition="$vo.photo neq ''">
+				<div style="float:left;width:110px;">
+					<img src="Uploads{$vo.photo}" width="110px"/>
+				</div>
+				</IF>
 			</div>
 		</div>
 	</foreach>
