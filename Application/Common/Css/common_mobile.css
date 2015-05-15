@@ -753,3 +753,8 @@ textarea{
 	vertical-align:bottom;
 	margin:0;
 }
+hr{
+	border:0;
+	border-bottom:1px solid #BBB;
+	margin:0.5em 0;
+}
