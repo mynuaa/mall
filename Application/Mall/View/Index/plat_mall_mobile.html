@@ -70,7 +70,9 @@
 		<div class="board-header">最新店铺<a href="?m=mall&c=shop&a=new_shop" id="newshop">我要开店</a></div>
 		<ul>
 			<FOREACH name="new_shop" item="vo">
+			<IF condition="$vo.shop_id elt 5">
 				<li><a href='./?m=mall&c=shop&id={$vo.shop_id}'>{$vo.shop_name}</a></li>
+			</IF>
 			</FOREACH>
 		</ul>
 		<div id="more-new-shop"><a href='./?m=mall&c=shop&a=shop_list'>更多店铺...</a></div>

@@ -32,7 +32,7 @@
 		<div id="info-image-bottom">
 			<IF condition="$photo_num gt 0">
 				<FOR start="0" end="$photo_num">
-				    <img src="./Uploads{$goods['photo_lit'][$i]}" id="pho_{$i}"/>
+				    <img src="./Uploads{$goods['photo_lit'][$i]}" id="pho_{$i}" onclick="show(pho_{$i})"/>
 				</FOR>
 			<ELSE/>	
 				<img src="./Uploads/logo.jpg" id="pho_{$i}"/>
@@ -144,16 +144,15 @@
 				<IF condition="$panel_goods_num eq 0">
 					<li><span>该用户暂无其他出售的商品</span></li>
 				<ELSE/>
-				<li>
 					<FOREACH name="panel_goods" item="vo">
-						<div style="float:left;">&nbsp;
+						<!--<div style="float:left;">&nbsp;
 							<IF condition="$vo.need_type eq 1">
 								<span style="color:#F56C7E;"><b>出</b></span>
 							<ELSE/>
 								<span style="color:#35B787;"><b>求</b></span>
 							</IF>
-						</div>
-						<a href="./?m=mall&c=goods&id={$vo.goods_id}">{$vo.goods_name}</a></li>
+						</div>-->
+						<li><a href="./?m=mall&c=goods&id={$vo.goods_id}">{$vo.goods_name}</a></li>
 					</FOREACH>
 				</IF>
 			</ul>
@@ -310,6 +309,9 @@ jQuery(function($){
 					},'json');
 			}
 		});
+
+
+
 
 	$('#pho_1').hover(	//不知道为啥后面的几张照片放大框的大小为0，此处手动重置大小
 		function()
