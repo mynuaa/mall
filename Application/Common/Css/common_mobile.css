@@ -262,9 +262,9 @@ select{
 }
 .box{
 	margin:10px 0;
-	height:140px;
 	width:100%;
 	border:2px solid #34B787;
+	padding:0.2em 0 0.5em;
 	overflow:hidden;
 	box-sizing:border-box;
 }
@@ -285,29 +285,36 @@ select{
 	width:75%;
 	float:left;
 	overflow:hidden;
+	padding-left:0.5em;
+	box-sizing:border-box;
 }
 .box_right_top{
 	font-size:0.8em;
-	font-family:"Helvetica Neue",Helvetica,Arial,Sans-serif;
 }
-.good_title{
+.box_right_bottom,.good_title{
 	width:100%;
 	overflow:hidden;
 	text-overflow:ellipsis;
 	white-space:nowrap;
 }
+.good_infos{
+	color:#999;
+	margin-top:0.3em;
+}
 .goodcondition1{
 	font-family:"微软雅黑";
 	float:left;
 	font-size:0.8em;
-	padding:0 0.5em;
+	padding-left:0.2em;
+	padding-right:0.5em;
 	font-weight:bold;
 	height:25px;
 	line-height:25px;
 	color:#FE5252;
 }
 .goodcondition2{
-	padding:0 0.5em;
+	padding-left:0.2em;
+	padding-right:0.5em;
 	height:25px;
 	line-height:25px;
 	float:left;
@@ -324,21 +331,15 @@ select{
 	color:black;
 	padding-right:0.5em; 
 }
-.box_right_top span{
-	height:25px;
-	line-height:25px;
-	font-size:0.7em;
-	color:black;
-}
 .box_right_bottom{
 	height:100%;
 	width:100%;
 	box-sizing:border-box;
-	padding:0.3em 0.5em;
-	font-size:1em;
+	font-size:0.9em;
 	overflow:hidden;
 	word-break:break-all;
 	font-family:"微软雅黑";
+	padding:0.2em 0 0;
 }
 #page{
 	line-height:40px;
@@ -351,10 +352,6 @@ select{
 }
 #page div{
 	display:inline-block;
-}
-.page_center
-{
-	font-size:1.6em;
 }
 #info-image{
 	width:100%;
