@@ -143,7 +143,7 @@ jQuery(function($){
 			var table_id = $(this).parents('.display_statu').attr('id');	
 			var xx=String(table_id);
 			var table_num=xx.substr(-1,1);
-			var need_type = $('#'+table_id+' .content_table input:radio[name="need_type'+table_num+'"]:checked').val();
+			var need_type = $('#'+table_id+' input:radio[name="need_type'+table_num+'"]:checked').val();
 			if(need_type == 1)		//出售
  				$(this).after('<input name="photo'+table_num+'[]" type="file" class="file">');
  			else
