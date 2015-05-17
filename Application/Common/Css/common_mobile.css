@@ -236,7 +236,7 @@ select{
 	transition:all 200ms;
 }
 .limit{
-	max-height:112px;
+	max-height:110px;
 	overflow:hidden;
 }
 .board li{

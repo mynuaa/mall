@@ -26,13 +26,13 @@
 		        	</IF>
 		   		</FOR>
 		   	<ELSE/>
-			    <img src="./Uploads/logo.jpg" data-large-img-url="./Uploads/logo.jpg">
+			    <img src="./Uploads/logo.jpg" data-large-img-url="./Uploads/logo.jpg" style="display:inline-block;" >
 			</IF>
 		</div>
 		<div id="info-image-bottom">
 			<IF condition="$photo_num gt 0">
 				<FOR start="0" end="$photo_num">
-				    <img src="./Uploads{$goods['photo_lit'][$i]}" id="pho_{$i}" onclick="show(pho_{$i})"/>
+				    <img src="./Uploads{$goods['photo_lit'][$i]}" id="pho_{$i}"/>
 				</FOR>
 			<ELSE/>	
 				<img src="./Uploads/logo.jpg" id="pho_{$i}"/>
@@ -195,7 +195,7 @@ $(function()
 {
 	$("#info-image-bottom img").click(function(){
 		var inow=$(this).index();
-		$("#info-image-top img").css({"display":"none"}).eq(inow).css({"display":"inline-block;"});
+		$("#info-image-top img").css({"display":"none"}).eq(inow).css({"display":"inline-block"});
 	});
 });
 function htmlEncode(str) 
