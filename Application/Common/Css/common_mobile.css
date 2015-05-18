@@ -828,3 +828,20 @@ hr{
 	padding:0.5em;
 	height:20px;
 }
+.talk-panel{
+	padding:0.5em;
+	border-bottom:2px dotted #CBCBCB;
+	box-sizing:border-box;
+}
+#talk_avator{
+	width:60px;
+	display:inline-block;
+	float:left;
+}
+#talk_re{
+	
+}
+#talk_re a{
+	font-size:0.8em;
+	color:#34B787;
+}

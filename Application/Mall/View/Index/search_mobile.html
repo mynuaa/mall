@@ -22,10 +22,12 @@
 		<FOREACH name="result" item="vo" key="k" >
 			<div class="box" id="{$vo.goods_id}">
 				<div class="box_left">
-					<IF condition="$vo.photo neq ''">
-					<img src="Uploads{$vo.photo}" width="100%">
-					</IF>
-				</div>
+				<IF condition="$vo.photo neq ''">
+				<img src="Uploads{$vo.photo}" width="100%">
+				<ELSE/>
+				<img src="./Uploads/logo.jpg" width="100%">
+				</IF>
+			</div>
 				<div class="box_right">
 					<div class="box_right_top">
 						<div class="good_title">

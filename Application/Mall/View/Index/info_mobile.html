@@ -108,13 +108,15 @@
 		<div id="mess_content">
 			<IF condition="$mess_count gt 0">
 				<FOREACH name="mess" item="vo">
-					<div uid="{$vo.from_uid}" username="{$vo.from_username}">
+					<div uid="{$vo.from_uid}" username="{$vo.from_username}" class="talk-panel">
 						<div id="talk_avator">
 						<img src="/ucenter/avatar.php?uid={$vo.from_uid}&size=middle" width="60px">
 						</div>
-						<div class="talk_centent">
-							{$vo['from_username']} &nbsp;&nbsp;&nbsp;
-							<span style="color:#8C8B8C;">发表于 {$vo.data}<br/>{$vo.content}</span>	
+						<div class="talk_content">	
+							{$vo['from_username']}<br/>
+							<span style="color:#8C8B8C;font-size:0.8em;font-family:'微软雅黑';">{$vo.data}</span>
+							<br/>
+							<span style="font-family:'微软雅黑';">{$vo.content}</span>	
 						</div>
 						<div id="talk_re"><a href='#textarea'>回复</a></div>
 					</div>
@@ -275,7 +277,7 @@ jQuery(function($){
 					{
 						noty({text: '回复成功',layout: 'center', type: 'success',timeout:'1000',});
 						$('#no-reply').remove();
-						$('#mess_content').append('<div class="talk_box clearfix" uid="{$uid}" username="{$username}"><div class="talk_avator"><img src="http://my.nuaa.edu.cn/ucenter/avatar.php?uid={$uid}&size=middle" width="60px"></div><div class="talk_centent">{$username} &nbsp;&nbsp;&nbsp;<span style="color:#8C8B8C;">发表于 '+r.time+'<br/>'+htmlEncode(content)+'</span></div><div class="talk_re"><a href="#textarea">回复</a></div></div>');
+						$('#mess_content').append('<div class="talk_box clearfix" uid="{$uid}" username="{$username}"><div class="talk_avator"><img src="http://my.nuaa.edu.cn/ucenter/avatar.php?uid={$uid}&size=middle" width="60px"></div><div class="talk_content">{$username} &nbsp;&nbsp;&nbsp;<span style="color:#8C8B8C;">发表于 '+r.time+'<br/>'+htmlEncode(content)+'</span></div><div class="talk_re"><a href="#textarea">回复</a></div></div>');
 						$('#textarea').val('').removeAttr('uid-re').removeAttr('username-re');
 					}
 				},'json');	
