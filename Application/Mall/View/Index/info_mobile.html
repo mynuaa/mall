@@ -20,13 +20,13 @@
 			<IF condition="$photo_num gt 0">
 		    	<FOR start="0" end="$photo_num">
 		    		<IF condition="$i eq 0">
-		        		<img class="photo_{$i}" src="./Uploads{$goods['photo_lit'][$i]}" data-large-img-url="./Uploads{$goods['photo_cut'][$i]}">
+		        		<img class="photo_{$i}" src="./Uploads{$goods['photo_lit'][$i]}" style="display:inline-block;" data-large-img-url="./Uploads{$goods['photo_cut'][$i]}">
 		        	<ELSE/>
 		        		<img class="photo_{$i}" src="./Uploads{$goods['photo_lit'][$i]}" style="display:none;" data-large-img-url="./Uploads{$goods['photo_cut'][$i]}">
 		        	</IF>
 		   		</FOR>
 		   	<ELSE/>
-			    <img src="./Uploads/logo.jpg" data-large-img-url="./Uploads/logo.jpg">
+			    <img src="./Uploads/logo.jpg" data-large-img-url="./Uploads/logo.jpg" style="display:inline-block;" >
 			</IF>
 		</div>
 		<div id="info-image-bottom">
@@ -144,16 +144,15 @@
 				<IF condition="$panel_goods_num eq 0">
 					<li><span>该用户暂无其他出售的商品</span></li>
 				<ELSE/>
-				<li>
 					<FOREACH name="panel_goods" item="vo">
-						<div style="float:left;">&nbsp;
+						<!--<div style="float:left;">&nbsp;
 							<IF condition="$vo.need_type eq 1">
 								<span style="color:#F56C7E;"><b>出</b></span>
 							<ELSE/>
 								<span style="color:#35B787;"><b>求</b></span>
 							</IF>
-						</div>
-						<a href="./?m=mall&c=goods&id={$vo.goods_id}">{$vo.goods_name}</a></li>
+						</div>-->
+						<li><a href="./?m=mall&c=goods&id={$vo.goods_id}">{$vo.goods_name}</a></li>
 					</FOREACH>
 				</IF>
 			</ul>
@@ -166,7 +165,7 @@
 				<ELSE/>
 					<FOREACH name="panel_likes" item="vo">
 						<li>
-						<span style="float:left;">&nbsp;{$vo.username}</span>
+						<span>&nbsp;{$vo.username}</span>
 						<span style="float:right;">{$vo.collect_time}&nbsp;</span>
 						</li>
 					</FOREACH>
@@ -175,7 +174,7 @@
 		</div>
 		<div class="board">
 			<div class="board-header">猜你喜欢</div>
-			<ul>
+			<ul class="limit">
 				<FOREACH name="guess" item="vo">
 					<li>
 					<IF condition="$vo.need_type eq 1">
@@ -192,6 +191,13 @@
 <include file="./Application/Common/View/common_bottom_mobile.html" />
 </body>
 <script>
+$(function()
+{
+	$("#info-image-bottom img").click(function(){
+		var inow=$(this).index();
+		$("#info-image-top img").css({"display":"none"}).eq(inow).css({"display":"inline-block"});
+	});
+});
 function htmlEncode(str) 
 {  
     var s = "";  
@@ -310,6 +316,9 @@ jQuery(function($){
 					},'json');
 			}
 		});
+
+
+
 
 	$('#pho_1').hover(	//不知道为啥后面的几张照片放大框的大小为0，此处手动重置大小
 		function()

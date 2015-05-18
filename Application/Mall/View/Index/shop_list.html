@@ -36,6 +36,20 @@
 				</div>
 				</FOREACH>
 			</div>
+
+			<IF condition="$page_num gt 0">
+			<div id="page">
+				<a href="?m=mall">首页</a>
+				<IF condition="$page_this neq 1"><a href="?m=mall&page={$page_this-1}">上一页</a></IF>
+				<span>第 {$page_this}/{$page_num} 页</span>
+				<IF condition="$page_this neq $page_num"><a href="?m=mall&page={$page_this+1}">下一页</a></IF>
+				<a href="?m=mall&page={$page_num}">尾页</a>
+			</div>
+			</IF>
+
+
+
+
 			<div class="page" style="width:600px;margin:20px auto;">
 				<div class="page_left_left" onclick="link_to(1)"></div>
 				<IF condition="$page_this neq 1"><div class="page_left" onclick="link_to({$page_this-1})"></div></IF>

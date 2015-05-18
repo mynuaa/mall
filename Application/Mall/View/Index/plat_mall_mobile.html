@@ -18,11 +18,12 @@
 	<include file="Application/Common/View/common_header_mall_mobile.html" />
 	<div class="board">
 		<div class="board-header">商城公告</div>
-		<ul>
+		<ul class="limit" id="notice-board">
 			<FOREACH name="notice" item="vo">
 				<li><a href='./?m=admin&c=notice&id={$vo.notice_id}'>{$vo.notice_title}</a></li>
 			</FOREACH>
 		</ul>
+		<div id="more-new-notice">更多公告...</div>
 	</div>
 	<div id="content">
 	<foreach name="data" item="vo" key="k" >
@@ -30,6 +31,8 @@
 			<div class="box_left">
 				<IF condition="$vo.photo neq ''">
 				<img src="Uploads{$vo.photo}" width="100%">
+				<ELSE/>
+				<img src="./Uploads/logo.jpg" width="100%">
 				</IF>
 			</div>
 			<div class="box_right">
@@ -68,7 +71,7 @@
 	</div>
 	<div class="board">
 		<div class="board-header">最新店铺<a href="?m=mall&c=shop&a=new_shop" id="newshop">我要开店</a></div>
-		<ul>
+		<ul class="limit">
 			<FOREACH name="new_shop" item="vo">
 				<li><a href='./?m=mall&c=shop&id={$vo.shop_id}'>{$vo.shop_name}</a></li>
 			</FOREACH>
@@ -87,3 +90,9 @@
 	<include file="Application/Common/View/common_bottom_mobile.html" />
 </body>
 </html>
+<script>
+function toggleNotice(){
+	document.getElementById("notice-board").classList.toggle("limit");
+}
+document.getElementById("more-new-notice").onclick=function(){toggleNotice();}
+</script>
