@@ -17,29 +17,25 @@
 	<include file="./Application/Common/View/common_header_mall_mobile.html"/>
 	<div id="shop-list">
 		<FOREACH name="shop" item="vo">
-			<div id="sl-box">
+			<div id="sl-box" onclick="linkto({$vo.shop_id})">
 				<div id="sl-box-img">
 					<Img src="./Uploads{$vo.cover}">
 				</div>
 				<div id="sl-box-right">
 					<div id="sl-box-righttop">
-						<a href='./?m=mall&c=shop&id={$vo.shop_id}'><span>{$vo.shop_name}</span></a><br>
-						<span>共有商品 {$vo.num}件</span>
-						<span style="float:right">主营 : {$vo.shop_type}</span>
+						<span>{$vo.shop_name}</span><br>
+						<span>共有商品 {$vo.num}件</span><br>
+						<span>主营 : {$vo.shop_type}</span>
 					</div>
 					<div id="sl-box-rightbottom">
-					<a href='./?m=mall&c=shop&id={$vo.shop_id}'>
 						<FOR start="0" end="$vo.photo_num">
 							<img src="./Uploads{$vo[photo][$i]}" class="shop_img" width="100px" />
 						</FOR>
-					</a>
 					</div>
 				</div>
 			</div>
 		</FOREACH>	
 	</div>
-
-
 	<div id="page">
 		<div style="color:#000;" onclick="link_to(1)">首页</div>
 		<IF condition="$page_this neq 1">
@@ -51,18 +47,18 @@
 		</IF>
 		<div style="color:#000;" onclick="link_to({$page_num})">尾页</div>
 	</div>
-
-
-
-	
 	<include file="./Application/Common/View/common_right_green_mobile.html" />
 	<include file="./Application/Common/View/common_bottom_mobile.html" />
 </body>
 <script>
-jQuery(function($){
+$(function(){
 	window.link_to=function(page)
 	{
 		window.location.href='./?m=mall&c=shop&a=shop_list&page='+page;
+	}
+	window.linkto=function(str)
+	{
+		window.location.href='./?m=mall&c=shop&id='+str;
 	}});
 </script>
 </html>

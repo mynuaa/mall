@@ -371,7 +371,6 @@ select{
 }
 #info-image{
 	width:100%;
-	height:360px;
 	overflow:hidden;
 	box-sizing:border-box;
 	border-bottom:5px solid #34B787;
@@ -594,7 +593,6 @@ label{white-space:nowrap;}
 #self-info{
 	line-height:20px;
 	padding-left:1em;
-	width:100px;
 	height:100px;
 	float:left;
 }
@@ -844,4 +842,70 @@ hr{
 #talk_re a{
 	font-size:0.8em;
 	color:#34B787;
+}
+.self-cansee a{
+	color:#34B787;
+	float:right;
+}
+#table{
+	font-family:"微软雅黑";
+}
+#table tr{
+	height:80px;
+}
+.content_table{
+	font-family:"微软雅黑";
+}
+#new_shop_a{
+	 display:inline;
+	 float:right;
+	 margin-right:6px;
+}
+#new_shop_a a{
+	 color:#FFF;
+	 text-decoration:underline;
+	 font-size:0.9em;
+}
+.team_header{
+	height:30px;
+	border-bottom:4px solid #34B787;
+	padding-top:0.5em;
+}
+.team_header_title{
+	float:left;
+	color:#A5A5A5;
+	font-size:1.4em;
+}
+.team_content{
+	width:100%;
+	box-sizing:border-box;
+	padding:0.4em;
+	font-family:"微软雅黑";
+}
+.team_content input{
+	width:90%;
+}
+.team_content table{
+	font-family:"微软雅黑";
+	font-size:0.9em;
+}
+.person_top{
+	font-size:1.3em;
+	font-weight: bold;
+}
+.person_bot{
+	font-size:0.8em;
+	color:grey;
+	margin-top: 6px;
+	line-height: 22px;
+}
+.person{
+	width: 100%;
+	padding-bottom:10px;
+	border-bottom: 2px dotted grey;
+	margin-top:8px;
+}
+.person_left{
+	width:80px;
+	margin-left: 5px;
 }
