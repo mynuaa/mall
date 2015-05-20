@@ -20,12 +20,14 @@
 			<div id="no-result">搜索结果为空哎~~换个关键词吧！</div>
 		<ELSE/>
 		<FOREACH name="result" item="vo" key="k" >
-			<div class="box" id="{$vo.goods_id}">
+			<div class="box" id="{$vo.goods_id}" onclick="linkto({$vo.goods_id})">
 				<div class="box_left">
-					<IF condition="$vo.photo neq ''">
-					<img src="Uploads{$vo.photo}" width="100%">
-					</IF>
-				</div>
+				<IF condition="$vo.photo neq ''">
+				<img src="Uploads{$vo.photo}" width="100%">
+				<ELSE/>
+				<img src="./Uploads/logo.jpg" width="100%">
+				</IF>
+			</div>
 				<div class="box_right">
 					<div class="box_right_top">
 						<div class="good_title">
@@ -34,7 +36,7 @@
 							<ELSE/>
 								<div class="goodcondition2">求</div>
 							</IF>
-							<a href="?c=goods&id={$vo.goods_id}" target="_blank">{$vo.goods_name}</a>
+							<a>{$vo.goods_name}</a>
 						</div>
 						<div>
 							<IF condition="$vo.price eq 0">价格面议<ELSE/>￥{$vo.price}</IF>
@@ -47,13 +49,13 @@
 								<span class="col_num">{$vo.col_num}</span>
 							</span>
 							<span style="color:#66C8A3">
-								<i onclick="document.location.href='?m=mall&c=goods&id={$vo.goods_id}#talk_both'" class="fa fa-twitch"></i>
+								<i class="fa fa-twitch"></i>
 								<span>{$vo.mess_goods}</span>
 							</span>
 						</div>
 						<div class="good_infos">{$vo.data} by {$vo.username}</div>
 					</div>
-				    <div class="box_right_bottom" onclick="window.open('?m=mall&c=goods&id={$vo.goods_id}','_blank')">
+				    <div class="box_right_bottom">
 						<IF condition="$vo.description neq ''">{$vo.description}<ELSE/>这个人很懒，没有留下任何商品描述</IF>
 					</div>
 				</div>
@@ -71,4 +73,10 @@
 	<include file="Application/Common/View/common_right_green_mobile.html" />
 	<include file="Application/Common/View/common_bottom_mobile.html" />
 </body>
+<script>
+	window.linkto=function(str)
+	{
+		window.location.href='?m=mall&c=goods&id='+str;
+	}
+</script>
 </html>

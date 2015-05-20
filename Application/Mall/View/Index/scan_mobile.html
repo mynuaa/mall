@@ -58,10 +58,12 @@
 	</div>
 	<div id="content">
 	<foreach name="data" item="vo" key="k" >
-		<div class="box" id="{$vo.goods_id}">
+		<div class="box" id="{$vo.goods_id}" onclick="linkto({$vo.goods_id})">
 			<div class="box_left">
 				<IF condition="$vo.photo neq ''">
 				<img src="Uploads{$vo.photo}" width="100%">
+				<ELSE/>
+				<img src="./Uploads/logo.jpg" width="100%">
 				</IF>
 			</div>
 			<div class="box_right">
@@ -72,7 +74,7 @@
 						<ELSE/>
 							<div class="goodcondition2">求</div>
 						</IF>
-						<a href="?c=goods&id={$vo.goods_id}" target="_blank">{$vo.goods_name}</a>
+						<a>{$vo.goods_name}</a>
 					</div>
 					<div>
 						<IF condition="$vo.price eq 0">价格面议<ELSE/>￥{$vo.price}</IF>
@@ -85,7 +87,7 @@
 							<span class="col_num">{$vo.col_num}</span>
 						</span>
 						<span style="color:#66C8A3">
-							<i onclick="document.location.href='?m=mall&c=goods&id={$vo.goods_id}#talk_both'" class="fa fa-twitch"></i>
+							<i class="fa fa-twitch"></i>
 							<span>{$vo.mess_goods}</span>
 						</span>
 					</div>
@@ -108,7 +110,7 @@
 						<ELSE />其他</IF>
 						联系方式 :</td><td>{$vo.contact}
 					</div>
-			    <div class="box_right_bottom" onclick="window.open('?m=mall&c=goods&id={$vo.goods_id}','_blank')">
+			    <div class="box_right_bottom">
 					<IF condition="$vo.description neq ''">{$vo.description}<ELSE/>这个人很懒，没有留下任何商品描述</IF>
 				</div>
 			</div>
@@ -133,6 +135,10 @@
 <script>
 var array_lb=new Array("手机","电子","书籍","车辆","服饰","化妆","日用","乐器","房屋","其他","虚拟","食品");
 jQuery(function($){
+	window.linkto=function(str)
+	{
+		window.location.href='?c=goods&id='+str;
+	}
 	$(document).ready(
 		function()
 		{
