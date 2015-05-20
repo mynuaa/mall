@@ -63,6 +63,7 @@
 		</FOREACH>
 		</IF>
 	</div>
+	<IF condition="$page_num gt 0">
 	<div id="page">
 		<a href="?m=mall&a=search&page=1">首页</a>
 		<IF condition="$page_this neq 1"><a href="?m=mall&a=search&page={$page_this-1}">上一页</a></IF>
@@ -70,6 +71,7 @@
 		<IF condition="$page_this neq $page_num"><a href="?m=mall&a=search&page={$page_this+1}">下一页</a></IF>
 		<a href="?m=mall&a=search&page={$page_num}">尾页</a>
 	</div>
+	</IF>
 	<include file="Application/Common/View/common_right_green_mobile.html" />
 	<include file="Application/Common/View/common_bottom_mobile.html" />
 </body>

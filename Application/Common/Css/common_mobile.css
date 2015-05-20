@@ -579,7 +579,6 @@ input[type=text]{color:#000;border:1px solid #BBB;border-radius:0.2em;width:100%
 label{white-space:nowrap;}
 #shop-top{
 	padding:1em;
-	height:100px;
 	overflow:hidden;
 	border-bottom:2px dotted grey;
 }
@@ -593,8 +592,14 @@ label{white-space:nowrap;}
 #self-info{
 	line-height:20px;
 	padding-left:1em;
-	height:100px;
 	float:left;
+	width:150px;
+	width:50%;
+}
+#self-info div{
+	font-size:0.8em;
+	font-family:"微软雅黑";
+	word-break:break-all;
 }
 #self-info span{
 	font-size:0.8em;
@@ -908,4 +913,9 @@ hr{
 .person_left{
 	width:80px;
 	margin-left: 5px;
+}
+.teaminfo{
+	padding:0.5em;
+	width:90%;
+	text-align:center;
 }

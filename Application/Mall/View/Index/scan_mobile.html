@@ -117,7 +117,7 @@
 		</div>
 	</foreach>
 	</div>
-	
+	<IF condition="$page_num gt 0">
 	<div id="page">
 		<div style="color:#000;" onclick="window.location.href='./?m=mall&a=scan'">首页</div>
 		<IF condition="$page_this neq 1">
@@ -129,6 +129,7 @@
 		</IF>
 		<div style="color:#000;" onclick="return page_link({$page_num})">尾页</div>
 	</div>
+	</IF>
 	<include file="./Application/Common/View/common_right_green_mobile.html" />
 	<include file="./Application/Common/View/common_bottom_mobile.html" />
 </body>

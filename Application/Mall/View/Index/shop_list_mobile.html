@@ -36,6 +36,7 @@
 			</div>
 		</FOREACH>	
 	</div>
+	<IF condition="$page_num gt 0">
 	<div id="page">
 		<div style="color:#000;" onclick="link_to(1)">首页</div>
 		<IF condition="$page_this neq 1">
@@ -47,6 +48,7 @@
 		</IF>
 		<div style="color:#000;" onclick="link_to({$page_num})">尾页</div>
 	</div>
+	</IF>
 	<include file="./Application/Common/View/common_right_green_mobile.html" />
 	<include file="./Application/Common/View/common_bottom_mobile.html" />
 </body>
