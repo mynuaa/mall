@@ -595,6 +595,7 @@ label{white-space:nowrap;}
 	padding-left:1em;
 	height:100px;
 	float:left;
+	width:150px;
 }
 #self-info span{
 	font-size:0.8em;
@@ -908,4 +909,9 @@ hr{
 .person_left{
 	width:80px;
 	margin-left: 5px;
+}
+.teaminfo{
+	padding:0.5em;
+	width:90%;
+	text-align:center;
 }
