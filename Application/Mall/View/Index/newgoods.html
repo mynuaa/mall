@@ -137,9 +137,8 @@ jQuery(function($){
 		$('body').delegate('.add_file_upload',"click",function()//增加上传文件的按钮
 		{
 			var table_id = $(this).parents('.display_statu').attr('id');	
-			var xx=String(table_id);
-			var table_num=xx.substr(-1,1);
-			var need_type = $('#'+table_id+' .content_table input:radio[name="need_type'+table_num+'"]:checked').val();
+			var table_num=table_id[table_id.length-1];
+			var need_type = $('#'+table_id+' .content_table input[name="need_type'+table_num+'"]:checked').val();
 			if(need_type == 1)		//出售
  				$(this).after('<input name="photo'+table_num+'[]" type="file" class="file">');
  			else
