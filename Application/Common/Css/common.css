@@ -5,12 +5,20 @@ a{text-decoration: none;}
 a:hover{text-decoration: underline;}
 .clearfix{	clear:both;	display:block;}
 .clearfix:after{	clear:both;	content:" ";	display: block;	visibility: hidden;	height: 0;}
-input,textarea
-{	transition: all 0.30s ease-in-out;	-webkit-transition: all 0.30s ease-in-out;	-moz-transition: all 0.30s ease-in-out;
-	outline:none;	font-family: 微软雅黑,Tahoma,Verdana,STHeiTi,simsun,sans-serif;}
-input:focus {	border:#35a5e5 1px solid;	box-shadow: 0 0 5px rgba(81, 203, 238, 1);	-webkit-box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-	-moz-box-shadow: 0 0 5px rgba(81, 203, 238, 1);}
-textarea:focus{	border:#35a5e5 1px solid;	box-shadow: 0 0 5px rgba(81, 203, 238, 1);	-webkit-box-shadow: 0 0 5px rgba(81, 203, 238, 1);	-moz-box-shadow: 0 0 5px rgba(81, 203, 238, 1);}
+input,textarea{
+	transition: all 0.30s ease-in-out;
+	-webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+	outline:none;
+	font-family: 微软雅黑,Tahoma,Verdana,STHeiTi,simsun,sans-serif;
+	border: 1px solid #BBB;
+}
+input:focus,textarea:focus {
+	border: 1px solid #35a5e5;
+	box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+	-webkit-box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+	-moz-box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+}
 .common_bottom a{	color:white;}
 .panel-right a{	color:black;}
 .info_table{	color:#8B8B8B;}
