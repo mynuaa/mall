@@ -29,8 +29,7 @@ class PublicController extends Controller
         }
         if (!$uid) return false;
         $uid = json_decode($uid, true);
-        $uid = intval($uid['uid']);
-        return $uid;
+        return $uid['uid'];
     }
     public function autologin()     //自动登录
     {
