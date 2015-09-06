@@ -18,6 +18,7 @@ class PublicController extends Controller
             $result = file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxa04c7656484a07d2&secret=66fe85f09de7ce2fac6d11e075886686&code={$_GET['code']}&grant_type=authorization_code");
             $result = json_decode($result, true);
             $openid = json_encode($result['openid']);
+            $openid = preg_replace('/"/', '', $openid);
             // 处理绑定/登录
             $user = file_get_contents("http://my.nuaa.edu.cn/sso/?action=getuserbyopenid&openid=" . $openid);
             $user = json_decode($user, true);
