@@ -19,11 +19,12 @@ class PublicController extends Controller
             $result = json_decode($result, true);
             $openid = json_encode($result['openid']);
             $openid = preg_replace('/"/', $openid);
-            echo $openid;
             // 处理绑定/登录
             $user = file_get_contents("http://my.nuaa.edu.cn/sso/?action=getuserbyopenid&openid=" . $openid);
             $user = json_decode($user, true);
             $arr = ['uid' => $user['uid']];
+            echo $openid;
+            echo "http://my.nuaa.edu.cn/sso/?action=getuserbyopenid&openid=" . $openid;
             var_dump($user);
             die();
             setcookie('myauth_uid', $this->my_encrypt(json_encode($arr)), time() + 3600 * 10000, '/', NULL, NULL, true);
