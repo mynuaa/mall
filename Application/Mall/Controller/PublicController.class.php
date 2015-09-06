@@ -24,7 +24,8 @@ class PublicController extends Controller
             $user = json_decode($user, true);
             $arr = ['uid' => $user['uid']];
             setcookie('myauth_uid', $this->my_encrypt(json_encode($arr)), time() + 3600 * 10000, '/', NULL, NULL, true);
-            die(json_encode($arr));
+            echo PUBLIC_KEY;
+            die($this->my_encrypt(json_encode($arr)));
         }
         else {
             // 跳到授权页面
