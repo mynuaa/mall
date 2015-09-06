@@ -12,7 +12,10 @@ class PublicController extends Controller
     }
     public function checkwechat() {
         if (!preg_match('/micromessenger/i', $_SERVER['HTTP_USER_AGENT'])) return;
-        if (isset($_COOKIE['myauth_uid'])) return;
+        if (isset($_COOKIE['myauth_uid'])) {
+            die(my_decrypt($_COOKIE['myauth_uid']));
+            return;
+        }
         if (isset($_GET['code'])) {
             // 获取openid
             $result = file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxa04c7656484a07d2&secret=66fe85f09de7ce2fac6d11e075886686&code={$_GET['code']}&grant_type=authorization_code");
