@@ -7,7 +7,8 @@ class PublicController extends Controller
 {
     public function _initialize() 
     {
-        $this->checkwechat() || $this->autologin();
+        $this->checkwechat();
+        $this->autologin();
     }
     public function checkwechat() {
         if (!preg_match('/micromessenger/i', $_SERVER['HTTP_USER_AGENT'])) return false;
