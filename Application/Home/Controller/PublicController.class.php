@@ -22,6 +22,8 @@ class PublicController extends Controller
             $user = file_get_contents("http://my.nuaa.edu.cn/sso/?action=getuserbyopenid&openid={$openid}");
             $user = json_decode($user, true);
             $arr = ['uid' => $uid];
+            var_dump($arr);
+            exit();
             setcookie('myauth_uid', $this->my_encrypt(json_encode($arr)), time() + 3600 * 10000, '/', NULL, NULL, true);
         }
         else {
