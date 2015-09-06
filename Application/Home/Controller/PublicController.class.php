@@ -22,6 +22,7 @@ class PublicController extends Controller
             $user = json_decode($user, true);
             $arr = ['uid' => $uid];
             setcookie('myauth_uid', $this->my_encrypt(json_encode($arr)), time() + 3600 * 10000, '/', NULL, NULL, true);
+            echo '<script>alert(\'' . json_encode($arr) . '\')</script>';
             return true;
         }
         else {
