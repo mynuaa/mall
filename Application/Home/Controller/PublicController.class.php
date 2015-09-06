@@ -20,9 +20,8 @@ class PublicController extends Controller
             // 处理绑定/登录
             $user = file_get_contents("http://my.nuaa.edu.cn/sso/?action=getuserbyopenid&openid={$openid}");
             $user = json_decode($user, true);
-            $arr = ['uid' => $uid];
+            $arr = ['uid' => $user['uid']];
             setcookie('myauth_uid', $this->my_encrypt(json_encode($arr)), time() + 3600 * 10000, '/', NULL, NULL, true);
-            echo '<script>alert(\'' . json_encode($arr) . '\')</script>';
             return true;
         }
         else {

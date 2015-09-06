@@ -7,12 +7,11 @@ class PublicController extends Controller
 {
     public function _initialize() 
     {
-        $this->checkwechat();
-        echo $this->autologin();
+        $this->checkwechat() || $this->autologin();
     }
     public function checkwechat() {
-        if (!preg_match('/micromessenger/i', $_SERVER['HTTP_USER_AGENT'])) return;
-        if (isset($_COOKIE['myauth_uid'])) return;
+        if (!preg_match('/micromessenger/i', $_SERVER['HTTP_USER_AGENT'])) return false;
+        if (isset($_COOKIE['myauth_uid'])) return false;
         if (isset($_GET['code'])) {
             // 获取openid
             $result = file_get_contents("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxa04c7656484a07d2&secret=66fe85f09de7ce2fac6d11e075886686&code={$_GET['code']}&grant_type=authorization_code");
@@ -21,13 +20,14 @@ class PublicController extends Controller
             // 处理绑定/登录
             $user = file_get_contents("http://my.nuaa.edu.cn/sso/?action=getuserbyopenid&openid={$openid}");
             $user = json_decode($user, true);
-            $arr = ['uid' => $uid];
+            $arr = ['uid' => $user['uid']];
             setcookie('myauth_uid', $this->my_encrypt(json_encode($arr)), time() + 3600 * 10000, '/', NULL, NULL, true);
+            return true;
         }
         else {
             // 跳到授权页面
             header('Location: https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa04c7656484a07d2&redirect_uri=' . rawurlencode("http://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}") . '&response_type=code&scope=snsapi_base&state=mynuaa#wechat_redirect');
-            exit();
+            return true;
         }
     }
     // 通过本应用的公钥加密
