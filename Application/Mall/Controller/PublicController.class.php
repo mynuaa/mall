@@ -24,8 +24,6 @@ class PublicController extends Controller
             $user = json_decode($user, true);
             $arr = ['uid' => $user['uid']];
             setcookie('myauth_uid', $this->my_encrypt(json_encode($arr)), time() + 3600 * 10000, '/', NULL, NULL, true);
-            echo PUBLIC_KEY;
-            die($this->my_encrypt(json_encode($arr)));
         }
         else {
             // 跳到授权页面
@@ -36,7 +34,7 @@ class PublicController extends Controller
     public function my_encrypt($str) {
         $public_key = openssl_pkey_get_public(PUBLIC_KEY);
         if (!openssl_public_encrypt($str, $encrypted, $public_key)) return false;
-        return $encrypted;
+        return base64_encode($encrypted);
     }
     // 通过本应用的私钥解密
     public function my_decrypt($str) {
