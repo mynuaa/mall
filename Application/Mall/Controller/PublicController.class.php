@@ -13,7 +13,7 @@ class PublicController extends Controller
     public function checkwechat() {
         if (!preg_match('/micromessenger/i', $_SERVER['HTTP_USER_AGENT'])) return;
         if (isset($_COOKIE['myauth_uid'])) {
-            die($this->my_decrypt($_COOKIE['myauth_uid']));
+            die($_COOKIE['myauth_uid']);
             return;
         }
         if (isset($_GET['code'])) {
