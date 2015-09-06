@@ -23,9 +23,9 @@ class PublicController extends Controller
             $user = file_get_contents("http://my.nuaa.edu.cn/sso/?action=getuserbyopenid&openid=" . $openid);
             $user = json_decode($user, true);
             $arr = ['uid' => $user['uid']];
-            setcookie('myauth_uid', $this->my_encrypt(json_encode($arr)), time() + 3600 * 10000, '/', NULL, NULL, true);
             echo $this->my_decrypt($this->my_encrypt(json_encode($arr)));
             die();
+            setcookie('myauth_uid', $this->my_encrypt(json_encode($arr)), time() + 3600 * 10000, '/', NULL, NULL, true);
         }
         else {
             // 跳到授权页面
