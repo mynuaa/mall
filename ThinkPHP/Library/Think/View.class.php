@@ -69,8 +69,8 @@ class View {
             'newt','noki','oper','palm','pana','pant','phil','play','port','prox',
             'qwap','sage','sams','sany','sch-','sec-','send','seri','sgh-','shar',
             'sie-','siem','smal','smar','sony','sph-','symb','t-mo','teli','tim-',
-            'tosh','tsm-','upg1','upsi','vk-v','voda','wap-','wapa','wapi','wapp',
-            'wapr','webc','winw','winw','xda','xda-'
+            'tsm-','upg1','upsi','vk-v','voda','wap-','wapa','wapi','wapp','wapr',
+            'webc','winw','winw','xda','xda-'
         );
         foreach ($mobile_agents as $device)
             if (stristr($user_agent, $device))
