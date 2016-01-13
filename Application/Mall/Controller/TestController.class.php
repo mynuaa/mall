@@ -5,7 +5,7 @@ Vendor('ThinkphpUcenter.UcApi');
 class TestController extends PublicController {
     public function index()
     {
-        var_dump(session('uid'));
+        var_dump(session('?uid'));
     }
 
 }
