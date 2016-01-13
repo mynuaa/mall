@@ -24,8 +24,8 @@ class PublicController extends Controller
             $user = json_decode($user, true);
             $arr = ['uid' => $user['uid']];
             setcookie('myauth_uid', $this->my_encrypt(json_encode($arr)), time() + 3600 * 10000, '/', NULL, NULL, true);
-            $_SESSION['uid'] = $user['uid'];
-            $_SESSION['username'] = $user['username'];
+            session('uid', $user['uid']);
+            session('username', $user['username']);
         }
         else {
             // 跳到授权页面
@@ -58,12 +58,12 @@ class PublicController extends Controller
     {
         if (isset($_COOKIE['myauth_uid'])) {
             $uid = $this->getuid();
-            $_SESSION['uid'] = $uid;
-            $_SESSION['username'] = uc_get_user($uid, 1)[1];
+            session('uid', $uid);
+            session('username', uc_get_user($uid, 1)[1]);
         }
         else {
-            unset($_SESSION['uid']);
-            unset($_SESSION['username']);
+            session('uid', null);
+            session('username', null);
         }
     }
 }
