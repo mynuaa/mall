@@ -1,7 +1,7 @@
 <?php
 namespace Mall\Controller;
 use Think\Controller;
-class ShopController extends Controller {
+class ShopController extends PublicController {
     public function index()    //店铺页面
     {
         $Shop=D('Shop');

@@ -2,7 +2,7 @@
 namespace Admin\Controller;
 use Think\Controller;
 Vendor('ThinkphpUcenter.UcApi');
-class OtherController extends Controller
+class OtherController extends PublicController
 {
 	public function index()	//查看管理员列表
 	{
