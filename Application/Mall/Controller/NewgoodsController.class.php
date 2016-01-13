@@ -1,11 +1,10 @@
 <?php
 namespace Mall\Controller;
 use Think\Controller;
-class NewgoodsController extends Controller
+class NewgoodsController extends PublicController
 {
 	public function index()
 	{
-		var_dump(session('uid'));
 		if(!session('?uid'))
 		{
 			$this->error("发布新需求需要先登录",'./?m=mall&load=1');
