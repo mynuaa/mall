@@ -1,7 +1,7 @@
 <?php
 namespace Mall\Controller;
 use Think\Controller;
-class GoodsController extends Controller
+class GoodsController extends PublicController
 {
 	public function index()
 	{

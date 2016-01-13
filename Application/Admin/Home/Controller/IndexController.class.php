@@ -4,7 +4,7 @@ namespace Home\Controller;
 use Think\Controller;
 header("Content-Type: text/html; charset=utf8");
 Vendor('ThinkphpUcenter.UcApi');
-class IndexController extends Controller 
+class IndexController extends PublicController 
 {
     public function index()
     { 

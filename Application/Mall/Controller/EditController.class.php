@@ -4,7 +4,7 @@ use Think\Controller;
 
 header("Content-Type: text/html; charset=utf8");
 
-class EditController extends Controller
+class EditController extends PublicController
 {
 	public function index()	//编辑页面
 	{
