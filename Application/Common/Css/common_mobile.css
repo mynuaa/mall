@@ -8,6 +8,7 @@ a{
 .fl{float:left;}
 .fr{float:right;}
 html,body{
+	font-family:"微软雅黑";
 	margin:0 auto;
 	padding:0;
 	position:absolute;
@@ -44,7 +45,6 @@ html,body{
 	padding:0 0.8em;
 }
 #navbar{
-	font-family:"微软雅黑";
 	background:#149767;
 	clear:both;
 	position:absolute;
@@ -277,8 +277,9 @@ select{
 }
 .box{
 	margin:10px 0;
+	padding-bottom:10px;
 	width:100%;
-	border:2px solid #34B787;
+	border-bottom:1px solid #BBB;
 	padding:0.2em 0 0.5em;
 	overflow:hidden;
 	box-sizing:border-box;
