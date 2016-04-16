@@ -2,4 +2,4 @@ Application/Runtime/
 Uploads
 googledeeaaa4a1809f938.html
 config.inc.php
-/ThinkPHP/Conf/convention.php
+Application/Common/Conf/config.php
