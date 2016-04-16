@@ -9,6 +9,23 @@
 	<script type="text/javascript" src="./Application/Common/Js/page.js"></script>
 	<script type="text/javascript" src="./Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
 	<script type="text/javascript" src="./Application/Common/Js/collect.js"></script>
+	<script type="text/javascript">
+		var evt = new Event();
+    	m = new Magnifier(evt);
+		var page="mall";
+		var goods_id={$goods['goods_id']};
+		var goods_name="{$goods['goods_name']}";
+		var sold_uid={$goods['uid']};
+		var sold_username="{$goods['username']}";
+		jQuery(function($){
+			m.attach({
+				    thumb: '.img',
+				    largeWrapper: 'preview',
+				    zoom:2,
+				    zoomable:true
+				});
+		});
+	</script>
 	<style>
 	.bdsharebuttonbox a{color:black;}
 	</style>
