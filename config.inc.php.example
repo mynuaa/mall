@@ -1,0 +1,28 @@
+<?php
+define('UC_CONNECT', 'mysql');
+define('UC_DBHOST', 'localhost');
+define('UC_DBUSER', 'root');
+define('UC_DBPW', '');
+define('UC_DBCHARSET', 'utf8');
+define('UC_DBTABLEPRE', '`ucenter`.');
+define('UC_DBCONNECT', '0');
+define('UC_KEY', '123456');
+define('UC_API', 'http://localhost/ucenter');
+define('UC_CHARSET', 'utf-8');
+define('UC_IP', '');
+define('UC_APPID', '2');
+define('UC_PPP', '20');
+
+// cookie 作用域
+$cookiedomain = '';
+// cookie 作用路径
+$cookiepath = '/';
+
+// 本应用的私钥
+define('PRIVATE_KEY', '-----BEGIN RSA PRIVATE KEY-----
+-----END RSA PRIVATE KEY-----');
+// 主服务器的公钥，需分发给各应用来进行加密
+define('PUBLIC_KEY', '-----BEGIN PUBLIC KEY-----
+-----END PUBLIC KEY-----');
+// 主服务器的公钥，供前端JS加密使用
+define('PUBLIC_KEY_FOR_JS', '');
