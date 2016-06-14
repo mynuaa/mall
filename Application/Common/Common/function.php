@@ -84,7 +84,40 @@ function send_message($from_uid,$from_username,$to_uid,$to_username,$content,$go
     $data['goods_name']=$goods_name;
     $data['message_type']=$message_type;
     $result=$message->data($data)->add();
-    
+    $m_title = ' ';
+    $m_content = '';
+    $collection=M('Newgoods');
+    $result=$collection->where('goods_id=%d',$goods_id)->select();
+    $goods_name = '';
+    if($result[0]['goods_name']!='') {
+    	$goods_name = $result[0]['goods_name'];
+    }
+    switch ($message_type) {
+    	case 0:
+    		$m_content = '您在南航mall中的主题"'.$goods_name.'"有回复。'.'请访问http://localhost/zhifeiji/mall?m=mall&c=goods&id='.$goods_id.'查看';
+    		break;
+    	case 1:
+    		$m_content = '您在南航mall收藏的物品"'.$goods_name.'"已被售出';
+    		break;
+    	case 2:
+    		$m_content = '管理员为您在南航mall中的商品"'.$goods_name.'"完成交易';
+    		break;
+    	case 3:
+    		$m_content = '管理员删除了您在南航mall中的商品"'.$goods_name.'"';
+    		break;
+    	case 4:
+    		$m_content = '您在南航mall中收藏的物品"'.$goods_name.'"已被删除';
+    		break;
+    }
+    if($uc_result = uc_pm_send($from_uid,$to_uid,$m_title,$m_content,1,0,0,0) > 0) {
+    	return $result;
+    }
+    else {
+    	$debug = M('Debug');
+    	$bug_data['message'] = $uc_result;
+    	$debug->data($bug_data)->add();
+    	return 0;
+	}
     if($result>0)  return $result; 
     else return 0;
 }
