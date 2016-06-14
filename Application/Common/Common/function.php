@@ -97,26 +97,28 @@ function send_message($from_uid,$from_username,$to_uid,$to_username,$content,$go
     		$m_content = '您在南航mall中的主题"'.$goods_name.'"有回复。'.'请访问http://localhost/zhifeiji/mall?m=mall&c=goods&id='.$goods_id.'查看';
     		break;
     	case 1:
-    		$m_content = '您在南航mall收藏的物品"'.$goods_name.'"已被售出';
+    		$m_content = '您在南航mall收藏的物品"'.$goods_name.'"已被售出'.'请访问南航mall查看';
     		break;
     	case 2:
-    		$m_content = '管理员为您在南航mall中的商品"'.$goods_name.'"完成交易';
+    		$m_content = '管理员为您在南航mall中的商品"'.$goods_name.'"完成交易'.'请访问南航mall查看';
     		break;
     	case 3:
-    		$m_content = '管理员删除了您在南航mall中的商品"'.$goods_name.'"';
+    		$m_content = '管理员删除了您在南航mall中的商品"'.$goods_name.'"请访问南航mall查看';
     		break;
     	case 4:
-    		$m_content = '您在南航mall中收藏的物品"'.$goods_name.'"已被删除';
+    		$m_content = '您在南航mall中收藏的物品"'.$goods_name.'"已被删除'.'请访问南航mall查看';
     		break;
     }
-    if($uc_result = uc_pm_send($from_uid,$to_uid,$m_title,$m_content,1,0,0,0) > 0) {
-    	return $result;
-    }
-    else {
-    	$debug = M('Debug');
-    	$bug_data['message'] = $uc_result;
-    	$debug->data($bug_data)->add();
-    	return 0;
+    if($from_uid != $to_uid) {
+	    if($uc_result = uc_pm_send($from_uid,$to_uid,$m_title,$m_content,1,0,0,0) > 0) {
+	    	return $result;
+	    }
+	    else {
+	    	/*$debug = M('Debug');
+	    	$bug_data['message'] = $uc_result;
+	    	$debug->data($bug_data)->add();*/
+	    	return 0;
+		}
 	}
     if($result>0)  return $result; 
     else return 0;
