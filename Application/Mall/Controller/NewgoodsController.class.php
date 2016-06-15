@@ -12,7 +12,7 @@ class NewgoodsController extends PublicController
 		}
 		if(session('?uid'))
         {
-            $this->assign('mess_id',get_user_mess(session('uid')));
+            $this->assign('mess_id',M('Message')->get_user_mess(session('uid')));
         }
 		$Config=D('Config');
 		$Shop=D('Shop');

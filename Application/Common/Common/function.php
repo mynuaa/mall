@@ -52,14 +52,6 @@ function get_goods_mess($goods_id)
     return $num;
 }
 
-function get_user_mess($uid)
-{
-    $message=M('Message');
-    $num=$message->where("to_uid=%d and status='1'",$uid)->count();
-    
-    return $num;
-}
-
 function is_admin($uid,$username)	//判断是否为管理员，如果是管理员，返回权限等级1,2，否则返回0
 {
 	$admin=M('Admin');
