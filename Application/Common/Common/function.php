@@ -18,30 +18,26 @@ function re_xss($list)
     return $list;
 }
 
-function get_shop_name($shop_id)
+function get_shop_info($type,$shop_id)
 {
 	$Shop=M('Shop');
 
 	$data['shop_id']=$shop_id;
 	$data['is_open']=1;
-	$result=$Shop->where($data)->select();
-	if($result[0]['shop_id']!='')
-		return $result[0]['shop_name'];
-	else
-		return 0;
-}
-
-function get_shop_avator($shop_id)
-{
-	$Shop=M('Shop');
-
-	$data['shop_id']=$shop_id;
-	$data['is_open']=1;
-	$result=$Shop->where($data)->select();
-	if($result[0]['shop_id']!='')
-		return substr($result[0]['cover'], 1);
-	else
-		return 0;
+	switch($type) {
+		case 'name':
+			$result=$Shop->where($data)->select();
+			if($result[0]['shop_id']!='')
+				return $result[0]['shop_name'];
+			else
+				return 0;
+		case 'avator':
+			$result=$Shop->where($data)->select();
+			if($result[0]['shop_id']!='')
+				return substr($result[0]['cover'], 1);
+			else
+				return 0;
+	}
 }
 
 function get_goods_mess($goods_id)
