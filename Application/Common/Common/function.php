@@ -82,7 +82,7 @@ function send_message($from_uid,$from_username,$to_uid,$to_username,$content,$go
     }
     switch ($message_type) {
     	case 0:
-    		$m_content = '您在南航mall中的主题"'.$goods_name.'"有回复。'.'请访问http://localhost/zhifeiji/mall?m=mall&c=goods&id='.$goods_id.'查看';
+    		$m_content = '您在南航mall中的主题"'.$goods_name.'"有回复。'.'请访问http://my.nuaa.edu.cn/mall?m=mall&c=goods&id='.$goods_id.'查看';
     		break;
     	case 1:
     		$m_content = '您在南航mall收藏的物品"'.$goods_name.'"已被售出'.'请访问南航mall查看';
