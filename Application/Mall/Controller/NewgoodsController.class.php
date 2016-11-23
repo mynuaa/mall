@@ -5,6 +5,7 @@ class NewgoodsController extends PublicController
 {
 	public function index()
 	{
+		$Message = D('Message');
 		if(!session('?uid'))
 		{
 			$this->error("发布新需求需要先登录",'./?m=mall&load=1');
@@ -12,7 +13,7 @@ class NewgoodsController extends PublicController
 		}
 		if(session('?uid'))
         {
-            $this->assign('mess_id',get_user_mess(session('uid')));
+             $this->assign('mess_id',$Message->get_user_mess(session('uid')));
         }
 		$Config=D('Config');
 		$Shop=D('Shop');

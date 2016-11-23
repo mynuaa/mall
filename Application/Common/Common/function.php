@@ -18,30 +18,26 @@ function re_xss($list)
     return $list;
 }
 
-function get_shop_name($shop_id)
+function get_shop_info($type,$shop_id)
 {
 	$Shop=M('Shop');
 
 	$data['shop_id']=$shop_id;
 	$data['is_open']=1;
-	$result=$Shop->where($data)->select();
-	if($result[0]['shop_id']!='')
-		return $result[0]['shop_name'];
-	else
-		return 0;
-}
-
-function get_shop_avator($shop_id)
-{
-	$Shop=M('Shop');
-
-	$data['shop_id']=$shop_id;
-	$data['is_open']=1;
-	$result=$Shop->where($data)->select();
-	if($result[0]['shop_id']!='')
-		return substr($result[0]['cover'], 1);
-	else
-		return 0;
+	switch($type) {
+		case 'name':
+			$result=$Shop->where($data)->select();
+			if($result[0]['shop_id']!='')
+				return $result[0]['shop_name'];
+			else
+				return 0;
+		case 'avator':
+			$result=$Shop->where($data)->select();
+			if($result[0]['shop_id']!='')
+				return substr($result[0]['cover'], 1);
+			else
+				return 0;
+	}
 }
 
 function get_goods_mess($goods_id)
@@ -49,14 +45,6 @@ function get_goods_mess($goods_id)
     $message=M('Message');
     $num=$message->where("goods_id=%d and message_type='0'",$goods_id)->count();
  
-    return $num;
-}
-
-function get_user_mess($uid)
-{
-    $message=M('Message');
-    $num=$message->where("to_uid=%d and status='1'",$uid)->count();
-    
     return $num;
 }
 
@@ -84,7 +72,42 @@ function send_message($from_uid,$from_username,$to_uid,$to_username,$content,$go
     $data['goods_name']=$goods_name;
     $data['message_type']=$message_type;
     $result=$message->data($data)->add();
-    
+    $m_title = ' ';
+    $m_content = '';
+    $collection=M('Newgoods');
+    $result=$collection->where('goods_id=%d',$goods_id)->select();
+    $goods_name = '';
+    if($result[0]['goods_name']!='') {
+    	$goods_name = $result[0]['goods_name'];
+    }
+    switch ($message_type) {
+    	case 0:
+    		$m_content = '您在南航mall中的主题"'.$goods_name.'"有回复。'.'请访问http://my.nuaa.edu.cn/mall?m=mall&c=goods&id='.$goods_id.'查看';
+    		break;
+    	case 1:
+    		$m_content = '您在南航mall收藏的物品"'.$goods_name.'"已被售出'.'请访问南航mall查看';
+    		break;
+    	case 2:
+    		$m_content = '管理员为您在南航mall中的商品"'.$goods_name.'"完成交易'.'请访问南航mall查看';
+    		break;
+    	case 3:
+    		$m_content = '管理员删除了您在南航mall中的商品"'.$goods_name.'"请访问南航mall查看';
+    		break;
+    	case 4:
+    		$m_content = '您在南航mall中收藏的物品"'.$goods_name.'"已被删除'.'请访问南航mall查看';
+    		break;
+    }
+    if($from_uid != $to_uid) {
+	    if($uc_result = uc_pm_send($from_uid,$to_uid,$m_title,$m_content,1,0,0,0) > 0) {
+	    	return $result;
+	    }
+	    else {
+	    	/*$debug = M('Debug');
+	    	$bug_data['message'] = $uc_result;
+	    	$debug->data($bug_data)->add();*/
+	    	return 0;
+		}
+	}
     if($result>0)  return $result; 
     else return 0;
 }

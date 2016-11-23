@@ -57,8 +57,8 @@ class NewgoodsModel extends Model
         //检测是否为商铺商品
         if($goods[0]['Concern_shopid'] != 0 )   //如果属于商铺商品
         {
-            $shop_name=get_shop_name($goods[0]['Concern_shopid']);
-            $shop_avator=get_shop_avator($goods[0]['Concern_shopid']);
+            $shop_name=get_shop_info('name',$goods[0]['Concern_shopid']);
+            $shop_avator=get_shop_info('avator',$goods[0]['Concern_shopid']);
             if($shop_avator && $shop_name)
             {
                 $goods[0]['username']=$shop_name;
@@ -93,8 +93,8 @@ class NewgoodsModel extends Model
             }*/
             if($value['Concern_shopid'] != 0)   //如果属于商铺商品
             {
-                $shop_name=get_shop_name($value['Concern_shopid']);
-                $shop_avator=get_shop_avator($value['Concern_shopid']);
+                $shop_name=get_shop_info('name',$value['Concern_shopid']);
+                $shop_avator=get_shop_info('avator',$value['Concern_shopid']);
                 if($shop_avator && $shop_name)
                 {
                     $list[$key]['username']=$shop_name;
@@ -138,8 +138,8 @@ class NewgoodsModel extends Model
             }*/
             if($value['Concern_shopid'] != 0)   //如果属于商铺商品
             {
-                $list[$key]['username']=get_shop_name($value['Concern_shopid']);
-                $list[$key]['shop_avator']=get_shop_avator($value['Concern_shopid']);
+                $list[$key]['username']=get_shop_info('name',$value['Concern_shopid']);
+                $list[$key]['shop_avator']=get_shop_info('avator',$value['Concern_shopid']);
             }
         }
 

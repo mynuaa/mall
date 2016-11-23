@@ -2,8 +2,8 @@
 
 define('IN_DISCUZ', TRUE);
 
-define('UC_CLIENT_VERSION', '1.5.0');	//note UCenter 版本标识
-define('UC_CLIENT_RELEASE', '20081031');
+define('UC_CLIENT_VERSION', '1.6.0');	//note UCenter 版本标识
+define('UC_CLIENT_RELEASE', '20110501');
 
 define('API_DELETEUSER', 0);		//note 用户删除 API 接口开关
 define('API_RENAMEUSER', 0);		//note 用户改名 API 接口开关
