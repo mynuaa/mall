@@ -20,7 +20,7 @@ function re_xss($list)
 
 function get_shop_info($type,$shop_id)
 {
-	$Shop=M('Shop');
+	$Shop=D('Shop');
 
 	$data['shop_id']=$shop_id;
 	$data['is_open']=1;
@@ -42,7 +42,7 @@ function get_shop_info($type,$shop_id)
 
 function get_goods_mess($goods_id)
 {
-    $message=M('Message');
+    $message=$D('Message');
     $num=$message->where("goods_id=%d and message_type='0'",$goods_id)->count();
  
     return $num;
@@ -50,7 +50,7 @@ function get_goods_mess($goods_id)
 
 function is_admin($uid,$username)	//判断是否为管理员，如果是管理员，返回权限等级1,2，否则返回0
 {
-	$admin=M('Admin');
+	$admin=D('Admin');
 	$result=$admin->where('admin_uid=%d and admin_name=%d',$uid,$username)->select();
 	if(count($result)==1)
 	    return $result[0]['admin_grade'];
@@ -60,7 +60,7 @@ function is_admin($uid,$username)	//判断是否为管理员，如果是管理�
 
 function send_message($from_uid,$from_username,$to_uid,$to_username,$content,$goods_id,$goods_name,$message_type)
 {
-	$message=M('Message');
+	$message=D('Message');
     $data['data']=date("Y-m-d H:i:s",time());
     $data['from_uid']=$from_uid;
     $data['from_username']=$from_username;
@@ -114,7 +114,7 @@ function send_message($from_uid,$from_username,$to_uid,$to_username,$content,$go
 
 function colle_over($goods_id,$type)	//当某件商品被删除或卖出时，发消息通知所有收藏的用户同时删除收藏记录 0为出错，1为成功操作 type1删除 0售出
 {
-	$collection=M('Collection');
+	$collection=D('Collection');
 	$result=$collection->where('goods_id=%d',$goods_id)->select();
 	$not=1;
 	if($result[0]['goods_id']!='')
@@ -183,7 +183,7 @@ function is_banned()	//判断当前用户是否超出禁言期，如果已超出
 
 function is_shopadmin()	//判断是否为店铺管理员
 {
-	$Shop=M('Shop');
+	$Shop=D('Shop');
 	$condition['admin_id']=session('uid');
 
 	return $Shop->where($condition)->count();	
@@ -191,7 +191,7 @@ function is_shopadmin()	//判断是否为店铺管理员
 
 function get_shopid()	//获取当前用户管理的商铺ID
 {
-	$Shop=M('Shop');
+	$Shop=D('Shop');
 	$condition['admin_id']=session('uid');
 	$data=$Shop->where($condition)->select();
 	if($data[0]['shop_id'] > 0)
@@ -201,7 +201,7 @@ function get_shopid()	//获取当前用户管理的商铺ID
 }
 function get_classify_num($num)	//获取分类的当天更新数目
 {
-	$newgoods=M('Newgoods');
+	$newgoods=D('Newgoods');
 	if(is_numeric($num) && $num >= 0 && $num <=11)
 		$result=$newgoods->where("DATE(data)='".date('Y-m-d',time())."' and classify=".$num)->count();
 	else
