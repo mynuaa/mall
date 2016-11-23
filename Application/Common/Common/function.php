@@ -42,7 +42,7 @@ function get_shop_info($type,$shop_id)
 
 function get_goods_mess($goods_id)
 {
-    $message=$D('Message');
+    $message=D('Message');
     $num=$message->where("goods_id=%d and message_type='0'",$goods_id)->count();
  
     return $num;

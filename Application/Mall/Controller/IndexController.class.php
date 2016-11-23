@@ -172,7 +172,7 @@ class IndexController extends PublicController {
         if($shop_id>0)  //如果有店铺
             $this->assign("shop_id",$shop_id);
         //初始化未读消息数目
-        if(session('?uid'))  $this->assign('mess_id',D('Message')->get_user_mess(session('uid')));
+        if(session('?uid'))  $this->assign('mess_id',$Message->get_user_mess(session('uid')));
 
         //分页载入
         $num=$Newgoods->get_search_num($_GET['search_content']);
