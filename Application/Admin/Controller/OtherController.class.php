@@ -221,18 +221,38 @@ class OtherController extends PublicController
         {
             $r['code']=1;
             $Newgoods=M('Newgoods');
-            $r['all_newgoodsnum_chu']=$Newgoods->where("need_type='1'")->count();
-            $r['all_newgoodsnum_qiu']=$Newgoods->where("need_type='0'")->count();
-            $r['today_newgoodsnum_chu']=$Newgoods->where("DATE(data)='".date('Y-m-d',time())."' and need_type='1'")->count();
-            $r['today_newgoodsnum_qiu']=$Newgoods->where("DATE(data)='".date('Y-m-d',time())."' and need_type='0'")->count();
+            $r['all_newgoodsnum_chu']=$Newgoods->where("need_type='1'")->count();//总出
+            $r['all_newgoodsnum_qiu']=$Newgoods->where("need_type='0'")->count();//总求
+            $r['today_newgoodsnum_chu']=$Newgoods->where("DATE(data)='".date('Y-m-d',time())."' and need_type='1'")->count();//昨日出
+            $r['today_newgoodsnum_qiu']=$Newgoods->where("DATE(data)='".date('Y-m-d',time())."' and need_type='0'")->count();//昨日求
             $Soldout=M('Soldout');
-            $r['all_soldgoodsnum_chu']=$Soldout->where("need_type='1'")->count();
-            $r['all_soldgoodsnum_qiu']=$Soldout->where("need_type='0'")->count();
-            $r['today_soldgoodsnum_chu']=$Soldout->where("DATE(data)='".date('Y-m-d',time())."' and need_type='1'")->count();
-            $r['today_soldgoodsnum_qiu']=$Soldout->where("DATE(data)='".date('Y-m-d',time())."' and need_type='0'")->count();
+            $r['all_soldgoodsnum_chu']=$Soldout->where("need_type='1'")->count();//总出 成交
+            $r['all_soldgoodsnum_qiu']=$Soldout->where("need_type='0'")->count();//总求 成交
+            $r['today_soldgoodsnum_chu']=$Soldout->where("CLOSE_TIME='".date('Y-m-d',time())."' and need_type='1'")->count();//昨日出 成交
+            $r['today_soldgoodsnum_qiu']=$Soldout->where("CLOSE_TIME='".date('Y-m-d',time())."' and need_type='0'")->count();//昨日求 DATE
             $Config=M('Config');
-            $r['all_usernum']=$Config->count();
-            $r['today_usernum']=$Config->where("DATE(data)='".date('Y-m-d',time())."'")->count();
+            $r['all_usernum']=$Config->count();//总发帖数
+            $r['today_usernum']=$Config->where("DATE(data)='".date('Y-m-d',time())."'")->count();//今日贴数
+        }
+        $this->ajaxReturn($r);
+    }
+
+    public function get_chart(){
+        if(!IS_AJAX || !session('?uid')){
+            $r['code']=-1;
+        }else if(is_admin(session('uid'),session('username'))<=0) {
+            $r['code']=-2;      //管理员权限不够
+        }else{
+            $r['code']=1;
+            $Soldout=M('Soldout');
+            
+            for($i=0;$i<7;$i++){//直接在服务端输出迎合g2库的json格式
+                $r["chu"][$i]['sum']=$Soldout->where("CLOSE_TIME='".date('Y-m-d',strtotime("-{$i} day"))."' and need_type='1'")->count();
+                $r["chu"][$i]['date']=date('m月d日',strtotime("-{$i} day"));
+                $r["qiu"][$i]['sum']=$Soldout->where("CLOSE_TIME='".date('Y-m-d',strtotime("-{$i} day"))."' and need_type='0'")->count();
+                $r["qiu"][$i]['date']=date('m月d日',strtotime("-{$i} day"));
+            }
+        
         }
         $this->ajaxReturn($r);
     }

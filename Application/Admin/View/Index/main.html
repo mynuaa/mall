@@ -5,9 +5,10 @@
 	<title>{$app_title}</title>
 	<link rel="stylesheet" type="text/css" href="./Application/Admin/Css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="./Application/Admin/Css/bootstrap-theme.min.css">
-	<script type="text/javascript" src="./Application/Common/Js/jquery-1.10.2.min.js"></script>
-	<script type="text/javascript" src="./Application/Common/Noty/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+	<script type="text/javascript" src="../lib/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="../lib/jquery/jquery.noty.packaged.min.js"></script>
 	<script type="text/javascript" src="./Application/Admin/js/bootstrap.min.js"></script>
+	<script src="../lib/g2/g2.2.2.0.js"></script>
 </head>
 <body>
 	<div style="width:1000px;margin:30px auto;border:2px solid #CCC;border-radius:10px;min-height:200px;padding:15px 20px;">
@@ -134,9 +135,12 @@
 	        	<div style="width:100%;text-align:right;margin-top:10px;"><a href="#" class="search_shop">查看所有商铺</a></div>
 	        </div>
 	        <div class="tab-pane active" id="tab5">
-	        	<div style="margin-top:10px;">
+	        	<div style="margin-top:10px;height: 300px">
 	        		<span style="font-size:18px;font-weight:bold;">实时数据统计</span>&nbsp;&nbsp;<a id="get_tj" href="javascript:void">获取数据</a>
-	        		<div style="margin-top:10px;" id="tj_area"></div>
+	        		<br>
+	        		<div style="margin-top:10px;width: 20%;position: relative;float: left; " id="tj_area"></div>
+	        		<!--<div style="width: 70% ;height:100px;background-color: black;position: relative;float: right;"></div>-->
+	        		<div id="c1" style="width:70%;position: relative;float: right;"></div>
 	        	</div>
 	        </div>
         </div>
@@ -478,14 +482,62 @@ jQuery(function($){
 			if(r.code)
 			{
 				console.log(r);
-				noty({text: '获取数据成功',layout: 'center', type: 'success',timeout:'1000',});
-				$('#tj_area').append("今日发布用户数："+r.today_usernum+"<br/>"+"总发布用户数："+r.all_usernum+"<br/><br/>"+"今日未成交数_出售："+r.today_newgoodsnum_chu+"<br/>"+"今日未成交数_求购："+r.today_newgoodsnum_qiu+"<br/>"+"总未成交数_出售："+r.all_newgoodsnum_chu+"<br/>"+"总未成交数_求购："+r.all_newgoodsnum_qiu+"<br/><br/>"+"今日已成交数_出售："+r.today_soldgoodsnum_chu+"<br/>"+"今日已成交数_求购："+r.today_soldgoodsnum_qiu+"<br/>"+"总成交数_出售："+r.all_soldgoodsnum_chu+"<br/>"+"总成交数_求购："+r.all_soldgoodsnum_qiu+"<br/>");
+				noty({text: '获取数据成功,正在绘制图表...',layout: 'center', type: 'success',timeout:'1000',});
+				$('#tj_area').html("今日发布用户数："+r.today_usernum+"<br/>"+"总发布用户数："+r.all_usernum+"<br/><br/>"+"今日未成交数_出售："+r.today_newgoodsnum_chu+"<br/>"+"今日未成交数_求购："+r.today_newgoodsnum_qiu+"<br/>"+"总未成交数_出售："+r.all_newgoodsnum_chu+"<br/>"+"总未成交数_求购："+r.all_newgoodsnum_qiu+"<br/><br/>"+"今日已成交数_出售："+r.today_soldgoodsnum_chu+"<br/>"+"今日已成交数_求购："+r.today_soldgoodsnum_qiu+"<br/>"+"总成交数_出售："+r.all_soldgoodsnum_chu+"<br/>"+"总成交数_求购："+r.all_soldgoodsnum_qiu+"<br/>");
+				tongji_chart();
 			}
 			else
 				noty({text: '操作失败'+r.code,layout: 'center', type: 'error',timeout:'3000',});
 		});
+
+
+		url='./?m=admin&c=other&a=get_chart';
+		$.post(url,'',function(r){
+			if(r.code){
+				console.log(r)
+				tongji_chart(r);
+			}
+			else
+				noty({text: '图表数据获取失败~'+r.code,layout: 'center', type: 'error',timeout:'3000',});
+		});
 	});
 });
+
+function tongji_chart(re){
+	//经历了众多尝试之后，终于放弃了在后端一键生成合适的json的想法，还是老老实实的转吧。这里采用了函数法
+	strJSON="[";
+	
+	for (var i = 6; i>0; i--) {
+		strJSON+="{'类型':'出售','数量':"+re['chu'][i]['sum']+",'时间':'"+re['chu'][i]['date']+"'},";
+	}
+	for (var i = 6; i>0; i--) {
+		strJSON+="{'类型':'求购','数量':"+re['qiu'][i]['sum']+",'时间':'"+re['qiu'][i]['date']+"'},";
+	}
+
+	strJSON+="]";
+	var data = new Function("return" + strJSON)();
+	console.log(data);
+
+
+    var chart = new G2.Chart({
+      id: 'c1',
+      width: 600,
+      height: 300
+    });
+    /*
+    var data = [
+      {"时间":0,"数量":7,"类型":"求购"},
+      {"时间":0,"数量":6.9,"类型":"出售"},
+      {"时间":1,"数量":10,"类型":"求购"},
+      {"时间":1,"数量":1,"类型":"出售"},
+      
+    ];*/
+
+    chart.source(data); 
+    chart.line().position('时间*数量').color('类型');
+    chart.render();
+
+}
 </script>
 </html>
 	
