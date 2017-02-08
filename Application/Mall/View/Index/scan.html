@@ -79,7 +79,7 @@
 							<table width="480px" height="28px" style="font-size:12px;float:left;" class="info_table">
 								<tr>
 									<td width="32px">地点 :</td><td width="33px"><IF condition="$vo.location eq 1">江宁<ELSEIF condition="$vo.location eq 0"/>本部<ELSE />不限</IF></td><td width="32px">分类 :</td><td width="35px"><IF condition="$vo.classify eq 0">手机<ELSEIF condition="$vo.classify eq 1"/>电子<ELSEIF condition="$vo.classify eq 2"/>书籍<ELSEIF condition="$vo.classify eq 3"/>车辆<ELSEIF condition="$vo.classify eq 4"/>服饰<ELSEIF condition="$vo.classify eq 5"/>化妆<ELSEIF condition="$vo.classify eq 6"/>日用<ELSEIF condition="$vo.classify eq 7"/>乐器<ELSEIF condition="$vo.classify eq 8"/>房屋<ELSEIF condition="$vo.classify eq 10"/>虚拟<ELSEIF condition="$vo.classify eq 11"/>食品<ELSE />其他</IF></td>
-									<td  width="55px">联系方式 :</td><td>{$vo.contact}</td>
+									<td  width="57px">联系方式 :</td><td><IF condition="session('?uid') eq 0">(登陆后可见)<ELSE/>{$vo.contact}</IF></td>
 								</tr>
 							</table>
 							<div class="clearfix">
