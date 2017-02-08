@@ -108,7 +108,7 @@
 						<ELSEIF condition="$vo.classify eq 7"/>乐器
 						<ELSEIF condition="$vo.classify eq 8"/>房屋
 						<ELSE />其他</IF>
-						联系方式 :</td><td>{$vo.contact}
+						联系方式 :<IF condition="session('?uid') eq 0">(登陆后可见)<ELSE/>{$vo.contact}</IF>
 					</div>
 			    <div class="box_right_bottom">
 					<IF condition="$vo.description neq ''">{$vo.description}<ELSE/>这个人很懒，没有留下任何商品描述</IF>
