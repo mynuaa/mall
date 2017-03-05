@@ -56,12 +56,13 @@ class NewgoodsController extends PublicController
         if($sh[0]['shop_id']!='')
             $this->assign("new_shop",$sh);
 
-    	if($_POST['in_where']!=1)
-    	{
-    		$this->display('Index:newgoods');
-    	}
-    	else
-    		$this->error('换客天地尚未开放，敬请期待');
+    	$this->display('Index:newgoods');
+    	// if($_POST['in_where']!=1)
+    	// {
+    	// 	$this->display('Index:newgoods');
+    	// }
+    	// else
+    	// 	$this->error('换客天地尚未开放，敬请期待');
 	}
 
 	public function ver()	//生成验证码
