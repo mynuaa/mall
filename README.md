@@ -9,4 +9,7 @@
 
     3. 然后执行initialize.sh
 
-    4. mall配置比较简单，一般sso配置好就没什么大问题
+    4. 在数据库中新建mall数据库，并导入项目中的app_zfjmall.sql
+
+
+    5. mall配置比较简单，一般sso配置好就没什么大问题
